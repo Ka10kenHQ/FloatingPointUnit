@@ -1,4 +1,4 @@
-module Unpacker #(
+module unpacker #(
     parameter N = 64
 )(
     input wire dbs,
