@@ -21,7 +21,7 @@ exponent exponent_inst(
     .s(s)
 );
 
-unpacker unpacker_inst(
+significant unpacker_inst(
     .db(db),
     .x(fp),
     .e_z(e_z),

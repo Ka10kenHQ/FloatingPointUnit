@@ -1,4 +1,4 @@
-module significand #(
+module significant #(
     parameter N = 64
 )(
     input wire db,
