@@ -1,4 +1,4 @@
-module tb_unpackermaster;
+module tb_unpacker;
 reg [63:0] fp;
 reg db;
 reg normal;
@@ -11,7 +11,7 @@ wire [52:0] f;
 wire fz;
 wire [51:0] h;
 
-unpackermaster uut (
+unpacker uut (
     .fp(fp),
     .db(db),
     .normal(normal),

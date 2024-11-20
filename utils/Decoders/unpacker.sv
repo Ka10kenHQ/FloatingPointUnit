@@ -1,4 +1,4 @@
-module unpackermaster(
+module unpacker(
     input [63:0] fp,
     input db,
     input normal,
