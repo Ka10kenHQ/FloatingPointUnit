@@ -1,0 +1,64 @@
+vsim work.tb_sticky
+# vsim work.tb_sticky 
+# Start time: 22:34:29 on Nov 27,2024
+# Loading sv_std.std
+# Loading work.tb_sticky
+# Loading work.sticky
+# Loading work.HDecJ
+# Loading work.ortree
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'x'. The port definition is at: ortree.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sticky/uut/or_tree/recursive_case/lower_or/recursive_case/lower_or/recursive_case/lower_or/recursive_case/lower_or/recursive_case/upper_or File: ortree.sv Line: 20
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'x'. The port definition is at: ortree.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sticky/uut/or_tree/recursive_case/lower_or/recursive_case/lower_or/recursive_case/lower_or/recursive_case/upper_or/recursive_case/upper_or File: ortree.sv Line: 20
+# ** Warning: (vsim-3015) [PCDPC] - Port size (6) does not match connection size (7) for port 'x'. The port definition is at: ortree.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sticky/uut/or_tree/recursive_case/lower_or/recursive_case/lower_or/recursive_case/upper_or File: ortree.sv Line: 20
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'x'. The port definition is at: ortree.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sticky/uut/or_tree/recursive_case/lower_or/recursive_case/lower_or/recursive_case/upper_or/recursive_case/lower_or/recursive_case/upper_or File: ortree.sv Line: 20
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'x'. The port definition is at: ortree.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sticky/uut/or_tree/recursive_case/lower_or/recursive_case/lower_or/recursive_case/upper_or/recursive_case/upper_or/recursive_case/upper_or File: ortree.sv Line: 20
+# ** Warning: (vsim-3015) [PCDPC] - Port size (13) does not match connection size (14) for port 'x'. The port definition is at: ortree.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sticky/uut/or_tree/recursive_case/lower_or/recursive_case/upper_or File: ortree.sv Line: 20
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'x'. The port definition is at: ortree.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sticky/uut/or_tree/recursive_case/lower_or/recursive_case/upper_or/recursive_case/lower_or/recursive_case/lower_or/recursive_case/upper_or File: ortree.sv Line: 20
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'x'. The port definition is at: ortree.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sticky/uut/or_tree/recursive_case/lower_or/recursive_case/upper_or/recursive_case/lower_or/recursive_case/upper_or/recursive_case/upper_or File: ortree.sv Line: 20
+# ** Warning: (vsim-3015) [PCDPC] - Port size (6) does not match connection size (7) for port 'x'. The port definition is at: ortree.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sticky/uut/or_tree/recursive_case/lower_or/recursive_case/upper_or/recursive_case/upper_or File: ortree.sv Line: 20
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'x'. The port definition is at: ortree.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sticky/uut/or_tree/recursive_case/lower_or/recursive_case/upper_or/recursive_case/upper_or/recursive_case/lower_or/recursive_case/upper_or File: ortree.sv Line: 20
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'x'. The port definition is at: ortree.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sticky/uut/or_tree/recursive_case/lower_or/recursive_case/upper_or/recursive_case/upper_or/recursive_case/upper_or/recursive_case/upper_or File: ortree.sv Line: 20
+# ** Warning: (vsim-3015) [PCDPC] - Port size (27) does not match connection size (28) for port 'x'. The port definition is at: ortree.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sticky/uut/or_tree/recursive_case/upper_or File: ortree.sv Line: 20
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'x'. The port definition is at: ortree.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sticky/uut/or_tree/recursive_case/upper_or/recursive_case/lower_or/recursive_case/lower_or/recursive_case/lower_or/recursive_case/upper_or File: ortree.sv Line: 20
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'x'. The port definition is at: ortree.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sticky/uut/or_tree/recursive_case/upper_or/recursive_case/lower_or/recursive_case/lower_or/recursive_case/upper_or/recursive_case/upper_or File: ortree.sv Line: 20
+# ** Warning: (vsim-3015) [PCDPC] - Port size (6) does not match connection size (7) for port 'x'. The port definition is at: ortree.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sticky/uut/or_tree/recursive_case/upper_or/recursive_case/lower_or/recursive_case/upper_or File: ortree.sv Line: 20
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'x'. The port definition is at: ortree.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sticky/uut/or_tree/recursive_case/upper_or/recursive_case/lower_or/recursive_case/upper_or/recursive_case/lower_or/recursive_case/upper_or File: ortree.sv Line: 20
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'x'. The port definition is at: ortree.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sticky/uut/or_tree/recursive_case/upper_or/recursive_case/lower_or/recursive_case/upper_or/recursive_case/upper_or/recursive_case/upper_or File: ortree.sv Line: 20
+# ** Warning: (vsim-3015) [PCDPC] - Port size (13) does not match connection size (14) for port 'x'. The port definition is at: ortree.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sticky/uut/or_tree/recursive_case/upper_or/recursive_case/upper_or File: ortree.sv Line: 20
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'x'. The port definition is at: ortree.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sticky/uut/or_tree/recursive_case/upper_or/recursive_case/upper_or/recursive_case/lower_or/recursive_case/lower_or/recursive_case/upper_or File: ortree.sv Line: 20
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'x'. The port definition is at: ortree.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sticky/uut/or_tree/recursive_case/upper_or/recursive_case/upper_or/recursive_case/lower_or/recursive_case/upper_or/recursive_case/upper_or File: ortree.sv Line: 20
+# ** Warning: (vsim-3015) [PCDPC] - Port size (6) does not match connection size (7) for port 'x'. The port definition is at: ortree.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sticky/uut/or_tree/recursive_case/upper_or/recursive_case/upper_or/recursive_case/upper_or File: ortree.sv Line: 20
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'x'. The port definition is at: ortree.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sticky/uut/or_tree/recursive_case/upper_or/recursive_case/upper_or/recursive_case/upper_or/recursive_case/lower_or/recursive_case/upper_or File: ortree.sv Line: 20
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'x'. The port definition is at: ortree.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_sticky/uut/or_tree/recursive_case/upper_or/recursive_case/upper_or/recursive_case/upper_or/recursive_case/upper_or/recursive_case/upper_or File: ortree.sv Line: 20
+add wave -position insertpoint  \
+sim:/tb_sticky/as2 \
+sim:/tb_sticky/fb2 \
+sim:/tb_sticky/sticky
+run
+# ** Note: $stop    : tb_sticky.sv(34)
+#    Time: 50 ps  Iteration: 0  Instance: /tb_sticky
+# Break in Module tb_sticky at tb_sticky.sv line 34
+# End time: 22:46:35 on Nov 27,2024, Elapsed time: 0:12:06
+# Errors: 0, Warnings: 23

@@ -1,0 +1,34 @@
+# vsim work 
+# Start time: 19:57:17 on Nov 27,2024
+# ** Error: (vsim-3170) Could not find 'work'.
+#         Searched libraries:
+#             /home/achir/FloatingPointUnit/utils/Decoders/work
+# Error loading design
+# End time: 19:57:17 on Nov 27,2024, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+vsim work.tb_exceptions
+# vsim work.tb_exceptions 
+# Start time: 19:58:01 on Nov 27,2024
+# Loading sv_std.std
+# Loading work.tb_exceptions
+# Loading work.exceptions
+add wave -position insertpoint  \
+sim:/tb_exceptions/e_inf \
+sim:/tb_exceptions/h_1 \
+sim:/tb_exceptions/fz \
+sim:/tb_exceptions/ez \
+sim:/tb_exceptions/ZERO \
+sim:/tb_exceptions/INF \
+sim:/tb_exceptions/NAN \
+sim:/tb_exceptions/SNAN
+run
+# Time = 0 | e_inf = 0, h_1 = 0, fz = 0, ez = 0 | ZERO = 0, INF = 0, NAN = 0, SNAN = 0
+# Time = 10 | e_inf = 1, h_1 = 0, fz = 0, ez = 0 | ZERO = 0, INF = 0, NAN = 0, SNAN = 1
+# Time = 20 | e_inf = 0, h_1 = 1, fz = 0, ez = 0 | ZERO = 0, INF = 0, NAN = 0, SNAN = 0
+# Time = 30 | e_inf = 0, h_1 = 0, fz = 1, ez = 0 | ZERO = 0, INF = 0, NAN = 0, SNAN = 0
+# Time = 40 | e_inf = 0, h_1 = 0, fz = 0, ez = 1 | ZERO = 0, INF = 0, NAN = 0, SNAN = 0
+# Time = 50 | e_inf = 1, h_1 = 1, fz = 0, ez = 0 | ZERO = 0, INF = 0, NAN = 1, SNAN = 0
+# Time = 60 | e_inf = 1, h_1 = 0, fz = 1, ez = 1 | ZERO = 1, INF = 1, NAN = 0, SNAN = 0
+# Time = 70 | e_inf = 1, h_1 = 1, fz = 1, ez = 0 | ZERO = 0, INF = 1, NAN = 1, SNAN = 0
+# End time: 19:58:33 on Nov 27,2024, Elapsed time: 0:00:32
+# Errors: 0, Warnings: 0

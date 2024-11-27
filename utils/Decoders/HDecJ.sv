@@ -1,7 +1,7 @@
 module HDecJ #(
     parameter N = 2
 )(
-    input  wire [N-1:0] x, 
+    input  [N-1:0] x, 
     output reg [2**N-1:0] y  
 );
 
@@ -24,8 +24,7 @@ module HDecJ #(
             
             integer i;
             always @* begin
-				    automatic integer IL, IH;
-                // Loop to compute y[i] based on U and V
+		integer IL, IH;
                 for(i = 0; i < 2**N; i = i + 1) begin
                     IL = i % (2**(N/2));
                     IH = i / (2**(N/2));
