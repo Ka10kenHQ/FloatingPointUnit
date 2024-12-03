@@ -1,4 +1,4 @@
-`include "./../HDecJ.sv"
+`include "./../unpacker/HDecJ.sv"
 
 module sticky (
     input [5:0] as2,
