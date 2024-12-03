@@ -1,10 +1,10 @@
 module alignment(
-input wire[10:0] ea,
-input wire[10:0] eb,
-input wire[52:0] fa,
-input wire sa,
-input wire[52:0] fb,
-input wire sb,
+input [10:0] ea,
+input [10:0] eb,
+input [52:0] fa,
+input  sa,
+input [52:0] fb,
+input  sb,
 output reg[10:0] es,
 output reg[55:0] fb3,
 output reg[52:0] fa2,
@@ -17,11 +17,11 @@ reg eb_gt_ea;
 reg[5:0] as2;
 reg[54:0] fb2;
 reg[54:0] temp;
-expsub uut(
-.ea(ea),
-.eb(eb),
-.as(as),
-.eb_gt_ea(eb_gt_ea)
+exp_sub uut(
+    .ea(ea),
+    .eb(eb),
+    .as(as),
+    .eb_gt_ea(eb_gt_ea)
 );
 
 limit uut1(
