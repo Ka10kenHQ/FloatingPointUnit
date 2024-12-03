@@ -8,7 +8,11 @@ module adder(
     input sub,
     input fla,
     input flb,
-    input nan
+    input nan,
+    output [10:0] es,
+    output [56:0] fs,
+    output ss,
+    output fls
     );
 
 endmodule
