@@ -1,10 +1,8 @@
-module significant #(
-    parameter N = 64
-)(
-    input wire db,
-    input wire [N-1:0] x,
-    input wire e_z,
-    input wire normal, 
+module significant #(parameter N = 64)(
+    input db,
+    input [N-1:0] x,
+    input e_z,
+    input normal, 
     output reg [5:0] lz,
     output reg [52:0] f,
     output reg fz,

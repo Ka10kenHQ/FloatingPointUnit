@@ -9,7 +9,7 @@ module unpacker(
     output reg [5:0]   lz,
     output reg [52:0]  f,
     output reg         fz,
-    output reg [51:0]  h  
+    output reg [51:0]  h
 );
 
 exponent exponent_inst(
@@ -31,6 +31,5 @@ significant unpacker_inst(
     .fz(fz),
     .h(h)
 );
-
 
 endmodule

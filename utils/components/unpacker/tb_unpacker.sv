@@ -26,7 +26,7 @@ unpacker uut (
 );
 
 initial begin
-    fp = 64'b0;
+    fp = 64'b100011;;
     db = 1;
     normal = 1;
     #10;

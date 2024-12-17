@@ -8,10 +8,10 @@ output snan,
 output [51:0] fnan 
 );
 
-always @(*) begin
-snan = nana == 1 ? sa : sb;
-fnan = nana == 1 ? ha : hb;
-end    
+assign snan = nana == 1 ? sa : sb;
+assign fnan = nana == 1 ? ha : hb;
+
+endmodule
 
 
 

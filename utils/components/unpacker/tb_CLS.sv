@@ -2,9 +2,10 @@ module tb_CLS;
 
 
     parameter N = 53;
-    wire [N-1:0] x;
+    reg [N-1:0] x;
+    reg [5:0] m;
     wire [N-1:0] y; 
-    wire [5:0] m;
+
 
     cls #(N) dut (
         .m(m),
@@ -12,7 +13,8 @@ module tb_CLS;
         .y(y)
     );
 
-    
+    reg u;
+
     initial begin
         u = 0;
         m = 6'b000110;

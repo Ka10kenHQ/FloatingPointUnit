@@ -5,7 +5,8 @@ output reg[N-2:0] abs
 
 always@(*)begin
     abs = x[N-1] ? ~x[N-2:0]+1 : x[N-2:0];
-end    
+end
+
 
 
 endmodule
