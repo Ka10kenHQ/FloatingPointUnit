@@ -79,7 +79,7 @@ nanselect nansel(
 .ha(h1),
 .hb(h2),
 .sb(s2),
-.nan(NANa),
+.nana(NANa),
 .snan(snan),
 .fnan(fnan)
 );
