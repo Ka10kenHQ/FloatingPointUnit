@@ -59,8 +59,8 @@ module tb_unpacker;
 
         $fclose(fd); 
         #100;
-        $finish; 
     end
+end
 
 endmodule
 
