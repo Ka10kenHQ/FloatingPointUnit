@@ -5,18 +5,21 @@ module sign_select(
     input sx,
     input sb,
     input ss1,
-    input INF,
+    input INFa,
+    input INFs,
     input NAN,
-    output ZERO,
-    output ss
+    output reg ZERO,
+    output reg ss
 );
 
-wire ss2, ss3;
+reg ss2, ss3;
 
-assign ss2 = sx ? sa : RM[0] & RM[1];
-assign ss3 = INF ? sa : sb;
-assign ss = INF ? ss3 : (fz ? ss1 : ss2);
-assign ZERO = ~(INF | NAN);
+always @(*) begin
+    ss2 = sx ? sa : RM[0] & RM[1];
+    ss3 = INFa ? sa : sb;
+    ss = INFs ? ss3 : (fz ? ss1 : ss2);
+    ZERO = ~(INFs | NAN);
+end
 
 endmodule
 

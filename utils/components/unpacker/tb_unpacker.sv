@@ -27,7 +27,7 @@ module tb_unpacker;
 
     integer fd;     
     reg [430:0] line;
-    reg [6:0] e32;  
+    reg [7:0] e32;  
     reg [22:0] f32; 
     reg s32;      
     reg [10:0] e64;
@@ -44,23 +44,14 @@ module tb_unpacker;
         while (!$feof(fd)) begin
             $fgets(line, fd); 
             $display("Line read: %s", line);
-
-            if (line[0] == "f" && line[1] == "3" && line[2] == "2") begin
-                $display("Here");
                 $sscanf(line, "f32: s = %b, e = %8b, f = %23b", s32, e32, f32);
                 fp = {s32, e32, f32, 32'b0};
                 db = 0;
-                normal = 0;
-                #10;
-                $display("Test Case for f32:");
-                $display("fp: %b, e_inf: %b, e_z: %b, e: %b, s: %b, lz: %b, f: %b, fz: %b, h: %b", 
-                         fp, e_inf, e_z, e, s, lz, f, fz, h);
+                normal=0;
+                #100;
         end
-
         $fclose(fd); 
-        #100;
     end
-end
 
 endmodule
 

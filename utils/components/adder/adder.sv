@@ -6,18 +6,17 @@ module adder(
     input [10:0] eb,
     input sb,
     input sub,
-    input fla,
-    input flb,
-    input nan,
+    input [3:0] fla,
+    input [3:0] flb,
+    input [52:0] nan,
     output [10:0] es,
     output [56:0] fs,
     output ss,
-    //FIXME: what the hell is fls ???
-    output fls
+    output reg [1:0] fls
     );
 
 reg [1:0] RM = 2'b0;
-
+reg INFa = fla[2];
 
 wire [55:0] fb3;
 wire [52:0] fa2;
@@ -47,7 +46,7 @@ alignment align(
 
 
 spec spc(
-    .sb(sb),
+    .sb(sb ^ sub),
     .sa(sa),
     .fla(fla),
     .flb(flb),
@@ -75,15 +74,18 @@ sign_select sign(
     .fz(fz),
     .sa(sa),
     .sx(sx),
-    .sb(sb),
+    .sb(sb ^ sub),
     .ss1(ss1),
-    .INF(INFs),
+    .INFs(INFs),
+    .INFa(INFa),
     .NAN(NANs),
     .ZERO(ZERO),
     .ss(ss)
 );
 
-assign fls = 0;
+always @(*) begin
+    fls = {INFs, ZERO};
+end
 
 
 endmodule

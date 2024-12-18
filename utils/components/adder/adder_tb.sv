@@ -7,14 +7,14 @@ module adder_tb;
     reg [10:0] eb;
     reg sb;
     reg sub;
-    reg fla;
-    reg flb;
-    reg nan;
+    reg [3:0] fla;
+    reg [3:0] flb;
+    reg [52:0] nan;
 
     wire [10:0] es;
     wire [56:0] fs;
     wire ss;
-    wire fls;
+    wire [1:0] fls;
 
     adder uut (
         .fa(fa),
@@ -36,7 +36,7 @@ module adder_tb;
     initial begin
         fa = 53'b0; ea = 11'b0; sa = 0;
         fb = 53'b0; eb = 11'b0; sb = 0;
-        sub = 0; fla = 0; flb = 0; nan = 0;
+        sub = 0; fla = 4'b0; flb = 4'b0; nan = 4'b0;
         #10;
         
         fa = 53'd100; ea = 11'd10; sa = 0;
@@ -46,7 +46,7 @@ module adder_tb;
 
         fa = 53'd200; ea = 11'd12; sa = 1;
         fb = 53'd150; eb = 11'd11; sb = 1;
-        sub = 1; fla = 1; flb = 1; nan = 0;
+        sub = 1; fla = 4'b1; flb = 4'b1; nan = 0;
         #10;
 
         fa = 53'd500; ea = 11'd20; sa = 0;
@@ -54,7 +54,6 @@ module adder_tb;
         sub = 0; fla = 1; flb = 0; nan = 1;
         #10;
 
-        $finish;
     end
 
 endmodule

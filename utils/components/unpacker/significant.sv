@@ -10,23 +10,23 @@ module significant #(parameter N = 64)(
 );
 
 parameter n = 64;
-parameter u = 53;
 parameter m = 6;
 reg [28:0] x1 = 0;
-reg [11:0] d = 12'b111111111111;
+reg [11:0] d = 11'b11111111111;
 reg [51:0] zero = 0;
 reg [63:0] temp; 
 reg [52:0] te;   
+reg [51:0] F2D;
+reg [23:0] F2S;
+
 wire [52:0] temp1;
-reg [51:0] F2D = x[51:0];
-reg [23:0] F2S = x[54:32];
 
 leadingzero #(n,m) leadingzero_inst (
     .x(temp), 
     .y(lz)   
 );
 
-cls #(u) CLS_inst (
+cls CLS_inst (
     .m(lz), 
     .x(te), 
     .y(temp1) 

@@ -7,6 +7,6 @@ module cls #(
 );
     
 always @* begin
-    y =(x >> (N - m) | (x << m));    
+    y = (x >> (N - m) | (x << m));    
 end
 endmodule
