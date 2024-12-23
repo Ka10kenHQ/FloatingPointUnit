@@ -17,6 +17,7 @@ fn decompose_f64(fp: f64) -> (u64, u16, u64) {
     (s, e, f)
 }
 
+
 fn main() -> io::Result<()> {
     let test_cases = vec![
         // Normal numbers
