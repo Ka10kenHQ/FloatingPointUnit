@@ -7,6 +7,8 @@ module signexpmd(
     input [10:0] eb,
     input [5:0] lzb,
 
+    input fdiv,
+
     output reg sq,
     output reg [12:0] eq
 );
@@ -14,18 +16,16 @@ module signexpmd(
 reg [12:0] a,b,c,d;
 
 reg carry = 1;
-
-// TODO: figure what is fdiv temporary here
-reg fdiv = 1;
+parameter n = 12;
 
 wire [13:0] t,s;
 
-ftadd add(
+ftadd #(n) add(
     .a(a),
     .b(b),
     .c(c),
     .d(d),
-    .c_in(carry),
+    .c_in(0),
 
     .t(t),
     .s(s)

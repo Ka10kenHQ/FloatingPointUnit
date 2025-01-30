@@ -7,6 +7,8 @@ module tb_signexpmd;
     reg [10:0] eb;
     reg [5:0] lzb;
 
+    reg fdiv;
+
     wire sq;
     wire [12:0] eq;
 
@@ -27,6 +29,7 @@ module tb_signexpmd;
         lza = 6'b101010;
         eb = 11'b10101010101;
         lzb = 6'b010101;
+        fdiv = 0;
 
         #10;
         $display("Test 1 -> sq: %b, eq: %b", sq, eq);
@@ -36,6 +39,7 @@ module tb_signexpmd;
         lza = 6'b000111;
         eb = 11'b10100110010;
         lzb = 6'b111000;
+        fdiv = 2;
 
         #10;
         $display("Test 2 -> sq: %b, eq: %b", sq, eq);
@@ -45,6 +49,7 @@ module tb_signexpmd;
         lza = 6'b111111;
         eb = 11'b11111111110;
         lzb = 6'b000000;
+        fdiv = 0;
 
         #10;
         $display("Test 3 -> sq: %b, eq: %b", sq, eq);
@@ -54,6 +59,7 @@ module tb_signexpmd;
         lza = 6'b100101;
         eb = 11'b11111111111;
         lzb = 6'b011010;
+        fdiv = 1;
 
         #10;
         $display("Test 4 -> sq: %b, eq: %b", sq, eq);
@@ -63,6 +69,7 @@ module tb_signexpmd;
         lza = 6'b0;
         eb = 11'b0;
         lzb = 6'b0;
+        fdiv = 0;
 
         #10;
         $display("Test 5 -> sq: %b, eq: %b", sq, eq);
