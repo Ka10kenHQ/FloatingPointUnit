@@ -15,7 +15,6 @@ module signexpmd(
 
 reg [12:0] a,b,c,d;
 
-reg carry = 1;
 parameter n = 12;
 
 wire [13:0] t,s;
@@ -25,8 +24,6 @@ ftadd #(n) add(
     .b(b),
     .c(c),
     .d(d),
-    .c_in(0),
-
     .t(t),
     .s(s)
 );
@@ -49,7 +46,7 @@ always @(*) begin
         d = {7'b1111111,lzb};
     end
 
-    eq = t + s + carry;
+    eq = t + s + 1;
 end
 
 endmodule

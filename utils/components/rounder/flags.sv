@@ -13,7 +13,7 @@ module flags(
 wire [6:0] lz_out;
 wire w1, w2, w3, w4, w5, eq;
 wire [12:0] add;
-wire [12:0] emax = 13'b1111_1111_1111;
+wire [12:0] emax = {3'b0, {3{db}}, {7{1'b1}}};
 
 leadingzero lzero(
     .x({fr, 7'b1111111}),

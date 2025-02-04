@@ -1,3 +1,5 @@
+`include "./../flags.sv"
+
 module tb_flags;
 
     reg  [56:0] fr;
@@ -53,4 +55,5 @@ module tb_flags;
     end
 
 endmodule
+
 

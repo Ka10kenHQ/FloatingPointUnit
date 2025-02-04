@@ -3,28 +3,32 @@ module ftadd #(parameter n = 12) (
     input [n:0] b,
     input [n:0] c,
     input [n:0] d,
-    input c_in,
     output reg [n+1:0] t,
     output reg [n+1:0] s
 );
     integer i;
-    reg carry;
-    reg [n:0] temp_sum;
-    
+    reg [1:0] temp_sum1, temp_sum2;
+    reg [n+1:0] carry, sum;
+
     always @(*) begin
-        carry = c_in;
-        t = 14'd0;
-        s = 14'd0;
+        carry[0] = 0;
 
         for (i = 0; i < n+1; i = i + 1) begin
-            temp_sum = a[i] + b[i] + c[i] + d[i] + carry;
+            temp_sum1 = a[i] + b[i] + c[i];
 
-            s[i] = temp_sum[0];
-            carry = temp_sum[1];
-            t[i+1] = carry;
+            sum[i] = temp_sum1[0];
+            carry[i+1] = temp_sum1[1];
         end
+        sum[n+1] = 0;
 
-        s[n+1] = carry;
+        t[0] = 0;
+        for (i = 0; i < n+1; i = i + 1) begin
+            temp_sum2 = sum[i] + carry[i] + d[i];
+
+            s[i] = temp_sum2[0];
+            t[i+1] = temp_sum2[1];
+        end
+        s[n+1] = 0;
     end
 endmodule
 

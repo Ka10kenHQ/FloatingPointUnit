@@ -2,6 +2,8 @@ module shiftdist(
     input [12:0] er,
     input [5:0] lz,
 
+    input db,
+
     input TINY,
     input UNFen,
 
@@ -10,8 +12,8 @@ module shiftdist(
 
 reg mask;
 reg [12:0] add;
-// 1 - emin = 1 - (-2^(n-1) + 2) = 2^(n-1) - 1 = emax
-wire [12:0] emax = 13'b1111_1111_1111;
+// 1 - emin = emax
+wire [12:0] emax = {3'b0, {3{db}}, {7{1'b1}}};
 
 always @(*) begin
     mask = TINY & ~UNFen;

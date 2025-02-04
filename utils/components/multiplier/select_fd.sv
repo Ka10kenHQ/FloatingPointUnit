@@ -24,7 +24,6 @@ three2add #(n) add(
     .a(a),
     .b(b),
     .c(c),
-    .c_in(0),
     .t(t),
     .s(s)
 );

@@ -1,3 +1,5 @@
+`include "./../shiftdist.sv"
+
 module tb_shiftdist;
 
     reg [12:0] er;
@@ -52,4 +54,5 @@ module tb_shiftdist;
     end
 
 endmodule
+
 
