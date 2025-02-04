@@ -1,3 +1,4 @@
+`include "./../cls.sv"
 module tb_CLS;
 
 

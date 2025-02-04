@@ -1,5 +1,5 @@
+`include "./../lrs.sv"
 module tb_lrs;
-
     reg [6:0] as2;
     reg [54:0] fb2;
     wire [54:0] fb3;

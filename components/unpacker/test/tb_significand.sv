@@ -1,3 +1,5 @@
+`include "./../significant.sv"
+
 module tb_significand;
 
     parameter N = 64;

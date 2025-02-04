@@ -1,3 +1,5 @@
+`include "./../signexpmd.sv"
+
 module tb_signexpmd;
 
     reg sa;

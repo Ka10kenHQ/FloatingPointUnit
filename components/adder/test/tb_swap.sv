@@ -1,3 +1,4 @@
+`include "./../swap.sv"
 module tb_swap;
 
     reg sa;

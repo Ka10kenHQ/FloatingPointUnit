@@ -1,5 +1,5 @@
+`include "./../limit.sv"
 module tb_limit;
-
     reg [10:0] as;    
     reg eb_gt_ea;        
     wire [5:0] as2;       

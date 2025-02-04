@@ -1,3 +1,4 @@
+`include "./../leadingzero.sv"
 module tb_leadingzero;
  
   parameter n = 32;

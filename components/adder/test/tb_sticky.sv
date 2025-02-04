@@ -1,3 +1,4 @@
+`include "./../sticky.sv"
 module tb_sticky;
 
     reg [5:0] as2;

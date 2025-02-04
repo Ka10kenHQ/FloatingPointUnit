@@ -1,10 +1,11 @@
-module tb_HDec;
+`include "./../Dec.sv"
+module tb_Dec;
 
     parameter N = 3;  
     reg [N-1:0] x;  
-    wire [2**N-1:0] y;
+    wire [2**N-1:0] y; 
 
-    HDec #(N) dut (
+    Dec #(N) dut (
         .x(x),
         .y(y)
     );
@@ -12,7 +13,7 @@ module tb_HDec;
     initial begin
         for (int i = 0; i < 2**N; i++) begin
             x = i;  
-            #50;   
+            #10;   
         end
 
     end

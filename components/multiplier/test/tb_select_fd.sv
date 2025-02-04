@@ -1,3 +1,4 @@
+`include "./../select_fd.sv"
 module tb_select_fb;
     reg [57:0] Da;
     reg [57:0] Db;

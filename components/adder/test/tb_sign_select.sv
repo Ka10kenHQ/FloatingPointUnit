@@ -1,5 +1,5 @@
+`include "./../sign_select.sv"
 module tb_sign_select;
-
     reg [1:0] RM;
     reg fz;
     reg sa;

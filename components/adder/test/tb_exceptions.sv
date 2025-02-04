@@ -1,5 +1,6 @@
-module tb_exceptions;
+`include "./../exceptions.sv"
 
+module tb_exceptions;
   reg e_inf;
   reg h_1;
   reg fz;

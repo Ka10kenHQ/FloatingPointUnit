@@ -1,3 +1,5 @@
+`include "./../HDecJ.sv"
+
 module tb_HDecJ;
 
     parameter N = 4;

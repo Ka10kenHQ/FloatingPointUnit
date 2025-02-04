@@ -1,3 +1,5 @@
+`include "./../unpackermaster.sv"
+
 module tb_unpackermaster;
 
     reg [63:0] FA2, FB2;

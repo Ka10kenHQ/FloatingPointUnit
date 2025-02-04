@@ -1,3 +1,4 @@
+`include "./../three2add.sv"
 module tb_three2add;
     parameter n = 11;
 

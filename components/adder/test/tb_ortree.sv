@@ -1,3 +1,5 @@
+`include "./../ortree.sv"
+
 module tb_ortree;
 
     parameter n = 8;
