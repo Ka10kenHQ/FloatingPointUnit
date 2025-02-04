@@ -1,6 +1,6 @@
 `include "./../multiplier/three2add.sv"
 
-// FIXME: i get dont care terms
+// FIXME: getting dont care terms in en and eni
 module expnorm(
     input [10:0] er,
     input [5:0] lz,
@@ -22,9 +22,8 @@ reg [10:0] emin = 11'b00000000001;
 reg [10:0] emin1 = 11'b00000000010;
 reg [11:0] sum;
 
-parameter n = 10;
 
-three2add #(n) add (
+three2add add (
     .a(er),
     .b(b),
     .c(c),

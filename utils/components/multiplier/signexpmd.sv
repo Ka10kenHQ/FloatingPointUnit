@@ -15,11 +15,9 @@ module signexpmd(
 
 reg [12:0] a,b,c,d;
 
-parameter n = 12;
-
 wire [13:0] t,s;
 
-ftadd #(n) add(
+ftadd add(
     .a(a),
     .b(b),
     .c(c),

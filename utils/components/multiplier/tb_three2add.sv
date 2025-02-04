@@ -1,5 +1,5 @@
 module tb_three2add;
-    parameter n = 12;
+    parameter n = 11;
 
     reg [n:0] a, b, c;
 
