@@ -26,24 +26,24 @@ module tb_expnorm;
         OVF1 = 1;
         UNFen = 0;
         TINY = 0;
-        #50;
+        #10;
         
         OVFen = 1;
         OVF1 = 1;
-        #50;
+        #10;
         
         OVFen = 0;
         OVF1 = 0;
         UNFen = 1;
         TINY = 1;
-        #50;
+        #10;
         
         UNFen = 0;
         TINY = 0;
         db = 1;
         er = 11'b00000001100;
         lz = 6'b000110;
-        #20;
+        #10;
         
         er = 11'b10101010101;
         lz = 6'b110011;
@@ -52,7 +52,7 @@ module tb_expnorm;
         OVF1 = 0;
         UNFen = 0;
         TINY = 1;
-        #20;
+        #10;
         
         $monitor("Time = %0t | er = %b | lz = %b | db = %b | OVFen = %b | OVF1 = %b | UNFen = %b | TINY = %b | en = %b | eni = %b", 
             $time, er, lz, db, OVFen, OVF1, UNFen, TINY, en, eni);

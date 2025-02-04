@@ -1,4 +1,3 @@
-// FIXME: high-impedance state in eout and fout sometimes
 module exprnd(
     input s,
     input [10:0] e3,
@@ -13,16 +12,11 @@ module exprnd(
 );
 
 
-wire inf;
-
-inf_selector infsel(
-    .RM(RM),
-    .s(s),
-    .inf(inf)
-);
-
+reg inf;
 
 always @(*) begin
+    inf = (RM == 2'b01) | (RM == 2'b10 & ~s) | (RM == 2'b11 & s);
+
     if(OVF & OVFen) begin
         if(inf) begin
             // infinity

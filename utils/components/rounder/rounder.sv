@@ -81,6 +81,7 @@ wire [51:0] fout;
 exprnd exprn(
     .s(s),
     .e3(e3),
+    .f3(f3),
     .RM(RM),
     .OVF(OVF),
     .db(db),
