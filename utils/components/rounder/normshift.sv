@@ -4,14 +4,59 @@ module normshift(
     input OVFen,
     input UNFen,
 
+    input db,
+
     output [127:0] fn,
     output [10:0] eni,
     output [10:0] en,
-    output TINY,
-    output OVF1
+    output reg TINY,
+    output reg OVF1
+);
+
+wire tiny, ovf1;
+wire [5:0] lz;
+wire [12:0] sh;
+
+flags flgs(
+    .fr(fr),
+    .er(er),
+    .db(db),
+    .TINY(tiny),
+    .OVF1(ovf1),
+    .lz(lz)
+);
+
+expnorm exp(
+    .er(er[10:0]),
+    .lz(lz),
+    .db(db),
+    .OVFen(OVFen),
+    .OVF1(ovf1),
+    .UNFen(UNFen),
+    .TINY(tiny),
+    .eni(eni),
+    .en(en)
+);
+
+shiftdist sdist(
+    .er(er),
+    .lz(lz),
+    .db(db),
+    .TINY(tiny),
+    .UNFen(UNFen),
+    .sh(sh)
 );
 
 
+signormshift signshift(
+    .fr(fr),
+    .sh(sh),
+    .fn(fn)
+);
 
+always @(*) begin
+    TINY = tiny;
+    OVF1 = ovf1;
+end
 
 endmodule
