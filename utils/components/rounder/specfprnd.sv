@@ -6,13 +6,17 @@ module specfrpnd(
     input ZERO,
     input NAN,
     input INF,
+    input INV,
+    input OVF,
+    input OVFen,
     input UNFen,
     input TINY,
     input DBZ,
     input siginx,
     input db,
 
-    output reg [63:0] fp_out
+    output reg [63:0] fp_out,
+    output [4:0] IEEEp
 );
 
 wire sp;
@@ -31,6 +35,21 @@ specselect specs(
     .ep(ep),
     .fp(fp)
 );
+
+rndexceptions rndexep(
+    .NAN(NAN),
+    .INF(INF),
+    .ZERO(ZERO),
+    .OVFen(OVFen),
+    .UNFen(UNFen),
+    .OVF(OVF),
+    .TINY(TINY),
+    .INV(INV),
+    .DBZ(DBZ),
+    .siginx(siginx),
+    .IEEEp(IEEEp)
+);
+
 
 always @(*) begin
     if(db) begin

@@ -10,7 +10,7 @@ module rndexceptions(
     input DBZ,
     input siginx,
 
-    output [4:0] IEEEp
+    output reg [4:0] IEEEp
 );
 
 reg OVFp, UNFp, INXp, INX;
