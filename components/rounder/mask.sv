@@ -1,5 +1,5 @@
-`include "./../adder/ortree.sv"
-`include "./../unpacker/HDecJ.sv"
+`include "./../../utils/ortree.sv"
+`include "./../../utils/HDecJ.sv"
 
 module mask(
     input [12:0] sh,

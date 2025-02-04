@@ -1,5 +1,5 @@
-`include "./utils/components/adder/adder.sv";
-`include "./utils/components/unpacker/unpackermaster.sv";
+`include "./components/adder/adder.sv";
+`include "./components/unpacker/unpackermaster.sv";
 
 module master  (
     input [63:0] fpa,

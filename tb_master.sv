@@ -1,6 +1,3 @@
-`include "./utils/components/adder/adder.sv"
-`include "./utils/components/unpacker/unpackermaster.sv"
-
 module tb_master;
 
     reg [63:0] fpa;

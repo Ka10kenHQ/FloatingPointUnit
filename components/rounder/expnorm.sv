@@ -1,4 +1,4 @@
-`include "./../multiplier/three2add.sv"
+`include "./../../utils/three2add.sv"
 
 module expnorm(
     input [10:0] er,

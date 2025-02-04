@@ -21,5 +21,3 @@ module three2add #(parameter n = 11) (
         s[n] = 0;
     end
 endmodule
-
-
