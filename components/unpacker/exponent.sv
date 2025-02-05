@@ -18,7 +18,7 @@ module exponent (
             e_z = fp[62:52] == 11'b0;
             e_inf = (~fp[62:52]) == 11'b0;
  
-            temp_e_db = {fp[62:53], e_z | fp[52]}; // TODO:
+            temp_e_db = {fp[62:53], e_z | fp[52]};
             inc = temp_e_db + 1;
             e = {~inc[10], inc[9:0]};
         end

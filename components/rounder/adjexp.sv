@@ -10,7 +10,6 @@ module adjexp(
 
 reg [10:0] in;
 
-// TODO: figure out 0^2 db^3 1^3 != 10 bits
 reg [7:0] emax1alpha;
 
 
@@ -33,7 +32,7 @@ always @(*) begin
     OVF = sigovf & out;
 
     if( ~OVFen & sigovf & out) begin
-        e3 = {2'b00, emax1alpha};
+        e3 = {3'b000, emax1alpha};
     end
     else begin
         e3 = e2;
