@@ -7,6 +7,4 @@ always@(*)begin
     abs = x[N-1] ? ~x[N-2:0]+1 : x[N-2:0];
 end
 
-
-
 endmodule

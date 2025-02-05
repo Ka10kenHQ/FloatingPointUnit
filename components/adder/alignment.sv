@@ -1,22 +1,27 @@
 module alignment(
-input [10:0] ea,
-input [10:0] eb,
-input [52:0] fa,
-input  sa,
-input [52:0] fb,
-input  sb,
-output reg[10:0] es,
-output reg[55:0] fb3,
-output reg[52:0] fa2,
-output reg sa2,
-output reg sx,
-output reg sb2
+    input [10:0] ea,
+    input [10:0] eb,
+
+    input [52:0] fa,
+    input  sa,
+    
+    input [52:0] fb,
+    input  sb,
+    
+    output reg[10:0] es,
+    output reg[55:0] fb3,
+    output [52:0] fa2,
+    output  sa2,
+    output reg sx,
+    output  sb2
 );
-reg[12:0] as;
-reg eb_gt_ea;
-reg[5:0] as2;
-reg[54:0] fb2;
-reg[54:0] temp;
+
+wire [10:0] as;
+wire [54:0] temp;
+wire [54:0] fb2;
+wire [5:0] as2;
+wire eb_gt_ea;
+
 exp_sub uut(
     .ea(ea),
     .eb(eb),

@@ -1,4 +1,4 @@
-`include "./../tb_spec"
+`include "./../spec.sv"
 module tb_spec;
 
     reg sb;
