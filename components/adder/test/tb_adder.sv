@@ -77,7 +77,6 @@ module tb_adder;
         
         #10;
         
-        $stop;
     end
 
 endmodule

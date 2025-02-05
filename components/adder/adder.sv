@@ -75,7 +75,7 @@ sigadd add(
 
 sign_select sign(
     .RM(RM),
-    .fz(fz),
+    .fz(fszero),
     .sa(sa),
     .sx(sx),
     .sb(sb ^ sub),
