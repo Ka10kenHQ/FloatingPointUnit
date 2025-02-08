@@ -19,13 +19,14 @@ module adder(
     output [10:0] es,
     output [56:0] fs,
     output ss,
-    output reg [1:0] fls
+    output reg [57:0] fls
 );
 
 reg INFa = fla[2];
 
 wire [55:0] fb3;
 wire [52:0] fa2;
+
 wire sa2, sx, sb2, sb_p;
 wire INFs,NANs,INV;
 wire ZERO;
@@ -88,7 +89,7 @@ sign_select sign(
 );
 
 always @(*) begin
-    fls = {INFs, ZERO};
+    fls = {1'b0, ZERO, INV, INFs, NANs, nan};
 end
 
 

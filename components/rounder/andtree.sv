@@ -1,5 +1,5 @@
 module andtree #(
-    parameter n = 2
+    parameter n = 11
 )(
     input [n-1:0] x, 
     output and_out 

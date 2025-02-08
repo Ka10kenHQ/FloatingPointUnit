@@ -14,7 +14,7 @@ module tb_adder;
     wire [10:0] es;
     wire [56:0] fs;
     wire ss;
-    wire [1:0] fls;
+    wire [57:0] fls;
 
     adder uut (
         .fa(fa),

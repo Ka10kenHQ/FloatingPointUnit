@@ -11,15 +11,22 @@ module master  (
     input [1:0] RM,
 
     output [63:0] fp_out,
-    output [4:0] IEEp
+    output [4:0] IEEp,
+    
+    output reg sa, sb,
+    output reg [10:0] ea, eb,
+    output reg [5:0] lza, lzb,
+    output reg [3:0] fla, flb,
+    output reg [52:0] nan,
+    output reg [52:0] fa, fb,
+    output reg [10:0] es,
+    output reg [56:0] fs,
+    output reg ss,
+    output reg [57:0] fls,
+    
+    // er
+    output reg [12:0] er_out
 );
-
-wire sa, sb;
-wire [10:0] ea,eb;
-wire [5:0] lza,lzb;
-wire [3:0] fla, flb;
-wire [52:0] nan;
-wire [52:0] fa,fb;
 
 
 unpackermaster unpack(
@@ -40,10 +47,6 @@ unpackermaster unpack(
     .nan(nan)
 );
 
-wire [10:0] es;
-wire [56:0] fs;
-wire ss;
-wire [1:0] fls;
 
 adder add(
     .fa(fa),
@@ -64,21 +67,29 @@ adder add(
 );
 
 // TODO: flags to add
-wire OVFen = 1'b0;
-wire UNFen = 1'b0;
+reg OVFen = 1'b1;
+reg UNFen = 1'b0;
+reg [11:0] temp_er;
+reg [12:0] er = {~temp_er[11], ~temp_er[11], temp_er[10:0]};
 
 rounder rnd(
     .db(db),
     .s(ss),
-    .er(es),
+    .er(er),
     .fr(fs),
     .OVFen(OVFen),
     .UNFen(UNFen),
-    .flr({5'b0, nan}),
+    .flr(fls),
     .RM(RM),
     .IEEEp(IEEp),
     .fp(fp_out)
 );
 
+always @(*) begin
+    temp_er = es + 1;
+    er = {~temp_er[11], ~temp_er[11], temp_er[10:0]};
+    er_out = er;
+end
 
 endmodule
+
