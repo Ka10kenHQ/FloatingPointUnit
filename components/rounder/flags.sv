@@ -25,9 +25,9 @@ assign lz = lz_out[5:0];
 assign add = er + {3'b0, {3{db}}, 1'b1, ~lz_out[5:0]};
 assign TINY = add[12];
 
-assign OVF1 = (fr[56] & (er > emax - 1)) | 
-              (fr[55] & (er > emax)) | 
-              (fr[54] & (er > emax + 1));
+assign OVF1 = (fr[0] & (er > emax - 1)) | 
+              (fr[1] & (er > emax)) | 
+              (fr[2] & (er > emax + 1));
 
 
 endmodule
