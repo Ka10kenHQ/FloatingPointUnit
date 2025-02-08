@@ -25,14 +25,10 @@ assign lz = lz_out[5:0];
 assign add = er + {3'b0, {3{db}}, 1'b1, ~lz_out[5:0]};
 assign TINY = add[12];
 
-assign w1 = ~er[12];           
-assign w2 = er[11] | er[10];
-assign w3 = w1 | w2;
-assign w4 = er[9] | er[8] | er[7];
-assign w5 = w4 & ~db;
-assign eq = (er == emax);      
+assign OVF1 = (fr[56] & (er > emax - 1)) | 
+              (fr[55] & (er > emax)) | 
+              (fr[54] & (er > emax + 1));
 
-assign OVF1 = (w3 | w5) | (eq & fr[56]);
 
 endmodule
 
