@@ -7,9 +7,11 @@ module exceptions (
     output INF,
     output NAN,
     output SNAN
-    );
-    assign ZERO = fz & ez;
-    assign INF = e_inf & fz;
-    assign NAN = e_inf & h_1;
-    assign SNAN = e_inf & ~(h_1 | fz);
+);
+assign ZERO = fz & ez;
+assign INF = e_inf & fz;
+assign NAN = e_inf & h_1;
+assign SNAN = e_inf & ~(h_1 | fz);
+
+
 endmodule
