@@ -14,23 +14,27 @@ wire sta, st_db;
 
 
 ortree #(n1) or1(
-    .x(fn[127:54]),
+    //NOTE: transformed [0:127] into [127:0]
+    .x(fn[73:0]),
     .or_out(st_db)
 );
 
 ortree #(n2) or2(
-    .x(fn[53:25]),
+    //NOTE: transformed [0:127] into [127:0]
+    .x(fn[102:74]),
     .or_out(sta)
 );
 
 always @(*) begin
-    f1[24:0] = fn[24:0];
+    //NOTE: transformed [0:127] into [127:0]
+
+    f1[54:30] = fn[127:103];
 
     if (db) begin
-        f1[54:25] = {fn[53:25], st_db};
+        f1[29:0] = {fn[102:74], st_db};
     end
     else begin
-        f1[54:25] = {sta | st_db, 29'b0};
+        f1[29:0] = {sta | st_db, 29'b0};
     end
 
 end

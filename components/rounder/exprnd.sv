@@ -30,8 +30,8 @@ always @(*) begin
         end
     end
     else begin
-        eout = e3 & {11{f3[0]}};
-        fout = f3[52:1];
+        eout = e3 & {11{f3[52]}};
+        fout = f3[51:0];
     end
 end
 

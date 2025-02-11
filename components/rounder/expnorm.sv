@@ -23,7 +23,6 @@ reg [11:0] sum;
 wire [11:0] t, s;
 
 
-
 three2add add (
     .a(er),
     .b(b),
@@ -47,7 +46,7 @@ always @(*) begin
 
     delta = db ? {w1, 3'b000} : {3'b000, w1};
 
-    c = {delta, 6'b000000};
+    c = {delta, 6'b0};
     b = {5'b11111, lz};
 
     sum = t + s + 1;
@@ -60,8 +59,6 @@ always @(*) begin
         eni = sum[10:0];
     end
 end
-
-
 
 endmodule
 

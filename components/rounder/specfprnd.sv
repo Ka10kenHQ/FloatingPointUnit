@@ -53,13 +53,33 @@ rndexceptions rndexep(
 
 always @(*) begin
     if(db) begin
-        fp_out = {sp, ep, fp};
+        fp_out = {sp, ep, rev_52(fp)};
     end
     else begin
-        fp_out = {sp, ep[7:0], fp[22:0], sp, ep[7:0], fp[22:0]};
+        fp_out = {sp, ep[7:0], rev_22(fp[22:0]), sp, ep[7:0], rev_22(fp[22:0])};
     end
-
 end
+
+function [22:0] rev_22;
+    input [22:0] fp_in;
+    integer i;
+    begin
+        for (i = 0; i < 23; i = i + 1) begin
+            rev_22[i] = fp_in[22 - i];
+        end
+    end
+endfunction
+
+function [52:0] rev_52;
+    input [52:0] fp_in;
+    integer i;
+    begin
+        for (i = 0; i < 53; i = i + 1) begin
+            rev_52[i] = fp_in[52 - i];
+        end
+    end
+endfunction
+
 
 
 endmodule

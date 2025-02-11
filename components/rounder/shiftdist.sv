@@ -22,7 +22,7 @@ always @(*) begin
         sh = er + emax;
     end
     else begin
-        sh = {7'b0, lz};
+        sh = {7'b0, lz[5:0]};
     end
 
 

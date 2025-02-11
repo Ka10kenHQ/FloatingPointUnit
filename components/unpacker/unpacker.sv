@@ -2,6 +2,7 @@ module unpacker(
     input [63:0]       fp,
     input              db,
     input              normal,
+
     output reg         e_inf,
     output reg         e_z,
     output reg [10:0]  e,

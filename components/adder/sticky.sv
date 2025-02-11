@@ -8,13 +8,13 @@ module sticky (
 );
 
 reg [54:0] temp;
-wire [255:0] y;
-parameter N = 8;
+wire [63:0] y;
+parameter N = 6;
 parameter n = 55;
 
 
 HDecJ #(N) hdec(
-    .x({2'b00,as2}),
+    .x({as2}),
     .y(y)
 );
 

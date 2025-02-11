@@ -22,10 +22,8 @@ module master  (
     output reg [10:0] es,
     output reg [56:0] fs,
     output reg ss,
-    output reg [57:0] fls,
+    output reg [57:0] fls
     
-    // er
-    output reg [12:0] er_out
 );
 
 
@@ -67,10 +65,10 @@ adder add(
 );
 
 // TODO: flags to add
-reg OVFen = 1'b1;
+reg OVFen = 1'b0;
 reg UNFen = 1'b0;
 reg [11:0] temp_er;
-reg [12:0] er = {~temp_er[11], ~temp_er[11], temp_er[10:0]};
+reg [12:0] er;
 
 rounder rnd(
     .db(db),
@@ -87,8 +85,7 @@ rounder rnd(
 
 always @(*) begin
     temp_er = es + 1;
-    er = {~temp_er[11], ~temp_er[11], temp_er[10:0]};
-    er_out = er;
+    er = {~temp_er[11], ~temp_er[11], ~temp_er[10:0]};
 end
 
 endmodule

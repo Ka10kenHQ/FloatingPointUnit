@@ -15,6 +15,7 @@ wire w1;
 wire [63:0] h;
 
 parameter n = 6;
+
 ortree #(n) or_tree(
     .x(t[11:6]),
     .or_out(w1)

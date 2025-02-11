@@ -1,3 +1,5 @@
+`include "./unpacker.sv"
+
 module unpackermaster(
     input [63:0] FA2,
     input [63:0] FB2,

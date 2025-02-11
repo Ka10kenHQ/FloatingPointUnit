@@ -1,6 +1,7 @@
 module rounder(
     input db,
     input s,
+    // TODO: this is 13 bits but adder output is 11 bits 
     input [12:0] er,
     input [56:0] fr,
     input OVFen,
@@ -78,6 +79,7 @@ adjexp adje(
 
 wire [10:0] eout;
 wire [51:0] fout;
+
 exprnd exprn(
     .s(s),
     .e3(e3),

@@ -28,15 +28,15 @@ always @(*) begin
 
     if(db) begin
         temp = f1[52:0] + 1;
-        l = f1[52];
-        r = f1[53];
-        st = f1[54];
+        l = f1[2];
+        r = f1[1];
+        st = f1[0];
     end
     else begin
-        temp = {f1[23:0], {29{1'b1}}} + 1;
-        l = f1[23];
-        r = f1[24];
-        st = f1[25];
+        temp = {f1[54:31], {29{1'b1}}} + 1;
+        l = f1[34];
+        r = f1[33];
+        st = f1[32];
     end
 
     siginx = r | st;

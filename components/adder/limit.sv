@@ -18,7 +18,7 @@ ortree #(n) or_tree (
 
 always @(*) begin
     as1 = eb_gt_ea ? ~as : as;
-    as2 = as1[5:0] | {5'b00000, or_out};
+    as2 = as1[5:0] | or_out;
 end
 
 

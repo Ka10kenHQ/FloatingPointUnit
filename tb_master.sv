@@ -17,7 +17,6 @@ wire [10:0] es;
 wire [56:0] fs;
 wire ss;
 wire [57:0] fls;
-wire [12:0] er;
 
 master uut (
     .fpa(fpa),
@@ -42,88 +41,23 @@ master uut (
     .es(es),
     .fs(fs),
     .ss(ss),
-    .fls(fls),
-    .er_out(er)
+    .fls(fls)
 );
 
 initial begin
-    fpa = 64'h4016000000000000; 
-    fpb = 64'h400c000000000000; 
+
+    fpa = {1'b0, 11'b10000000000, 52'b1000000000000000000000000000000000000000000000000000};
+    fpb = {1'b0, 11'b10000000000, 52'b1000000000000000000000000000000000000000000000000000};
+
     db = 1;
     normal = 1;
     sub = 0;
-    RM = 2'b11; 
+    RM = 2'b00;
 
     #10;
-    $display("Test Case 1: %f + %f = %f", $bitstoreal(fpa), $bitstoreal(fpb), $bitstoreal(fp_out));
+    $display("fp_out = %b", fp_out);
 
-    $display("sa: %b", sa);
-    $display("sb: %b", sb);
-    $display("ea: %b", ea);
-    $display("eb: %b", eb);
-    $display("lza: %b", lza);
-    $display("lzb: %b", lzb);
-    $display("fla: %b", fla);
-    $display("flb: %b", flb);
-    $display("nan: %b", nan);
-    $display("fa: %b", fa);
-    $display("fb: %b", fb);
-    $display("es: %b", es);
-    $display("fs: %b", fs);
-    $display("ss: %b", ss);
-    $display("fls: %b", fls);
-    $display("er: %b", er);
-
-    fpa = 64'hc016000000000000; 
-    fpb = 64'h400c000000000000; 
-    sub = 1;
-
-    #10;
-    $display("Test Case 2: %f - %f = %f", $bitstoreal(fpa), $bitstoreal(fpb), $bitstoreal(fp_out));
-
-    $display("sa: %b", sa);
-    $display("sb: %b", sb);
-    $display("ea: %b", ea);
-    $display("eb: %b", eb);
-    $display("lza: %b", lza);
-    $display("lzb: %b", lzb);
-    $display("fla: %b", fla);
-    $display("flb: %b", flb);
-    $display("nan: %b", nan);
-    $display("fa: %b", fa);
-    $display("fb: %b", fb);
-    $display("es: %b", es);
-    $display("fs: %b", fs);
-    $display("ss: %b", ss);
-    $display("fls: %b", fls);
-    $display("er: %b", er);
-
-    fpa = 64'h7FF0000000000000; 
-    fpb = 64'h4000000000000000;
-    sub = 0;
-
-    #10;
-    $display("Test Case 3: %f + %f = %f", $bitstoreal(fpa), $bitstoreal(fpb), $bitstoreal(fp_out));
-
-    $display("sa: %b", sa);
-    $display("sb: %b", sb);
-    $display("ea: %b", ea);
-    $display("eb: %b", eb);
-    $display("lza: %b", lza);
-    $display("lzb: %b", lzb);
-    $display("fla: %b", fla);
-    $display("flb: %b", flb);
-    $display("nan: %b", nan);
-    $display("fa: %b", fa);
-    $display("fb: %b", fb);
-    $display("es: %b", es);
-    $display("fs: %b", fs);
-    $display("ss: %b", ss);
-    $display("fls: %b", fls);
-    $display("er: %b", er);
-
-    #10;
 end
-    
+
 endmodule
 
