@@ -84,8 +84,7 @@ rounder rnd(
 );
 
 always @(*) begin
-    temp_er = es + 1;
-    er = {~temp_er[11], ~temp_er[11], ~temp_er[10:0]};
+    er = {es[10], es[10], es[10:0]};
 end
 
 endmodule
