@@ -8,11 +8,10 @@ module limit (
 reg [10:0] as1;
 wire or_out;
 
-parameter n = 8;
-
+parameter n = 5;
 
 ortree #(n) or_tree (
-    .x({3'b000, as1[10:6]}),
+    .x(as1[10:6]),
     .or_out(or_out)
 );
 

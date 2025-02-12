@@ -1,6 +1,9 @@
 module rounder(
     input db,
     input s,
+    // <e> + 1 = <~e[n], e[n-1:0]>
+    // e[10:0] + 1 = e'[11:0]
+    // er[12:0] = {~e'[11],~e'[11:0]}
     // TODO: this is 13 bits but adder output is 11 bits 
     input [12:0] er,
     input [56:0] fr,

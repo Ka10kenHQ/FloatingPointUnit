@@ -25,17 +25,8 @@ mask msk(
 );
 
 always @(*) begin
-    fn[63:0] = and_64(fs, v);
-    fn[127:64] = and_64(fs, w);
+    fn[63:0] = fs & w;
+    fn[127:64] = fs & v;
 end
-
-function [63:0] and_64(input [63:0] ina, input [63:0] inb);
-    integer i;
-    begin
-        for (i = 0; i < 64; i = i + 1)
-            and_64[i] = ina[i] & inb[i];
-    end
-endfunction
-
 
 endmodule

@@ -14,7 +14,7 @@ parameter n = 55;
 
 
 HDecJ #(N) hdec(
-    .x({as2}),
+    .x(as2),
     .y(y)
 );
 

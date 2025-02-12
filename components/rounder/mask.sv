@@ -34,7 +34,7 @@ always @(*) begin
     u = sh[12] ? flip_bits({h[62:0], 1'b1}) : h;
 
     v = ~u;
-    w = and_64(u, sh[12]);
+    w = u & sh[12];
 
 end
 
@@ -45,15 +45,6 @@ function [63:0] flip_bits(input [63:0] in);
             flip_bits[i] = in[63 - i];
     end
 endfunction
-
-function [63:0] and_64(input [63:0] in, input to_and);
-    integer i;
-    begin
-        for (i = 0; i < 64; i = i + 1)
-            and_64[i] = in[i] & to_and;
-    end
-endfunction
-
 
 endmodule
 

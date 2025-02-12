@@ -11,7 +11,6 @@ module shiftdist(
 );
 
 reg mask;
-reg [12:0] add;
 // 1 - emin = emax
 wire [12:0] emax = {3'b0, {3{db}}, {7{1'b1}}};
 
@@ -24,9 +23,6 @@ always @(*) begin
     else begin
         sh = {7'b0, lz[5:0]};
     end
-
-
 end
-
 
 endmodule

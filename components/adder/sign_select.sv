@@ -17,8 +17,8 @@ reg ss2, ss3;
 always @(*) begin
     ss2 = sx ? sa : RM[0] & RM[1];
     ss3 = INFa ? sa : sb;
-    ss = INFs ? ss3 : (fz ? ss1 : ss2);
-    ZERO = ~(INFs | NAN);
+    ss = INFs ? ss3 : (fz ? ss2 : ss1);
+    ZERO = ~(INFs | NAN) & fz;
 end
 
 endmodule

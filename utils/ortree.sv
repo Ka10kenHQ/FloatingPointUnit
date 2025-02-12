@@ -8,7 +8,7 @@ module ortree #(
     localparam npof2 = 2 ** $clog2(n);
 
     wire [npof2-1:0] padded_x;
-    assign padded_x = { {npof2 - n{1'b0}}, x };
+    assign padded_x = { {npof2 - n{1'b0}}, x};
 
     generate
         if (npof2 > 1) begin : recursive_case
