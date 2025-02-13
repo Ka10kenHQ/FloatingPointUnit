@@ -4,7 +4,7 @@ use std::io::{self, Write};
 fn decompose_f32(fp: f32) -> (u32, u8, u32) {
     let bits = f32::to_bits(fp);
     let s = (bits >> 31) & 1;
-    let e = ((bits >> 23) & 0xFF) as u8; // exponent
+    let e = ((bits >> 23) & 0xFF) as u8;
     let f = bits & 0x7FFFFF;
     (s, e, f)
 }
@@ -32,7 +32,7 @@ fn main() -> io::Result<()> {
         (0.1234_f32, 0.1234_f64),
         (1000000.0_f32, 1000000.0_f64),
 
-        // Special cases
+        //NOTE: Special cases
         // Zero (positive and negative)
         (0.0_f32, 0.0_f64),
         (-0.0_f32, -0.0_f64),
