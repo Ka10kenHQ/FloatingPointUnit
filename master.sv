@@ -68,11 +68,8 @@ adder add(
     .fls(fls)
 );
 
-// TODO: flags to add
 reg OVFen = 1'b0;
 reg UNFen = 1'b0;
-reg [11:0] temp_er;
-reg [12:0] er;
 
 
 rounder rnd(
@@ -91,9 +88,6 @@ rounder rnd(
     .f_out(f_out)
 );
 
-always @(*) begin
-    temp_er = es + 1;
-end
 
 endmodule
 

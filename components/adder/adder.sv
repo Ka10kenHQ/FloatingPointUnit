@@ -86,8 +86,7 @@ sign_select sign(
 );
 
 always @(*) begin
-    // TODO: 1 bit is missing flr is [57:0] but fls is [56:0]
-    fls = {ZERO, INV, INFs, NANs, nan};
+    fls = {nan, ZERO, INFs, NANs, INV, 1'b0};
 end
 
 
