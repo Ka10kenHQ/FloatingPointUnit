@@ -10,14 +10,12 @@ module shiftdist(
     output reg [12:0] sh
 );
 
-reg mask;
 // 1 - emin = emax
 wire [12:0] emax = {3'b0, {3{db}}, {7{1'b1}}};
 
 always @(*) begin
-    mask = TINY & ~UNFen;
 
-    if(mask) begin
+    if(TINY & ~UNFen) begin
         sh = er + emax;
     end
     else begin

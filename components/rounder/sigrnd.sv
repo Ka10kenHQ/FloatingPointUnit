@@ -50,7 +50,7 @@ always @(*) begin
             f2 = {1'b0, f1[52:0]};
         end
         else begin
-            f2 = {1'b0, f1[52:32], 30'b0};
+            f2 = {1'b0, f1[52:30], 28'b0};
         end
     end
 end

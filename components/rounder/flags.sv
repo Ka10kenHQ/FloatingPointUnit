@@ -22,7 +22,7 @@ leadingzero lzero(
 
 always @(*) begin
     lz = lz_out[5:0];
-    add = er + {3'b0, {3{db}}, 1'b1, ~lz[5:0]};
+    add = er[12:0] + {3'b0, {3{db}}, 1'b1, ~lz[5:0]};
     TINY = add[12];
     OVF1 = (fr[56] & (er > emax - 1)) | 
               (fr[55] & (er > emax)) | 

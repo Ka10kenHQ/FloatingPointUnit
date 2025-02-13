@@ -1,4 +1,4 @@
-module specfrpnd(
+module specfprnd(
     input s,
     input [10:0] eout,
     input [51:0] fout,

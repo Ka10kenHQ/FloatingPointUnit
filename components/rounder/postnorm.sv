@@ -11,15 +11,15 @@ always @(*) begin
 
     sigovf = f2[53];
 
-    if(f2[53:52] == 2'b10) begin
+    if(f2[53:52] == 2'b10 && f2[51:0] == 52'b0) begin
         e2 = eni;
+        f3 = {1'b1, 52'b0};
     end
     else begin
         e2 = en;
+        f3 = f2[52:0];
     end
 
-    // TODO: f[1] | f[0] or f[-1] | f[0]
-    f3 = {f2[53] | f2[52], f2[51:0]};
 end
 
 

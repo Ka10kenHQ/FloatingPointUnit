@@ -44,10 +44,10 @@ always @(*) begin
         w1 = 2'b01;
     end
 
-    delta = db ? {w1, 3'b000} : {3'b000, w1};
+    delta = db ? {w1, 3'b0} : {3'b0, w1};
 
     c = {delta, 6'b0};
-    b = {5'b11111, lz};
+    b = {5'b11111, ~lz[5:0]};
 
     sum = t + s + 1;
 

@@ -96,7 +96,7 @@ exprnd exprn(
     .fout(fout)
 );
 
-specfrpnd specpnd(
+specfprnd specpnd(
     .s(s),
     .eout(eout),
     .fout(fout),
