@@ -52,6 +52,18 @@ initial begin
     $display("fp_out = %b", fp_out);
     $display("sp_out = %b, ep_out = %b, f_out = %b", sp_out, ep_out, f_out);
 
+    fpa = {1'b0, 8'b10000101, 23'b10010000000000000000000,1'b0, 8'b10000101, 23'b10010000000000000000000};
+    fpb = {1'b0, 8'b10000101, 23'b10010000000000000000000,1'b0, 8'b10000101, 23'b10010000000000000000000};
+
+    db = 0;
+    normal = 1;
+    sub = 0;
+    RM = 2'b01;
+    
+    #10;
+    $display("fp_out = %b", fp_out);
+    $display("sp_out = %b, ep_out = %b, f_out = %b", sp_out, ep_out, f_out);
+
 
 end
 

@@ -48,6 +48,18 @@ module tb_unpackermaster;
         $display("sa = %b, ea = %b, fa = %b", sa, ea, fa);
         $display("sb = %b, eb = %b, fb = %b", sb, eb, fb);
 
+        // 100 is single precision
+        FA2 = {1'b0, 8'b10000101, 23'b10010000000000000000000, 1'b0, 8'b10000101, 23'b10010000000000000000000};
+        FB2 = {1'b0, 8'b10000101, 23'b10010000000000000000000,1'b0, 8'b10000101, 23'b10010000000000000000000};
+
+        db = 1'b0;
+        normal = 1'b1;
+
+        #10;
+        $display("sa = %b, ea = %b, fa = %b", sa, ea, fa);
+        $display("sb = %b, eb = %b, fb = %b", sb, eb, fb);
+
+
     end
 
 

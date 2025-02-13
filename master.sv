@@ -78,7 +78,7 @@ reg [12:0] er;
 rounder rnd(
     .db(db),
     .s(ss),
-    .er(er),
+    .er({es[10], es[10], es}),
     .fr(fs),
     .OVFen(OVFen),
     .UNFen(UNFen),
@@ -93,7 +93,7 @@ rounder rnd(
 
 always @(*) begin
     temp_er = es + 1;
-    er = es;
+    // er = {};
 end
 
 endmodule

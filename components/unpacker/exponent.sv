@@ -14,7 +14,6 @@ reg [7:0] temp_e;
 always @(*) begin
     s = fp[63];
     if(db) begin
-
         e_z = fp[62:52] == 11'b0;
         e_inf = (~fp[62:52]) == 11'b0;
 
@@ -23,7 +22,6 @@ always @(*) begin
         e = {~inc[10], inc[9:0]};
     end
     else begin
-
         e_z = fp[62:55] == 8'b0;
         e_inf = (~fp[62:55]) == 8'b0;
 
