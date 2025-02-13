@@ -15,9 +15,10 @@ module exprnd(
 reg inf;
 
 always @(*) begin
-    inf = (RM == 2'b01) | (RM == 2'b10 & ~s) | (RM == 2'b11 & s);
 
-    if(OVF & OVFen) begin
+    inf = RM[1] == 1'b1 ? RM[0] : ~(RM[0] ^ s);
+
+    if(OVF & ~OVFen) begin
         if(inf) begin
             // infinity
             eout = {{3{db}}, 8'b11111111};

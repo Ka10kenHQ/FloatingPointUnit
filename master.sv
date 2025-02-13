@@ -13,19 +13,18 @@ module master  (
     output [63:0] fp_out,
     output [4:0] IEEp,
     
-    output reg sa, sb,
-    output reg [10:0] ea, eb,
-    output reg [5:0] lza, lzb,
-    output reg [3:0] fla, flb,
-    output reg [52:0] nan,
-    output reg [52:0] fa, fb,
-    output reg [10:0] es,
-    output reg [56:0] fs,
-    output reg ss,
-    output reg [57:0] fls
-    
+
+    output sp_out,
+    output [10:0] ep_out,
+    output [51:0] f_out
 );
 
+wire [5:0]  lza, lzb;
+wire [3:0]  fla, flb;
+wire [10:0] ea, eb;
+wire [52:0] nan;
+wire [52:0] fa, fb;
+wire        sa, sb;
 
 unpackermaster unpack(
     .FA2(fpa),
@@ -45,6 +44,11 @@ unpackermaster unpack(
     .nan(nan)
 );
 
+
+wire ss;
+wire [10:0] es;
+wire [56:0] fs;
+wire [57:0] fls;
 
 adder add(
     .fa(fa),
@@ -70,6 +74,7 @@ reg UNFen = 1'b0;
 reg [11:0] temp_er;
 reg [12:0] er;
 
+
 rounder rnd(
     .db(db),
     .s(ss),
@@ -80,11 +85,15 @@ rounder rnd(
     .flr(fls),
     .RM(RM),
     .IEEEp(IEEp),
-    .fp(fp_out)
+    .fp(fp_out),
+    .sp_out(sp_out),
+    .ep_out(ep_out),
+    .f_out(f_out)
 );
 
 always @(*) begin
-    er = {es[10], es[10], es[10:0]};
+    temp_er = es + 1;
+    er = es;
 end
 
 endmodule

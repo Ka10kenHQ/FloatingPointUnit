@@ -37,12 +37,16 @@ module tb_unpackermaster;
 
         #10;
         $display("sa = %b, ea = %b, fa = %b", sa, ea, fa);
+        $display("sb = %b, eb = %b, fb = %b", sb, eb, fb);
 
-        FA2 = {1'b0 , 8'b10000010, 23'b11100000000000000000000, 32'b0};
-        db = 1'b0;
+        FA2 = {1'b0, 11'b10000000010, 52'b0100000000000000000000000000000000000000000000000000};
+        FB2 = {1'b0, 11'b10000000010, 52'b0100000000000000000000000000000000000000000000000000};
+        db = 1'b1;
         normal = 1'b1;
+
         #10;
         $display("sa = %b, ea = %b, fa = %b", sa, ea, fa);
+        $display("sb = %b, eb = %b, fb = %b", sb, eb, fb);
 
     end
 

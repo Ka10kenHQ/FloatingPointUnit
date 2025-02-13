@@ -56,7 +56,7 @@ always @(*) begin
         eni = emin1;
     end else begin
         en = sum[10:0];
-        eni = sum[10:0];
+        eni = sum[10:0] + 1;
     end
 end
 

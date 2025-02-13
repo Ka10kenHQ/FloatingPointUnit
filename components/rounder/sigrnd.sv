@@ -45,7 +45,13 @@ always @(*) begin
         f2 = temp;
     end
     else begin
-        f2 = {1'b0, f1[52:0]};
+        //NOTE: modification from slides (its not in book)
+        if(db) begin
+            f2 = {1'b0, f1[52:0]};
+        end
+        else begin
+            f2 = {1'b0, f1[52:32], 30'b0};
+        end
     end
 end
 

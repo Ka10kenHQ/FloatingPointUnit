@@ -1,9 +1,6 @@
 module rounder(
     input db,
     input s,
-    // <e> + 1 = <~e[n], e[n-1:0]>
-    // e[10:0] + 1 = e'[11:0]
-    // er[12:0] = {~e'[11],~e'[11:0]}
     // TODO: this is 13 bits but adder output is 11 bits 
     input [12:0] er,
     input [56:0] fr,
@@ -13,7 +10,10 @@ module rounder(
     input [1:0] RM,
 
     output [4:0] IEEEp,
-    output [63:0] fp
+    output [63:0] fp,
+    output sp_out,
+    output [10:0] ep_out,
+    output [51:0] f_out
 );
 
 wire [127:0] fn;
@@ -71,6 +71,7 @@ postnorm pnorm(
 
 wire [10:0] e3;
 wire OVF;
+
 adjexp adje(
     .e2(e2),
     .db(db),
@@ -106,12 +107,15 @@ specfrpnd specpnd(
     .UNFen(UNFen),
     .OVF(OVF),
     .TINY(TINY),
-    .ZERO(flr[53]),
-    .NAN(flr[54]),
+    .ZERO(flr[57]),
+    .NAN(flr[56]),
     .INF(flr[55]),
-    .INV(flr[56]),
-    .DBZ(flr[57]),
+    .INV(flr[54]),
+    .DBZ(flr[53]),
     .fp_out(fp),
+    .sp_out(sp_out),
+    .ep_out(ep_out),
+    .f_out(f_out),
     .IEEEp(IEEEp)
 );
 

@@ -16,7 +16,6 @@ always @(*) begin
     if(db) begin
 
         e_z = fp[62:52] == 11'b0;
-        e_inf = (fp[62:52] == 11'b11111111111);
         e_inf = (~fp[62:52]) == 11'b0;
 
         temp_e_db = {fp[62:53], e_z | fp[52]};

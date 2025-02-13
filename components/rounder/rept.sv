@@ -25,6 +25,7 @@ ortree #(n2) or2(
     .or_out(sta)
 );
 
+
 always @(*) begin
     //NOTE: transformed [0:127] into [127:0]
 

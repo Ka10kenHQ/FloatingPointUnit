@@ -19,8 +19,8 @@ abs ut(
 
 always@(*)begin
     first = {2'b00, fa2[52:0],3'b000};
-    second = {2'b00^sx, fb3^sx, sx};
-    res = first + second;
+    second = {2'b00^sx, fb3^sx};
+    res = first + second + sx;
     fszero = res[57:0] != 58'b0;
     neg = res[57];
     ss1 = (sb2 & neg) | (sa2 & ~(sb2 & neg));

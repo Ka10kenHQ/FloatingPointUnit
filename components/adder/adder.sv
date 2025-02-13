@@ -22,18 +22,10 @@ module adder(
     output reg [57:0] fls
 );
 
-reg INFa = fla[2];
-
 wire [55:0] fb3;
 wire [52:0] fa2;
 
-wire sa2, sx, sb2, sb_p;
-wire INFs,NANs,INV;
-wire ZERO;
-
-wire fszero;
-wire ss1;
-
+wire sa2, sx, sb2;
 
 alignment align(
     .ea(ea),
@@ -50,6 +42,7 @@ alignment align(
     .sb2(sb2)
 );
 
+wire INFs,NANs,INV;
 
 spec spc(
     .sb(sb ^ sub),
@@ -61,6 +54,8 @@ spec spc(
     .INV(INV)
 ); 
 
+wire fszero;
+wire ss1;
 
 sigadd add(
     .fa2(fa2),
@@ -73,6 +68,8 @@ sigadd add(
     .ss1(ss1)
 );
 
+reg INFa = fla[2];
+wire ZERO;
 
 sign_select sign(
     .RM(RM),

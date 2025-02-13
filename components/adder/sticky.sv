@@ -9,6 +9,7 @@ module sticky (
 
 reg [54:0] temp;
 wire [63:0] y;
+
 parameter N = 6;
 parameter n = 55;
 
@@ -18,17 +19,17 @@ HDecJ #(N) hdec(
     .y(y)
 );
 
+ortree #(n) or_tree(
+    .x(temp),
+    .or_out(sticky)
+);
+
 always @(*) begin
     integer i;
     for(i =0; i<= 54;i = i+1) begin
         temp[i] = fb2[i] & y[i];
     end
 end
-
-ortree #(n) or_tree(
-    .x(temp),
-    .or_out(sticky)
-);
 
 
 endmodule

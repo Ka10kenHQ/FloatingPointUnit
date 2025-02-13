@@ -9,9 +9,7 @@ module adjexp(
 );
 
 reg [10:0] in;
-
 reg [7:0] emax1alpha;
-
 
 wire out;
 
@@ -21,7 +19,7 @@ andtree andt(
 );
 
 always @(*) begin
-    emax1alpha = {2'b0, {3{db}}, 3'b111};
+    emax1alpha = {2'b0, {3{db}}, 6'b111111};
     if(db) begin
         in = e2;
     end
@@ -32,7 +30,7 @@ always @(*) begin
     OVF = sigovf & out;
 
     if( ~OVFen & sigovf & out) begin
-        e3 = {3'b000, emax1alpha};
+        e3 = emax1alpha;
     end
     else begin
         e3 = e2;

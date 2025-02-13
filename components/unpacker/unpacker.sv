@@ -13,6 +13,7 @@ module unpacker(
     output reg [51:0]  h
 );
 
+
 exponent exponent_inst(
     .fp(fp),
     .db(db),
@@ -24,7 +25,7 @@ exponent exponent_inst(
 
 significant unpacker_inst(
     .db(db),
-    .x(fp),
+    .fp(fp),
     .e_z(e_z),
     .normal(normal),
     .lz(lz),

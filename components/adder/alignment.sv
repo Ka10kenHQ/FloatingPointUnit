@@ -17,9 +17,6 @@ module alignment(
 );
 
 wire [10:0] as;
-wire [54:0] temp;
-wire [54:0] fb2;
-wire [5:0] as2;
 wire eb_gt_ea;
 
 exp_sub uut(
@@ -29,12 +26,15 @@ exp_sub uut(
     .eb_gt_ea(eb_gt_ea)
 );
 
+wire [5:0] as2;
+
 limit uut1(
     .as(as),
     .eb_gt_ea(eb_gt_ea),
     .as2(as2)
 );
 
+wire [54:0] fb2;
 swap uut2(
     .fa(fa),
     .fb(fb),
@@ -46,6 +46,8 @@ swap uut2(
     .sa2(sa2),
     .sb2(sb2)
 );
+
+wire [54:0] temp;
 
 lrs uut3(
 .as2(as2),
