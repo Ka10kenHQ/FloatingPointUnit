@@ -1,5 +1,4 @@
 **/transcript
 **/vsim.wlf
 **/work
-.*
-!/.gitignore
+.nvim/
