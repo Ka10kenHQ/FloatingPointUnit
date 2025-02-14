@@ -17,6 +17,6 @@ assign sa2 = eb_gt_ea ? sb : sa;
 assign fa2 = eb_gt_ea ? fb : fa;
 
 assign sb2 = eb_gt_ea ? sa : sb;
-assign fb2 = eb_gt_ea ? {1'b0, fb[52:0], 1'b0} : {fb[52:0], 2'b0};
+assign fb2 = eb_gt_ea ? {1'b0, fa[52:0], 1'b0} : {fb[52:0], 2'b0};
 
 endmodule

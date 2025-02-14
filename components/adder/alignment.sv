@@ -47,14 +47,15 @@ swap uut2(
     .sb2(sb2)
 );
 
-wire [54:0] temp;
+wire [54:0] fp3_h;
 
 lrs uut3(
 .as2(as2),
 .fb2(fb2),
-.fb3(temp)
+.fb3(fp3_h)
 );
 
+wire sticky;
 sticky uut4(
 .as2(as2),
 .fb2(fb2),
@@ -64,6 +65,6 @@ sticky uut4(
 always@(*) begin
 sx = sa2 ^ sb2;
 es = eb_gt_ea ? eb : ea;
-fb3 = {temp, sticky};
+fb3 = {fp3_h[54:0], sticky};
 end    
 endmodule

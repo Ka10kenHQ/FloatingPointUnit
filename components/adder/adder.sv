@@ -19,11 +19,12 @@ module adder(
     output [10:0] es,
     output [56:0] fs,
     output ss,
-    output reg [57:0] fls
+    output [57:0] fls
 );
 
 wire [55:0] fb3;
 wire [52:0] fa2;
+wire sb_adj = sb ^ sub;
 
 wire sa2, sx, sb2;
 
@@ -33,7 +34,7 @@ alignment align(
     .fa(fa),
     .sa(sa),
     .fb(fb),
-    .sb(sb ^ sub),
+    .sb(sb_adj),
     .es(es),
     .fb3(fb3),
     .fa2(fa2),
@@ -45,7 +46,7 @@ alignment align(
 wire INFs,NANs,INV;
 
 spec spc(
-    .sb(sb ^ sub),
+    .sb(sb_adj),
     .sa(sa),
     .fla(fla),
     .flb(flb),
@@ -68,7 +69,7 @@ sigadd add(
     .ss1(ss1)
 );
 
-reg INFa = fla[2];
+wire INFa = fla[2];
 wire ZERO;
 
 sign_select sign(
@@ -76,7 +77,7 @@ sign_select sign(
     .fz(fszero),
     .sa(sa),
     .sx(sx),
-    .sb(sb ^ sub),
+    .sb(sb_adj),
     .ss1(ss1),
     .INFs(INFs),
     .INFa(INFa),
@@ -85,9 +86,7 @@ sign_select sign(
     .ss(ss)
 );
 
-always @(*) begin
-    fls = {nan, ZERO, INFs, NANs, INV, 1'b0};
-end
+assign fls = {nan, ZERO, INFs, NANs, INV, 1'b0};
 
 
 endmodule

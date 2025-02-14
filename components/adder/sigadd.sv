@@ -8,8 +8,9 @@ module sigadd(
     output reg fszero,
     output reg ss1
 );
+
 reg neg;
-reg[57:0] first,second;
+reg[57:0] a, b;
 reg[57:0] res;
 
 abs ut(
@@ -18,11 +19,15 @@ abs ut(
 );
 
 always@(*)begin
-    first = {2'b00, fa2[52:0],3'b000};
-    second = {2'b00^sx, fb3^sx};
-    res = first + second + sx;
-    fszero = res[57:0] != 58'b0;
+    a = {2'b00, fa2[52:0],3'b000};
+    b = {2'b00^{2{sx}}, fb3^{56{sx}}};
+    
+    res = a + b + sx;
+
+    fszero = (res[57:0] == 58'b0);
+    
     neg = res[57];
+    
     ss1 = (sb2 & neg) | (sa2 & ~(sb2 & neg));
 end 
 

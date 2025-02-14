@@ -75,7 +75,7 @@ reg UNFen = 1'b0;
 rounder rnd(
     .db(db),
     .s(ss),
-    .er({es[10], es[10], es[10:0]}),
+    .er({1'b0, 1'b0, es[10:0]}),
     .fr(fs),
     .OVFen(OVFen),
     .UNFen(UNFen),

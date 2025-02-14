@@ -2,21 +2,17 @@ module exp_sub (
     input [10:0] ea,
     input [10:0] eb,
 
-    output reg eb_gt_ea,
-    output reg [10:0] as
+    output eb_gt_ea,
+    output [10:0] as
 );
 
-reg [11:0] ina;
-reg [11:0] inb;
-reg [11:0] sum;
+wire [11:0] ina, inb, sum;
 
-always @(*) begin
-    ina = {ea[10],ea[10:0]};
-    inb = {~eb[10],~eb[10:0]};
+assign ina = {ea[10], ea[10:0]};
+assign inb = {~eb[10], ~eb[10:0]};
 
-    sum = ina + inb + 1;
-    eb_gt_ea = sum[11];
-    as = sum[10:0];
-end
+assign sum = ina + inb + 1;
+assign eb_gt_ea = sum[11];
+assign as = sum[10:0];
 
 endmodule

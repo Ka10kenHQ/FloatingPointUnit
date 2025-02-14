@@ -18,8 +18,6 @@ module tb_adder;
     wire ss;
     wire [57:0] fls;
 
-    real fp_result;
-
 
     unpackermaster unpack (
         .FA2(fpa),
@@ -58,6 +56,7 @@ module tb_adder;
     );
 
     initial begin
+        // 3.0 + 3.0
         fpa = {1'b0, 11'b10000000000, 52'b1000000000000000000000000000000000000000000000000000};
         fpb = {1'b0, 11'b10000000000, 52'b1000000000000000000000000000000000000000000000000000};
 
@@ -68,7 +67,7 @@ module tb_adder;
 
         #10;
         $display("ss = %b, es = %b, fs = %b", ss, es, fs);
-
+        $display("fls = %b", fls);
     end
 
 endmodule
