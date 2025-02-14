@@ -30,17 +30,15 @@ always @(*) begin
 
     sq = sa ^ sb;
 
-    a = {ea[10], ea[10], ea};
-    b = {7'b1111111, ~lza};
+    a = {ea[10], ea[10], ea[10:0]};
+    b = {7'b1111111, ~lza[5:0]};
 
     if (fdiv) begin
-        c = {~eb[10], ~eb[10], ~eb};
-
+        c = {~eb[10], ~eb[10], ~eb[10:0]};
         d = {7'b0,lzb};
     end
     else begin 
-        c = {eb[10], eb[10], eb};
-
+        c = {eb[10], eb[10], eb[10:0]};
         d = {7'b1111111,lzb};
     end
 

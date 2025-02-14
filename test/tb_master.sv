@@ -38,7 +38,7 @@ initial begin
     sub = 0;
     RM = 2'b01;
 
-    #50;
+    #20;
     $display("fp_out = %b", fp_out);
     $display("sp_out = %b, ep_out = %b, f_out = %b", sp_out, ep_out, f_out);
 
@@ -51,7 +51,7 @@ initial begin
     sub = 0;
     RM = 2'b01;
     
-    #50;
+    #20;
     $display("fp_out = %b", fp_out);
     $display("sp_out = %b, ep_out = %b, f_out = %b", sp_out, ep_out, f_out);
 
@@ -64,7 +64,7 @@ initial begin
     sub = 0;
     RM = 2'b01;
     
-    #50;
+    #20;
     $display("fp_out = %b", fp_out);
     $display("sp_out = %b, ep_out = %b, f_out = %b", sp_out, ep_out, f_out);
 
@@ -77,7 +77,7 @@ initial begin
     sub = 0;
     RM = 2'b00;
 
-    #50;
+    #20;
     $display("fp_out = %b", fp_out);
     $display("sp_out = %b, ep_out = %b, f_out = %b", sp_out, ep_out, f_out);
 

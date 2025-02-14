@@ -68,14 +68,13 @@ adder add(
     .fls(fls)
 );
 
-reg OVFen = 1'b0;
-reg UNFen = 1'b0;
-
+wire OVFen = 1'b0;
+wire UNFen = 1'b0;
 
 rounder rnd(
     .db(db),
     .s(ss),
-    .er({1'b0, 1'b0, es[10:0]}),
+    .er({es[10], es[10], es[10:0]}),
     .fr(fs),
     .OVFen(OVFen),
     .UNFen(UNFen),

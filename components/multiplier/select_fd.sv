@@ -5,9 +5,9 @@ module select_fb(
     input [57:0] Db,
 
     input [114:0] Eb,
+    input [54:0] E,
 
     input db,
-    input [54:0] E,
 
     output reg [56:0] fd
 );
@@ -19,8 +19,7 @@ reg [116:0] beta;
 reg neg, zero;
 reg [55:0] r;
 
-parameter n = 115;
-
+parameter n = 116;
 
 three2add #(n) add(
     .a(a),
@@ -31,7 +30,7 @@ three2add #(n) add(
 );
 
 always @(*) begin
-    a = {{1'b0, Da}, {56'b0, 1'b1}};
+    a = {1'b0, Da, 56'b0, 1'b1};
     b = {1'b1, ~Eb};
     
     if(db) begin
@@ -55,14 +54,14 @@ always @(*) begin
             r = E + 1;
         end
         else begin
-            r = {E[25:0], {29{1'b1}}} + 1;
+            r = {E[54:30], {29{1'b1}}} + 1;
         end
     end
 
-    fd[26:0] = r[26:0];
-    fd[27] = (db == 1)? r[27] : ~zero;
-    fd[55:28] = r[55:28];
-    fd[56] = ~zero & db;
+    fd[56:30] = r[55:29];
+    fd[29] = (db == 1)? r[28] : ~zero;
+    fd[28:1] = r[27:0];
+    fd[0] = ~zero & db;
 
 end
 
