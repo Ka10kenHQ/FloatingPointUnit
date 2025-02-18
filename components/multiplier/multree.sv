@@ -1,9 +1,26 @@
 module multree(
     input [57:0] a,
     input [57:0] b,
-
-    output [115:0] out
+output reg [115:0] out
 );
+  reg [115:0] partials [57:0];
+  wire [115:0] t,s;
+parameter n = 58;
+ftaddrec #(n) re (
+	.partials(partials),
+	.out1(t),
+	.out2(s)
+	);  
 
-
+integer i, j;
+  always@(*) begin
+    for (i = 0; i < 58; i++) begin
+       for (j = 0; j < 58; j++) begin
+          partials[i][j] = a[i] & b[j];
+       end
+       partials[i] = partials[i] << i;
+    end
+out = t + s;
+  end
 endmodule
+
