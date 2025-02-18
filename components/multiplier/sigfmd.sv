@@ -52,7 +52,7 @@ multree quot4(
 
 wire [56:0] fd_out;
 
-select_fb fd_inst(
+select_fd fd_inst(
     .Da({fa, 5'b0}),
     .Db({fb, 5'b0}),
     .Eb(mul_out[114:0]),

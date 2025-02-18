@@ -1,6 +1,6 @@
 `include "./../../utils/three2add.sv"
 
-module select_fb(
+module select_fd(
     input [57:0] Da,
     input [57:0] Db,
 
