@@ -1,7 +1,7 @@
 module ftaddrec #(parameter n = 58) (
     input [115:0] partials[n-1:0],
-    output reg [115:0] out1,
-    output reg [115:0] out2
+    output reg [115:0] t,
+    output reg [115:0] s
 );
 integer i;
 reg [115:0] sum1,sum2,sum3, sum4,sum5, sum6;
@@ -24,17 +24,17 @@ end
 
 generate 
 if (npof > 4) begin
-	ftaddrec #(npof/2) zur1(
-		.partials(partials1[npof/2-1:0]),
-		.out1(sum1),
-		.out2(sum2)
-		);
+    ftaddrec #(npof/2) zur1(
+        .partials(partials1[npof/2-1:0]),
+        .t(sum1),
+        .s(sum2)
+    );
 
-		ftaddrec #(npof/2) zur2(
-			.partials(partials1[npof-1:npof/2]),
-			.out1(sum3),
-			.out2(sum4)
-	   );
+    ftaddrec #(npof/2) zur2(
+        .partials(partials1[npof-1:npof/2]),
+        .t(sum3),
+        .s(sum4)
+    );
 
 
 
@@ -49,14 +49,14 @@ always @(*) begin
     end
     sum[116] = 0;
 
-    out1[0] = 0;
+    t[0] = 0;
     for (i = 0; i < 116; i = i + 1) begin
         sum6 = sum[i] + carry[i] + sum4[i];
 
-        out2[i] = sum6[0];
-        out1[i+1] = sum6[1];
+        s[i] = sum6[0];
+        t[i+1] = sum6[1];
     end
-    out2[116] = 0;
+    s[116] = 0;
 end
 end
 else begin : Base
@@ -72,14 +72,14 @@ always @(*) begin
     end
     sum[116] = 0;
 
-    out1[0] = 0;
+    t[0] = 0;
     for (i = 0; i < 116; i = i + 1) begin
         sum6 = sum[i] + carry[i] + partials[3][i];
 
-        out2[i] = sum6[0];
-        out1[i+1] = sum6[1];
+        s[i] = sum6[0];
+        t[i+1] = sum6[1];
     end
-    out2[116] = 0;
+    s[116] = 0;
 end
 end
 endgenerate
