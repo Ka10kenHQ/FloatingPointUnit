@@ -1,7 +1,7 @@
 module multree(
-    input [57:0] a,
-    input [57:0] b,
-output reg [115:0] out
+    input [57:0]       a,
+    input [57:0]       b,
+    output reg [115:0] out
 );
 
 reg [115:0] partials [57:0];
@@ -16,7 +16,7 @@ ftaddrec #(n) re (
 );  
 
 integer i, j;
-always@(*) begin
+always @(*) begin
   for (i = 0; i < 58; i++) begin
     partials[i] = 0;
     for (j = 0; j < 58; j++) begin
