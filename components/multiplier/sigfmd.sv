@@ -8,7 +8,7 @@ module sigfmd (
     output reg [56:0] fq
 );
 
-reg [7:0] look_up;
+wire [7:0] look_up;
 
 rom256X8 rm(
     .addr(fb[51:44]),
@@ -24,7 +24,8 @@ multree mlt(
     .out(mul_out)
 );
 
-wire [115:0] quot1_out, quot2_out, quot3_out, quot4_out;
+wire [115:0] quot1_out, quot2_out;
+wire [115:0] quot3_out, quot4_out;
 
 multree quot1(
     .a({fa, 5'b0}),
@@ -87,11 +88,12 @@ initial begin
     Dcnt = db ? 3 : 2;
     iter = 1;
     oe1 = 2'b11;
+    fq = 57'b0;
 end
 
 always @(*) begin
     do begin
-        if((oe1 == 2'b11) && ~oe2) begin
+        if(oe1[0] & oe1[1] & ~oe2) begin
             if(iter == 1) begin
                 fa_in = {2'b01, look_up[7:0], 48'b0};
                 fb_in = {fb , 5'b0};
@@ -100,14 +102,17 @@ always @(*) begin
             if(iter == 2) begin
                 fa_in = mul_out[115:58];
                 fb_in = {fb, 5'b0};
+                oe1 = 2'b10;
+                oe2 = 1'b1;
             end
             Dcnt = Dcnt - 1;
         end
-        else if((oe1 == 2'b10) && oe2) begin
+        else if(~oe1[0] & oe1[1] & oe2) begin
             fa_in = ~mul_out[115:90];
             fb_in = mul_out[115:68];
         end
         iter = iter + 1;
+        if(iter == 5 && Dcnt > 0) iter = 1;
     end while(Dcnt > 0);
     
     fq = fdiv ? fd_out : {regular_mul[115:60], or_out};
