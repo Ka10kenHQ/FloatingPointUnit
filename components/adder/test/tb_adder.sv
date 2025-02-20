@@ -1,3 +1,6 @@
+`include "./../../unpacker/unpackermaster.sv"
+`include "./../adder.sv"
+
 module tb_adder;
 
     reg [63:0] fpa;

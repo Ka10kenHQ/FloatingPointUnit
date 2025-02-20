@@ -9,13 +9,20 @@ module signexpmd(
 
     input fdiv,
 
-    output reg sq,
-    output reg [12:0] eq
+    output wire sq,
+    output wire [12:0] eq
 );
 
-reg [12:0] a,b,c,d;
+wire [12:0] a, b, c, d;
+wire [13:0] t, s;
 
-wire [13:0] t,s;
+assign sq = sa ^ sb;
+
+assign a = {ea[10], ea[10], ea[10:0]};
+assign b = {7'b1111111, ~lza};
+
+assign c = fdiv ? {~eb[10], ~eb[10], ~eb[10:0]} : {eb[10], eb[10], eb[10:0]};
+assign d = fdiv ? {7'b0, lzb} : {7'b1111111, lzb};
 
 ftadd add(
     .a(a),
@@ -26,23 +33,7 @@ ftadd add(
     .s(s)
 );
 
-always @(*) begin
-
-    sq = sa ^ sb;
-
-    a = {ea[10], ea[10], ea[10:0]};
-    b = {7'b1111111, ~lza[5:0]};
-
-    if (fdiv) begin
-        c = {~eb[10], ~eb[10], ~eb[10:0]};
-        d = {7'b0,lzb};
-    end
-    else begin 
-        c = {eb[10], eb[10], eb[10:0]};
-        d = {7'b1111111,lzb};
-    end
-
-    eq = t + s + 1;
-end
+assign eq = t + s + 1;
 
 endmodule
+

@@ -1,5 +1,5 @@
 module rom256X8(
-    input [7:0] addr,
+    input wire [7:0] addr,
     output reg [7:0] data
 );
 

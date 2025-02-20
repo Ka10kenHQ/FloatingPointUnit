@@ -1,5 +1,5 @@
 `include "./../select_fd.sv"
-module tb_select_fb;
+module tb_select_fd;
     reg [57:0] Da;
     reg [57:0] Db;
     reg [114:0] Eb;
@@ -8,7 +8,7 @@ module tb_select_fb;
 
     wire [56:0] fd;
 
-    select_fb uut (
+    select_fd uut (
         .Da(Da),
         .Db(Db),
         .Eb(Eb),

@@ -21,6 +21,7 @@ module tb_signexpmd;
         .sb(sb),
         .eb(eb),
         .lzb(lzb),
+        .fdiv(fdiv),
         .sq(sq),
         .eq(eq)
     );

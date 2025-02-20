@@ -1,7 +1,7 @@
 module multree(
-    input [57:0]       a,
-    input [57:0]       b,
-    output reg [115:0] out
+    input wire [57:0]     a,
+    input wire [57:0]     b,
+    output reg [115:0]    out
 );
 
 reg [115:0] partials [57:0];
@@ -10,9 +10,9 @@ wire [115:0] t,s;
 parameter n = 58;
 
 ftaddrec #(n) re (
-	.partials(partials),
-	.t(t),
-	.s(s)
+  .partials(partials),
+  .t(t),
+  .s(s)
 );  
 
 integer i, j;

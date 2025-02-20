@@ -1,10 +1,10 @@
 `include "./../../utils/ortree.sv"
 
 module sigfmd (
-    input [52:0] fa,
-    input [52:0] fb,
-    input fdiv,
-    input db,
+    input [52:0]      fa,
+    input [52:0]      fb,
+    input             fdiv,
+    input             db,
     output reg [56:0] fq
 );
 
@@ -22,33 +22,6 @@ multree mlt(
     .a(fa_in),
     .b(fb_in),
     .out(mul_out)
-);
-
-wire [115:0] quot1_out, quot2_out;
-wire [115:0] quot3_out, quot4_out;
-
-multree quot1(
-    .a({fa, 5'b0}),
-    .b(mul_out[115:58]),
-    .out(quot1_out)
-);
-
-multree quot2(
-    .a({fa, 5'b0}),
-    .b(quot1_out[115:58]),
-    .out(quot2_out)
-);
-
-multree quot3(
-    .a({quot2_out[115:90], ({29{db}} & quot2_out[89:61]), 3'b0}),
-    .b({fb, 5'b0}),
-    .out(quot3_out)
-);
-
-multree quot4(
-    .a({quot3_out[115:90], ({29{db}} & quot3_out[89:61]), 3'b0}),
-    .b({fb, 5'b0}),
-    .out(quot4_out)
 );
 
 wire [56:0] fd_out;
@@ -77,29 +50,30 @@ ortree #(n) or_inst(
 );
 
 
-integer Dcnt;
-integer iter;
-
+reg Dcnt;
+reg iter;
 reg [1:0] oe1;
 reg oe2;
 
 initial begin
-    oe2 = 1'b0;
     Dcnt = db ? 3 : 2;
     iter = 1;
+
     oe1 = 2'b11;
-    fq = 57'b0;
+    oe2 = 1'b0;
 end
 
+
+integer i;
+
 always @(*) begin
-    do begin
+    while (Dcnt > 0) begin
         if(oe1[0] & oe1[1] & ~oe2) begin
             if(iter == 1) begin
                 fa_in = {2'b01, look_up[7:0], 48'b0};
                 fb_in = {fb , 5'b0};
             end
-            else
-            if(iter == 2) begin
+            else if(iter == 2) begin
                 fa_in = mul_out[115:58];
                 fb_in = {fb, 5'b0};
                 oe1 = 2'b10;
@@ -112,9 +86,32 @@ always @(*) begin
             fb_in = mul_out[115:68];
         end
         iter = iter + 1;
+
         if(iter == 5 && Dcnt > 0) iter = 1;
-    end while(Dcnt > 0);
-    
+        else if(iter == 5 && Dcnt == 0) begin
+            oe1 = 2'b01;
+            oe2 = 1'b1;
+        end
+    end
+
+    for(i = 1; i < 5; i = i +1) begin
+        if(~oe1[1] & oe1[0] & oe2) begin
+            fa_in = {fa, 5'b0};
+            fb_in = mul_out[115:68];
+            oe2 = 1'b0;
+        end
+        else if(~oe1[1] & oe1[0] & ~oe2) begin
+            fa_in = {fa, 5'b0};
+            fb_in = {mul_out[115:68]};
+            oe1 = 2'b00;
+            oe2 = 1'b0;
+        end
+        else if(~oe1[1] & ~oe1[0] & ~oe2) begin
+            fa_in = {mul_out[115:90], ({29{db}} & mul_out[89:61]), 3'b0};
+            fb_in = {fb, 5'b0};
+        end
+    end
+
     fq = fdiv ? fd_out : {regular_mul[115:60], or_out};
 end
 

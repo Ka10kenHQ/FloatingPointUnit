@@ -1,15 +1,15 @@
 `include "./../../utils/three2add.sv"
 
 module select_fd(
-    input [57:0] Da,
-    input [57:0] Db,
+    input wire [57:0]  Da,
+    input wire [57:0]  Db,
 
-    input [114:0] Eb,
-    input [54:0] E,
+    input wire [114:0] Eb,
+    input wire [54:0]  E,
 
-    input db,
+    input wire         db,
 
-    output reg [56:0] fd
+    output reg [56:0]  fd
 );
 
 reg [115:0] a,b,c;

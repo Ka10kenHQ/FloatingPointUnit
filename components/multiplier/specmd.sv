@@ -4,42 +4,29 @@ module specmd(
     input [3:0] flb,
     input fdiv,
 
-    output reg [57:0] flq
+    output [57:0] flq
 );
 
-reg ZEROq;
-reg INFq;
-reg NANq;
-reg INV;
-reg DBZ;
+wire ZEROq;
+wire INFq;
+wire NANq;
+wire INV;
+wire DBZ;
 
-always @(*) begin
-    DBZ = fdiv & flb[3] & ~(fla[3] | fla[2] | fla[1] | fla[0]);
-    if(fdiv) begin
-        INV = (fla[3] & flb[3]) | (fla[2] & flb[2]) | (fla[1] & flb[1]);
-    end
-    else begin
-        INV = (fla[2] & flb[3]) | (fla[3] & flb[2]) | (fla[1] | flb[1]);
-    end
-    NANq = INV | (fla[0] | flb[0]);
+assign DBZ = fdiv & flb[3] & ~(fla[3] | fla[2] | fla[1] | fla[0]);
 
-    if(fdiv) begin
-        INFq = (fla[2] & ~NANq) | DBZ;
-    end
-    else begin
-        INFq = (fla[2] | flb[2]) & ~NANq;
-    end
+assign INV = fdiv ? ((fla[3] & flb[3]) | (fla[2] & flb[2]) | (fla[1] & flb[1])) :
+                    ((fla[2] & flb[3]) | (fla[3] & flb[2]) | (fla[1] | flb[1]));
 
-    if(fdiv) begin
-        ZEROq = (fla[3] | flb[2]) & ~NANq;
-    end
-    else begin
-        ZEROq = (fla[3] | flb[3]) & ~NANq;
-    end
+assign NANq = INV | (fla[0] | flb[0]);
 
-    flq = {nan, ZEROq, INFq, NANq, INV, DBZ};
-end
+assign INFq = fdiv ? ((fla[2] & ~NANq) | DBZ) :
+                     ((fla[2] | flb[2]) & ~NANq);
 
+assign ZEROq = fdiv ? ((fla[3] | flb[2]) & ~NANq) :
+                      ((fla[3] | flb[3]) & ~NANq);
 
+assign flq = {nan, ZEROq, INFq, NANq, INV, DBZ};
 
 endmodule
+
