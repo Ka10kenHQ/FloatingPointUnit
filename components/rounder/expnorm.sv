@@ -1,4 +1,5 @@
 `include "./../../utils/three2add.sv"
+`include "./../../utils/add.sv"
 
 module expnorm(
     input [10:0] er,
@@ -18,7 +19,6 @@ reg [10:0] c;
 reg [10:0] b;
 reg [10:0] emin;
 reg [10:0] emin1;
-reg [11:0] sum;
 
 wire [11:0] t, s;
 
@@ -29,6 +29,15 @@ three2add add (
     .c(c),
     .t(t),
     .s(s)
+);
+
+parameter n = 11;
+wire [11:0] sum;
+add #(n) ad(
+    .a(t[10:0]),
+    .b(s[10:0]),
+    .c_in(1'b1),
+    .sum(sum)
 );
 
 always @(*) begin
@@ -48,8 +57,6 @@ always @(*) begin
 
     c = {delta, 6'b0};
     b = {5'b11111, ~lz[5:0]};
-
-    sum = t + s + 1;
 
     if (~UNFen & TINY) begin
         en = emin;

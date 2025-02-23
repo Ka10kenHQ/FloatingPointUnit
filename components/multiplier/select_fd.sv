@@ -1,4 +1,5 @@
 `include "./../../utils/three2add.sv"
+`include "./../../utils/add.sv"
 
 module select_fd(
     input wire [57:0]  Da,
@@ -29,6 +30,15 @@ three2add #(n) add(
     .s(s)
 );
 
+parameter m = 117;
+wire [117:0] sum;
+add #(m) ad(
+    .a(t),
+    .b(s),
+    .c_in(1'b1),
+    .sum(sum)
+);
+
 always @(*) begin
     a = {1'b0, Da, 56'b0, 1'b1};
     b = {1'b1, ~Eb};
@@ -39,9 +49,8 @@ always @(*) begin
     else begin
         c = {{26{1'b1}}, ~({Db, 29'b0}), 3'b111};
     end
-
-    beta = t + s + 1;
-    neg = beta[116];
+    beta = sum[116:0];
+    neg = beta[117];
 
     zero = (beta == 117'b0);
 

@@ -20,6 +20,11 @@ module tb_flags;
     );
 
     initial begin
+        fr = 57'b0; er = 13'b0; db = 0;
+
+        $monitor("Time=%0t | fr=%b | er=%b | db=%b || TINY=%b | OVF1=%b | lz=%b", 
+            $time, fr, er, db, TINY, OVF1, lz);
+
         
         fr = 57'b000000000000000000000000000000000000000000000000000000000;
         er = 13'b0000000000000;
@@ -46,12 +51,6 @@ module tb_flags;
         db = 1'b0;
         #10;
 
-        $display("Test completed!");
-    end
-
-    initial begin
-        $monitor("Time=%0t | fr=%b | er=%b | db=%b || TINY=%b | OVF1=%b | lz=%b", 
-                 $time, fr, er, db, TINY, OVF1, lz);
     end
 
 endmodule

@@ -12,16 +12,23 @@ module muldiv (
     input wire  [52:0] nan,
     input wire  [3:0]  fla,
     input wire  [3:0]  flb,
-    output [56:0] fq,
-    output [12:0] eq,
-    output        sq,
-    output [57:0] flq
+    output wire [56:0] fq,
+    output wire [12:0] eq,
+    output wire        sq,
+    output wire [57:0] flq
 );
+
+wire [1:0] oe1;
+wire oe2;
+assign oe1 = 2'b11;
+assign oe2 = 1'b0;
 
 sigfmd sig(
     .fa(fa),
     .fb(fb),
     .fdiv(fdiv),
+    .oe1(oe1),
+    .oe2(oe2),
     .db(db),
     .fq(fq)
 );

@@ -1,3 +1,5 @@
+`include "./../../utils/add.sv"
+
 module shiftdist(
     input [12:0] er,
     input [5:0] lz,
@@ -7,20 +9,23 @@ module shiftdist(
     input TINY,
     input UNFen,
 
-    output reg [12:0] sh
+    output [12:0] sh
 );
 
 // 1 - emin = emax
-wire [12:0] emax = {3'b0, {3{db}}, {7{1'b1}}};
+wire [12:0] emax;
+assign emax = {3'b0, {3{db}}, {7{1'b1}}};
 
-always @(*) begin
+parameter n = 13;
+wire [13:0] sum;
 
-    if(TINY & ~UNFen) begin
-        sh = er + emax;
-    end
-    else begin
-        sh = {7'b0, lz[5:0]};
-    end
-end
+add #(n) ad(
+    .a(er[12:0]),
+    .b(emax),
+    .c_in(1'b0),
+    .sum(sum)
+);
+
+assign sh = TINY & ~UNFen ? sum[12:0] : {7'b0, lz[5:0]};
 
 endmodule

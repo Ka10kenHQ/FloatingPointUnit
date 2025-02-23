@@ -24,11 +24,10 @@ module tb_exp_sub;
     ea = 11'b11111111111; eb = 11'b10000000000; #10; // Test case 7: ea > eb
     ea = 11'b00100100100; eb = 11'b00100100100; #10; // Test case 8: ea == eb
     
-    $stop;
   end
 
   initial begin
-    $monitor("Time = %0t | ea = %b, eb = %b | eb_gt_ea = %b, as = %b", 
+    $monitor("Time = %0t | ea = %d, eb = %d | eb_gt_ea = %d, as = %d", 
              $time, ea, eb, eb_gt_ea, as);
   end
 

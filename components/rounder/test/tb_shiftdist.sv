@@ -6,11 +6,13 @@ module tb_shiftdist;
     reg [5:0] lz;
     reg TINY;
     reg UNFen;
+    reg db;
     wire [12:0] sh;
 
     shiftdist uut (
         .er(er),
         .lz(lz),
+        .db(db),
         .TINY(TINY),
         .UNFen(UNFen),
         .sh(sh)
@@ -21,6 +23,7 @@ module tb_shiftdist;
         lz = 6'b000100;
         TINY = 1;
         UNFen = 0;
+        db = 1;
         #10;
         $display("sh = %b", sh);
 

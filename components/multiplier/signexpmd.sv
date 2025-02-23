@@ -1,3 +1,5 @@
+`include "./../../utils/add.sv"
+
 module signexpmd(
     input sa,
     input [10:0] ea,
@@ -33,7 +35,18 @@ ftadd add(
     .s(s)
 );
 
-assign eq = t + s + 1;
+parameter n = 13;
+
+wire [13:0] sum;
+
+add #(n) ad(
+    .a(t[12:0]),
+    .b(s[12:0]),
+    .c_in(1'b1),
+    .sum(sum)
+);
+
+assign eq = sum[12:0];
 
 endmodule
 
