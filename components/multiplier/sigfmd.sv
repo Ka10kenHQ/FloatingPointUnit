@@ -4,6 +4,7 @@ module sigfmd (
     input [52:0]      fa,
     input [52:0]      fb,
     input             fdiv,
+    input             act,
     input             db,
     input [1:0]       oe1,
     input             oe2,
@@ -55,9 +56,10 @@ reg [1:0] Dcnt;
 reg [2:0] iter;
 reg [1:0] oe1_reg;
 reg oe2_reg;
+reg start_process;
 
 integer i;
-always @(oe1[0] & oe1[1] & ~oe2) begin
+always @(posedge act) begin
     Dcnt = db ? 2'b11 : 2'b10;
     iter = 1;
     oe1_reg = oe1;
@@ -66,7 +68,9 @@ always @(oe1[0] & oe1[1] & ~oe2) begin
     do begin
         if(oe1_reg[0] & oe1_reg[1] & ~oe2_reg) begin
             if(iter == 1) begin
+	
                 $display("im here 1");
+		$display("look_up=%d", look_up);
                 fa_in = {2'b01, look_up[7:0], 48'b0};
                 fb_in = {fb , 5'b0};
             end
@@ -86,7 +90,7 @@ always @(oe1[0] & oe1[1] & ~oe2) begin
         end
         $display("iter = %d", iter);
         iter = iter + 1;
-
+        $display("mulout=%d", mul_out);
         if(iter == 5 && Dcnt > 0) begin 
             iter = 1;
         end
@@ -118,6 +122,7 @@ always @(oe1[0] & oe1[1] & ~oe2) begin
 
         end
     end
+$display("look_iup=%d", look_up);
 end
 
 always @(*) begin

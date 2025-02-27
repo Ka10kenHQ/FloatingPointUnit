@@ -56,7 +56,7 @@ always @(*) begin
         s[i] = sum6[0];
         t[i+1] = sum6[1];
     end
-    s[116] = 0;
+    
 end
 end
 else begin : Base
@@ -79,7 +79,7 @@ always @(*) begin
         s[i] = sum6[0];
         t[i+1] = sum6[1];
     end
-    s[116] = 0;
+    
 end
 end
 endgenerate
