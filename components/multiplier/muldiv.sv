@@ -12,6 +12,7 @@ module muldiv (
     input wire  [52:0] nan,
     input wire  [3:0]  fla,
     input wire  [3:0]  flb,
+
     output wire [56:0] fq,
     output wire [12:0] eq,
     output wire        sq,
