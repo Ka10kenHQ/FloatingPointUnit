@@ -6,16 +6,13 @@ module tb_sigfmd;
     reg [1:0] oe1;
     reg oe2;
     wire [56:0] fq;
-reg act = 0;
     sigfmd uut (
         .fa(fa),
         .fb(fb),
         .oe1(oe1),
         .oe2(oe2),
-	.act(act),
         .fdiv(fdiv),
-        .db(db),
-	
+        .db(db),	
         .fq(fq)
     );
 
@@ -26,8 +23,6 @@ reg act = 0;
         fb = 53'h0F1E2D3C4B;
         fdiv = 0;
         db = 0;
-        #5;
-	act = 1;
 	#10;
 
         fa = 53'h3F2E1D0C9B;

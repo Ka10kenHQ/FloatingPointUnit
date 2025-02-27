@@ -6,7 +6,7 @@ module rom256X8(
 reg [15:0] rom [255:0];
 
 initial begin
-    $readmemb("/home/zura/FloatingPointUnit/components/multiplier/lookup_table.txt", rom);
+    $readmemb("$HOME/FloatingPointUnit/components/multiplier/lookup_table.txt", rom);
 end
 
 always @(*) begin

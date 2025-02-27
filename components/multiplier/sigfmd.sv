@@ -4,7 +4,6 @@ module sigfmd (
     input [52:0]      fa,
     input [52:0]      fb,
     input             fdiv,
-    input             act,
     input             db,
     input [1:0]       oe1,
     input             oe2,
@@ -52,77 +51,58 @@ ortree #(n) or_inst(
     .or_out(or_out)
 );
 
+reg [2:0] state;
 reg [1:0] Dcnt;
-reg [2:0] iter;
 reg [1:0] oe1_reg;
 reg oe2_reg;
 reg start_process;
+reg act;
 
-integer i;
+always @(oe1[1] & oe1[0] & ~oe2) begin
+    Dcnt <= db ? 2'b11 : 2'b10;
+    oe1_reg <= oe1;
+    oe2_reg <= oe2;
+    state <= 0;
+    #5;
+    act = 1;
+end
+
 always @(posedge act) begin
-    Dcnt = db ? 2'b11 : 2'b10;
-    iter = 1;
-    oe1_reg = oe1;
-    oe2_reg = oe2;
-
-    do begin
-        if(oe1_reg[0] & oe1_reg[1] & ~oe2_reg) begin
-            if(iter == 1) begin
-	
-                $display("im here 1");
-		$display("look_up=%d", look_up);
-                fa_in = {2'b01, look_up[7:0], 48'b0};
-                fb_in = {fb , 5'b0};
-            end
-            else if(iter == 2) begin
-                $display("im here 2");
-                fa_in = mul_out[115:58];
-                fb_in = {fb, 5'b0};
-                oe1_reg = 2'b10;
-                oe2_reg = 1'b1;
-            end
-            Dcnt = Dcnt - 1;
-            $display("Dcnt = %d", Dcnt);
+    case (state)
+        0: begin
+                fa_in <= {2'b01, look_up[7:0], 48'b0};
+                fb_in <= {fb , 5'b0};
+                state <= 1;
         end
-        else if(~oe1_reg[0] & oe1_reg[1] & oe2_reg) begin
-            fa_in = ~mul_out[115:90];
-            fb_in = mul_out[115:68];
+        1: begin
+            fa_in <= mul_out[115:58];
+            fb_in <= {fb, 5'b0};
+            oe1_reg <= 2'b10;
+            oe2_reg <= 1'b1;
+            Dcnt <= Dcnt - 1;
+            state <= (Dcnt == 0) ? 3 : 2;
         end
-        $display("iter = %d", iter);
-        iter = iter + 1;
-        $display("mulout=%d", mul_out);
-        if(iter == 5 && Dcnt > 0) begin 
-            iter = 1;
+        2: begin
+            fa_in <= ~mul_out[115:90];
+            fb_in <= mul_out[115:68];
+            state <= 3;
         end
-        else if(Dcnt == 0) begin
-            oe1_reg = 2'b01;
-            oe2_reg = 1'b1;
+        3: begin
+            fa_in <= {fa, 5'b0};
+            fb_in <= mul_out[115:68];
+            oe2_reg <= 1'b0;
+            state <= 4;
         end
-    end while(Dcnt > 0);
-
-    $display("then i am here");
-    for(i = 1; i < 5; i = i +1) begin
-        if(~oe1_reg[1] & oe1_reg[0] & oe2_reg) begin
-            fa_in = {fa, 5'b0};
-            fb_in = mul_out[115:68];
-            oe2_reg = 1'b0;
-            $display("Am i inside?");
+        4: begin
+            fa_in <= {mul_out[115:90], ({29{db}} & mul_out[89:61]), 3'b0};
+            fb_in <= {fb, 5'b0};
+            state <= 5;
         end
-        else if(~oe1_reg[1] & oe1_reg[0] & ~oe2_reg) begin
-            fa_in = {fa, 5'b0};
-            fb_in = {mul_out[115:68]};
-            oe1_reg = 2'b00;
-            oe2_reg = 1'b0;
-            $display("Am i inside 2 ?");
+        5: begin
+            oe1_reg <= 2'b01;
+            oe2_reg <= 1'b1;
         end
-        else if(~oe1_reg[1] & ~oe1_reg[0] & ~oe2_reg) begin
-            fa_in = {mul_out[115:90], ({29{db}} & mul_out[89:61]), 3'b0};
-            fb_in = {fb, 5'b0};
-            $display("Am i inside 3 ?");
-
-        end
-    end
-$display("look_iup=%d", look_up);
+    endcase
 end
 
 always @(*) begin
