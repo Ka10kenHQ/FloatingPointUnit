@@ -1,5 +1,5 @@
 use std::{fs::File, io::Result};
-use std::io::{self, Write};
+use std::io::Write;
 
 
 pub fn lookup_table() -> Result<()> {
@@ -47,4 +47,5 @@ fn calc_x0(fb : u8) -> f64 {
 
    x0
 }
+
 
