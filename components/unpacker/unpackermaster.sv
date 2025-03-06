@@ -6,35 +6,30 @@ module unpackermaster(
     input db,
     input normal,
 
-    output reg sa,
-    output reg [10:0] ea,
-    output reg [5:0] lza,
-    output reg [52:0] fa,
-    output reg [3:0] fla,
+    output [0:0] sa,
+    output [10:0] ea,
+    output [5:0] lza,
+    output [52:0] fa,
+    output [3:0] fla,
     
-    output reg sb,
-    output reg [10:0] eb,
-    output reg [5:0] lzb,
-    output reg [52:0] fb,
-    output reg [3:0] flb,
+    output [0:0] sb,
+    output [10:0] eb,
+    output [5:0] lzb,
+    output [52:0] fb,
+    output [3:0] flb,
 
-    output reg [52:0] nan
+    output [52:0] nan
 );
 
-reg e_inf1,s1,fz1, e_z1, e_inf2, s2,fz2,e_z2;
-
+wire e_inf1, s1, fz1, e_z1, e_inf2, s2, fz2, e_z2;
 wire snan;
 wire [51:0] fnan;
-
 wire ZEROa, INFa, SNANa, NANa;
-wire ZEROb,INFb,SNANb,NANb;
-
-wire [10:0] e1,e2;
-
-wire [5:0] lz1,lz2;
-
-wire [51:0] h1,h2;
-wire [52:0] f1,f2;
+wire ZEROb, INFb, SNANb, NANb;
+wire [10:0] e1, e2;
+wire [5:0] lz1, lz2;
+wire [51:0] h1, h2;
+wire [52:0] f1, f2;
 
 unpacker a(
     .fp(FA2),
@@ -96,24 +91,23 @@ nanselect nansel(
     .fnan(fnan)
 );
 
-always @(*)  begin
-    sa = s1;
-    ea = e1;
-    lza = lz1;
-    fa = f1;
-    fla[3] = ZEROa;
-    fla[2] = INFa;
-    fla[1] = SNANa;
-    fla[0] = NANa;
-    nan = {snan, fnan};
-    sb = s2;
-    eb = e2;
-    lzb= lz2;
-    fb = f2;
-    flb[3] = ZEROb;
-    flb[2] = INFb;
-    flb[1] = SNANb;
-    flb[0] = NANb;
-end    
+assign sa = s1;
+assign ea = e1;
+assign lza = lz1;
+assign fa = f1;
+assign fla[3] = ZEROa;
+assign fla[2] = INFa;
+assign fla[1] = SNANa;
+assign fla[0] = NANa;
+assign nan = {snan, fnan};
+assign sb = s2;
+assign eb = e2;
+assign lzb = lz2;
+assign fb = f2;
+assign flb[3] = ZEROb;
+assign flb[2] = INFb;
+assign flb[1] = SNANb;
+assign flb[0] = NANb;
 
 endmodule
+

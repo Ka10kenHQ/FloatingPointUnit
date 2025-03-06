@@ -4,13 +4,12 @@ module adjexp(
     input sigovf,
     input OVFen,
 
-    output reg [10:0] e3,
-    output reg OVF
+    output [10:0] e3,
+    output OVF
 );
 
-reg [10:0] in;
-reg [7:0] emax1alpha;
-
+wire [10:0] in = db ? e2 : {3'b111, e2[7:0]};
+wire [7:0] emax1alpha = {2'b0, {3{db}}, 6'b111111};
 wire out;
 
 andtree andt(
@@ -18,25 +17,8 @@ andtree andt(
     .and_out(out)
 );
 
-always @(*) begin
-    emax1alpha = {2'b0, {3{db}}, 6'b111111};
-    if(db) begin
-        in = e2;
-    end
-    else begin
-        in = {3'b111, e2[7:0]};
-    end
-
-    OVF = sigovf & out;
-
-    if( ~OVFen & sigovf & out) begin
-        e3 = emax1alpha;
-    end
-    else begin
-        e3 = e2;
-    end
-
-end
-
+assign OVF = sigovf & out;
+assign e3 = (~OVFen & sigovf & out) ? {3'b000, emax1alpha} : e2;
 
 endmodule
+

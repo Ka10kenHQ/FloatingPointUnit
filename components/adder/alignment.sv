@@ -8,11 +8,11 @@ module alignment(
     input [52:0] fb,
     input  sb,
     
-    output reg[10:0] es,
-    output reg[55:0] fb3,
+    output [10:0] es,
+    output [55:0] fb3,
     output [52:0] fa2,
     output  sa2,
-    output reg sx,
+    output  sx,
     output  sb2
 );
 
@@ -62,9 +62,8 @@ sticky uut4(
 .sticky(sticky)
 );
 
-always@(*) begin
-sx = sa2 ^ sb2;
-es = eb_gt_ea ? eb : ea;
-fb3 = {fp3_h[54:0], sticky};
-end    
+assign sx = sa2 ^ sb2;
+assign es = eb_gt_ea ? eb : ea;
+assign fb3 = {fp3_h[54:0], sticky};
+
 endmodule

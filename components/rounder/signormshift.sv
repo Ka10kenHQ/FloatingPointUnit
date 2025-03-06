@@ -4,7 +4,7 @@ module signormshift(
     input [56:0] fr,
     input [12:0] sh,
 
-    output reg [127:0] fn
+    output [127:0] fn
 );
 
 
@@ -24,9 +24,7 @@ mask msk(
     .w(w)
 );
 
-always @(*) begin
-    fn[63:0] = fs & w;
-    fn[127:64] = fs & v;
-end
+assign fn[63:0] = fs & w;
+assign fn[127:64] = fs & v;
 
 endmodule

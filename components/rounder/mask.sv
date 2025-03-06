@@ -3,16 +3,19 @@
 
 module mask(
     input [12:0] sh,
-    output reg [63:0] v,
-    output reg [63:0] w
+    output [63:0] v,
+    output [63:0] w
 );
 
-reg [11:0] t;
-reg [5:0] shp;
-reg [63:0] u; 
+wire [11:0] t = sh[11] ? ~sh[11:0] : sh[11:0];
 
 wire w1;
+wire [5:0] shp = w1 ? 6'b111111 : t[5:0];
 wire [63:0] h;
+wire [63:0] u = sh[12] ? flip_bits({h[62:0], 1'b1}) : h;
+
+assign v = ~u;
+assign w = u & {64{sh[12]}};
 
 parameter n = 6;
 
@@ -26,24 +29,12 @@ HDecJ #(n) hdec(
     .y(h)
 );
 
-always @(*) begin
-    t = sh[11] ? ~sh[11:0] : sh[11:0];
-
-    shp = w1 ? 6'b111111 : t[5:0];
-
-    u = sh[12] ? flip_bits({h[62:0], 1'b1}) : h;
-
-    v = ~u;
-    w = u & sh[12];
-
-end
-
-function [63:0] flip_bits(input [63:0] in);
+function automatic [63:0] flip_bits(input [63:0] in);
     integer i;
-    begin
-        for (i = 0; i < 64; i = i + 1)
-            flip_bits[i] = in[63 - i];
-    end
+begin
+    for (i = 0; i < 64; i = i + 1)
+        flip_bits[i] = in[63 - i];
+end
 endfunction
 
 endmodule

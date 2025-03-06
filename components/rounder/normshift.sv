@@ -9,8 +9,8 @@ module normshift(
     output [127:0] fn,
     output [10:0] eni,
     output [10:0] en,
-    output reg TINY,
-    output reg OVF1
+    output TINY,
+    output OVF1
 );
 
 wire tiny, ovf1;
@@ -54,9 +54,7 @@ signormshift signshift(
     .fn(fn)
 );
 
-always @(*) begin
-    TINY = tiny;
-    OVF1 = ovf1;
-end
+assign TINY = tiny;
+assign OVF1 = ovf1;
 
 endmodule

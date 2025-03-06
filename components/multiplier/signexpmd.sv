@@ -11,8 +11,8 @@ module signexpmd(
 
     input fdiv,
 
-    output wire sq,
-    output wire [12:0] eq
+    output  sq,
+    output  [12:0] eq
 );
 
 wire [12:0] a, b, c, d;
@@ -35,10 +35,9 @@ ftadd add(
     .s(s)
 );
 
-parameter n = 13;
-
 wire [13:0] sum;
 
+parameter n = 13;
 add #(n) ad(
     .a(t[12:0]),
     .b(s[12:0]),

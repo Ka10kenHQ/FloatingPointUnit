@@ -1,12 +1,12 @@
 `include "./../../utils/ortree.sv"
 
+// FIXME: needs to remove always@(*) 
 module sigfmd (
     input [52:0]      fa,
     input [52:0]      fb,
     input             fdiv,
     input             db,
-    input [1:0]       oe1,
-    input             oe2,
+    input             init,
     output reg [56:0] fq
 );
 
@@ -55,42 +55,35 @@ reg [2:0] state;
 reg [1:0] Dcnt;
 reg [1:0] oe1_reg;
 reg oe2_reg;
-reg start_process;
-reg act;
 
-always @(oe1[1] & oe1[0] & ~oe2) begin
+always @(posedge init) begin
     Dcnt <= db ? 2'b11 : 2'b10;
-    oe1_reg <= oe1;
-    oe2_reg <= oe2;
-    state <= 0;
     #5;
-    act = 1;
+    state <= 0;
 end
 
-always @(posedge act) begin
+always @(state) begin
     case (state)
         0: begin
-                fa_in <= {2'b01, look_up[7:0], 48'b0};
-                fb_in <= {fb , 5'b0};
-                state <= 1;
+            fa_in <= {2'b01, look_up[7:0], 48'b0};
+            fb_in <= {fb , 5'b0};
+            state <= 1;
         end
         1: begin
             fa_in <= mul_out[115:58];
             fb_in <= {fb, 5'b0};
-            oe1_reg <= 2'b10;
-            oe2_reg <= 1'b1;
             Dcnt <= Dcnt - 1;
-            state <= (Dcnt == 0) ? 3 : 2;
+            state <= 2;
         end
         2: begin
             fa_in <= ~mul_out[115:90];
             fb_in <= mul_out[115:68];
+            Dcnt <= Dcnt - 1;
             state <= 3;
         end
         3: begin
             fa_in <= {fa, 5'b0};
             fb_in <= mul_out[115:68];
-            oe2_reg <= 1'b0;
             state <= 4;
         end
         4: begin
@@ -98,10 +91,7 @@ always @(posedge act) begin
             fb_in <= {fb, 5'b0};
             state <= 5;
         end
-        5: begin
-            oe1_reg <= 2'b01;
-            oe2_reg <= 1'b1;
-        end
+        default: begin $display("doing nothing"); end
     endcase
 end
 

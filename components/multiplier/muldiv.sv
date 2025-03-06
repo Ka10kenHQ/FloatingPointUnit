@@ -1,36 +1,32 @@
 module muldiv (
-    input wire fdiv,
-    input wire sa,
-    input wire sb,
-    input wire db,
-    input wire  [52:0] fa,
-    input wire  [52:0] fb,
-    input wire  [10:0] ea,
-    input wire  [10:0] eb,
-    input wire  [5:0]  lza,
-    input wire  [5:0]  lzb,
-    input wire  [52:0] nan,
-    input wire  [3:0]  fla,
-    input wire  [3:0]  flb,
+    input fdiv,
+    input sa,
+    input sb,
+    input db,
+    input  [52:0] fa,
+    input  [52:0] fb,
+    input  [10:0] ea,
+    input  [10:0] eb,
+    input  [5:0]  lza,
+    input  [5:0]  lzb,
+    input  [52:0] nan,
+    input  [3:0]  fla,
+    input  [3:0]  flb,
 
-    output wire [56:0] fq,
-    output wire [12:0] eq,
-    output wire        sq,
-    output wire [57:0] flq
+    output [56:0] fq,
+    output [12:0] eq,
+    output        sq,
+    output [57:0] flq
 );
 
-wire [1:0] oe1;
-wire oe2;
-assign oe1 = 2'b11;
-assign oe2 = 1'b0;
-
+wire init;
+assign init = 1;
 sigfmd sig(
     .fa(fa),
     .fb(fb),
     .fdiv(fdiv),
-    .oe1(oe1),
-    .oe2(oe2),
     .db(db),
+    .init(init),
     .fq(fq)
 );
 

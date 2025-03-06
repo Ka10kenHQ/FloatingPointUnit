@@ -1,35 +1,41 @@
 `include "./../../utils/add.sv"
 
 module multree(
-    input wire [57:0]     a,
-    input wire [57:0]     b,
-    output  [115:0]       out
+    input  [57:0]        a,
+    input  [57:0]        b,
+    output [115:0]       out
 );
 
-reg [115:0] partials [57:0];
+wire [115:0] partials [57:0];
+wire [115:0] temp [57:0];
 wire [115:0] t,s;
+
+
+genvar i, j;
+generate
+  for (i = 0; i < 58; i++) begin
+    assign temp[i][115:58] = 0;
+    for (j = 0; j < 58; j++) begin
+      assign temp[i][j] = a[i] & b[j];
+    end
+  end
+
+  for(i=0; i < 58; i++) begin
+    assign partials[i] = temp[i] << i;
+  end
+endgenerate
 
 parameter n = 58;
 
-ftaddrec #(n) re (
+ftaddrec #(n) ftadd(
   .partials(partials),
   .t(t),
   .s(s)
 );  
 
-integer i, j;
-always @(*) begin
-  for (i = 0; i < 58; i++) begin
-    partials[i] = 0;
-    for (j = 0; j < 58; j++) begin
-      partials[i][j] = a[i] & b[j];
-    end
-    partials[i] = partials[i] << i;
-  end
-end
-
 parameter m = 116;
 wire [116:0] sum;
+
 add #(m) ad(
   .a(t),
   .b(s),

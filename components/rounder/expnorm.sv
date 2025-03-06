@@ -13,15 +13,14 @@ module expnorm(
     output reg [10:0] en
 );
 
-reg [1:0] w1;
-reg [4:0] delta;
-reg [10:0] c;
-reg [10:0] b;
-reg [10:0] emin;
-reg [10:0] emin1;
+wire [1:0] w1;
+wire [4:0] delta;
+wire [10:0] c;
+wire [10:0] b;
+wire [10:0] emin;
+wire [10:0] emin1;
 
 wire [11:0] t, s;
-
 
 three2add add (
     .a(er),
@@ -40,32 +39,18 @@ add #(n) ad(
     .sum(sum)
 );
 
-always @(*) begin
-    emin = 11'b00000000001;
-    emin1 = 11'b00000000010;
+assign emin = 11'b00000000001;
+assign emin1 = 11'b00000000010;
 
-    if(OVFen & OVF1) begin
-        w1 = 2'b11;
-    end
-    else w1 = 2'b10;
+assign w1 = (OVFen & OVF1) ? 2'b11 :
+            (UNFen & TINY) ? 2'b01 : 2'b10;
 
-    if(UNFen & TINY) begin
-        w1 = 2'b01;
-    end
+assign delta = db ? {w1, 3'b0} : {3'b0, w1};
+assign c = {delta, 6'b0};
+assign b = {5'b11111, ~lz[5:0]};
 
-    delta = db ? {w1, 3'b0} : {3'b0, w1};
-
-    c = {delta, 6'b0};
-    b = {5'b11111, ~lz[5:0]};
-
-    if (~UNFen & TINY) begin
-        en = emin;
-        eni = emin1;
-    end else begin
-        en = sum[10:0];
-        eni = sum[10:0] + 1;
-    end
-end
+assign en = (~UNFen & TINY) ? emin : sum[10:0];
+assign eni = (~UNFen & TINY) ? emin1 : sum[10:0] + 1;
 
 endmodule
 

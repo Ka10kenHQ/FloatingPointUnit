@@ -5,7 +5,7 @@ module tb_significand;
     parameter N = 64;
     
     reg dbs;
-    reg [N-1:0] x;
+    reg [N-1:0] fp;
     reg ez;
     reg normal;
 
@@ -15,9 +15,9 @@ module tb_significand;
     wire [51:0] h;
 
     significant #(N) uut (
-        .dbs(dbs),
-        .x(x),
-        .ez(ez),
+        .db(dbs),
+        .fp(fp),
+        .e_z(ez),
         .normal(normal),
         .lz(lz),
         .f(f),
@@ -27,31 +27,31 @@ module tb_significand;
 
     initial begin
         dbs = 0;
-        x = 64'hA5A5A5A5A5A5A5A5;  // Sample input value
+        fp = 64'hA5A5A5A5A5A5A5A5;  // Sample input value
         ez = 0;
         normal = 1;
         #40;
         
         dbs = 1;
-        x = 64'h1F1F1F1F1F1F1F1F;  // Another sample input value
+        fp = 64'h1F1F1F1F1F1F1F1F;  // Another sample input value
         ez = 1;
         normal = 0;
         #40;
 
         dbs = 0;
-        x = 64'hDEADBEEFDEADBEEF;  // Another input pattern
+        fp = 64'hDEADBEEFDEADBEEF;  // Another input pattern
         ez = 0;
         normal = 1;
         #40;
 
         dbs = 1;
-        x = 64'hFFFFFFFFFFFFFFFF;  // All bits set
+        fp = 64'hFFFFFFFFFFFFFFFF;  // All bits set
         ez = 1;
         normal = 0;
         #40;
 
         dbs = 0;
-        x = 64'h1234567890ABCDEF;  // Random 64-bit value
+        fp = 64'h1234567890ABCDEF;  // Random 64-bit value
         ez = 0;
         normal = 1;
         #40;

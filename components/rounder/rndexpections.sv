@@ -13,18 +13,16 @@ module rndexceptions(
     output reg [4:0] IEEEp
 );
 
-reg OVFp, UNFp, INXp, INX;
-reg spec;
+wire OVFp, UNFp, INXp, INX;
+wire spec;
 
-always @(*) begin
-    spec = (NAN | INF | ZERO);
-    OVFp = ~spec & OVF;
-    INX = siginx | (OVF & ~OVFen);
+assign spec = (NAN | INF | ZERO);
+assign OVFp = ~spec & OVF;
+assign INX = siginx | (OVF & ~OVFen);
 
-    UNFp = ~spec & TINY & (UNFen | INX);
-    INXp = ~spec & INX;
-    IEEEp = {INV, DBZ, OVFp, UNFp, INXp};
-end
+assign UNFp = ~spec & TINY & (UNFen | INX);
+assign INXp = ~spec & INX;
+assign IEEEp = {INV, DBZ, OVFp, UNFp, INXp};
 
 
 endmodule

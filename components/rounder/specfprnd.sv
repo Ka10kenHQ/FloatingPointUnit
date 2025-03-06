@@ -15,10 +15,10 @@ module specfprnd(
     input siginx,
     input db,
 
-    output reg [63:0] fp_out,
-    output reg sp_out,
-    output reg [10:0] ep_out,
-    output reg [51:0] f_out,
+    output [63:0] fp_out,
+    output sp_out,
+    output [10:0] ep_out,
+    output [51:0] f_out,
     output [4:0] IEEEp
 );
 
@@ -54,17 +54,10 @@ rndexceptions rndexep(
 );
 
 
-always @(*) begin
-    sp_out = sp;
-    ep_out = ep;
-    f_out = fp;
-    if(db) begin
-        fp_out = {sp, ep, fp[51:0]};
-    end
-    else begin
-        fp_out = {sp, ep[7:0], fp[51:28], sp, ep[7:0], fp[51:28]};
-    end
-end
+assign sp_out = sp;
+assign ep_out = ep;
+assign f_out = fp;
+assign fp_out = db ? {sp, ep, fp[51:0]} : {sp, ep[7:0], fp[51:28], sp, ep[7:0], fp[51:28]};
 
 
 endmodule

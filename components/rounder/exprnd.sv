@@ -7,34 +7,20 @@ module exprnd(
     input db,
     input OVFen,
 
-    output reg [10:0] eout,
-    output reg [51:0] fout
+    output [10:0] eout,
+    output [51:0] fout
 );
 
+wire inf;
+assign inf = (RM[1] == 1'b1) ? RM[0] : ~(RM[0] ^ s);
 
-reg inf;
+assign eout = (OVF & ~OVFen) ? 
+              (inf ? {{3{db}}, 8'b11111111} : {{3{db}}, 7'b1111111, 1'b0}) :
+              (e3 & f3[52]);
 
-always @(*) begin
-
-    inf = RM[1] == 1'b1 ? RM[0] : ~(RM[0] ^ s);
-
-    if(OVF & ~OVFen) begin
-        if(inf) begin
-            // infinity
-            eout = {{3{db}}, 8'b11111111};
-            fout = 52'b0;
-        end
-        else begin
-            // Xmax
-            eout = {{3{db}}, 7'b1111111, 1'b0};
-            fout = {{23{1'b1}}, {29{db}}};
-        end
-    end
-    else begin
-        eout = e3 & f3[52];
-        fout = f3[51:0];
-    end
-end
-
+assign fout = (OVF & ~OVFen) ? 
+              (inf ? 52'b0 : {{23{1'b1}}, {29{db}}}) :
+              f3[51:0];
 
 endmodule
+

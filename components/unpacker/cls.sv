@@ -3,10 +3,9 @@ module cls #(
 )(
     input  [5:0] m,
     input   [N-1:0] x, 
-    output reg [N-1:0] y  
+    output [N-1:0] y  
 );
     
-always @* begin
-    y = (x >> (N - m) | (x << m));    
-end
+assign y = (x >> (N - m) | (x << m));    
+
 endmodule

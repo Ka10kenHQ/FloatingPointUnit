@@ -5,7 +5,10 @@ module limit (
     input eb_gt_ea,
     output reg [5:0] as2
 );
-reg [10:0] as1;
+wire [10:0] as1;
+assign as1 = eb_gt_ea ? ~as : as;
+
+
 wire or_out;
 
 parameter n = 5;
@@ -15,10 +18,7 @@ ortree #(n) or_tree (
     .or_out(or_out)
 );
 
-always @(*) begin
-    as1 = eb_gt_ea ? ~as : as;
-    as2 = as1[5:0] | or_out;
-end
+assign as2 = as1[5:0] | or_out;
 
 
 endmodule
