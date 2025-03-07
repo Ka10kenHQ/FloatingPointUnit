@@ -1,12 +1,10 @@
 module ortree #(
-    parameter n = 2
+    parameter n = 2,
+    parameter npof2 = 2 ** $clog2(n)
 )(
     input [n-1:0] x, 
     output or_out 
 );
-
-    localparam npof2 = 2 ** $clog2(n);
-
     wire [npof2-1:0] padded_x;
     assign padded_x = { {npof2 - n{1'b0}}, x};
 
@@ -15,12 +13,12 @@ module ortree #(
             wire L;
             wire U;
 
-            ortree #(npof2 / 2) lower_or (
+            ortree #(.n(npof2 / 2), .npof2(npof2 / 2)) lower_or (
                 .x(padded_x[(npof2 / 2) - 1:0]),          
                 .or_out(L)               
             );
 
-            ortree #(npof2 / 2) upper_or (
+            ortree #(.n(npof2 / 2), .npof2(npof2 / 2)) upper_or (
                 .x(padded_x[npof2-1:(npof2 / 2)]),          
                 .or_out(U)               
             );
