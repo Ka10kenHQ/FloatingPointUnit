@@ -19,14 +19,11 @@ module muldiv (
     output [57:0] flq
 );
 
-wire init;
-assign init = 1;
 sigfmd sig(
     .fa(fa),
     .fb(fb),
     .fdiv(fdiv),
     .db(db),
-    .init(init),
     .fq(fq)
 );
 
