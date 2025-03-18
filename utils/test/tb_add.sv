@@ -15,7 +15,7 @@ module tb_add;
     );
 
     initial begin
-        $monitor("Time = %0t | a = %d | b = %d | sum = %d", $time, a, b, sum);
+        $monitor("Time = %0t | a = %d | b = %d | c_in = %d | sum = %d", $time, a, b, c_in, sum);
 
         a = 10'b0000000000; b = 10'b0000000000; c_in = 1'b1; #10;
         a = 10'b0000000001; b = 10'b0000000001; #10;

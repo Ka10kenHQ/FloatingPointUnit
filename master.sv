@@ -9,21 +9,20 @@ module master  (
     input db,
     input normal,
     input sub,
-    input fdiv, // Added missing input
+    input fdiv,
     input [1:0] RM,
-
-    // Outputs for both adder and muldiv results
-    output [63:0] fp_add_out,
-    output [4:0] IEEp_add,
-    output sp_add_out,
-    output [10:0] ep_add_out,
-    output [51:0] f_add_out,
 
     output [63:0] fp_mul_out,
     output [4:0] IEEp_mul,
     output sp_mul_out,
     output [10:0] ep_mul_out,
-    output [51:0] f_mul_out
+    output [51:0] f_mul_out,
+
+    output [63:0] fp_add_out,
+    output [4:0] IEEp_add,
+    output sp_add_out,
+    output [10:0] ep_add_out,
+    output [51:0] f_add_out
 );
 
 wire [5:0]  lza, lzb;
@@ -51,7 +50,6 @@ unpackermaster unpack(
     .nan(nan)
 );
 
-// Adder outputs
 wire ss;
 wire [10:0] es;
 wire [56:0] fs;
@@ -75,7 +73,6 @@ adder add(
     .fls(fls)
 );
 
-// Muldiv outputs
 wire [56:0] fq;
 wire [12:0] eq;
 wire sq;

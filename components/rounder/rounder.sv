@@ -10,6 +10,7 @@ module rounder(
 
     output [4:0] IEEEp,
     output [63:0] fp,
+    // TODO: remove below outputs after testing is done
     output sp_out,
     output [10:0] ep_out,
     output [51:0] f_out

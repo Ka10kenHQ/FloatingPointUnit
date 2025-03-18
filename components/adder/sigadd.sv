@@ -7,17 +7,17 @@ module sigadd(
     input  sb2,
     input  sx, 
     output [56:0] fs,
-    output reg fszero,
-    output reg ss1
+    output fszero,
+    output ss1
 );
 
 wire [57:0] a, b;
-parameter n = 58;
 wire [58:0] sum;
 
 assign a = {2'b00, fa2[52:0],3'b000};
 assign b = {2'b00^{2{sx}}, fb3^{56{sx}}};
 
+parameter n = 58;
 add #(n) ad(
     .a(a),
     .b(b),
@@ -28,7 +28,6 @@ add #(n) ad(
 wire [57:0] res;
 assign res = sum[57:0];
 assign fszero = (res == 58'b0);
-
 assign neg = res[57];
 assign ss1 = (sb2 & neg) | (sa2 & ~(sb2 & neg));
 

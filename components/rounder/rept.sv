@@ -2,16 +2,15 @@
 
 module rept(
     input [127:0] fn,
-    input db,
+    input         db,
 
-    output wire [54:0] f1
+    output [54:0] f1
 );
 
 parameter n1 = 74;
 parameter n2 = 29;
 
 wire sta, st_db;
-
 
 ortree #(n1) or1(
     //NOTE: transformed [0:127] into [127:0]

@@ -2,9 +2,9 @@ module leadingzero #(parameter n = 64, m = 6) (
     input  [n - 1 : 0] x,
     output [m : 0] y
 );
-reg [m-1:0] y_H;
-reg [m-1:0] y_L;
-reg high_zero;
+wire [m-1:0] y_H;
+wire [m-1:0] y_L;
+wire high_zero;
 generate
 if (m > 1) begin : rec
 

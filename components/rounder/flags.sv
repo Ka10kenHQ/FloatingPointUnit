@@ -21,9 +21,9 @@ leadingzero lzero(
     .y(lz_out)
 );
 
-parameter n = 13;
 wire [13:0] sum;
 
+parameter n = 13;
 add #(n) ad(
     .a({3'b0, {3{db}}, 1'b1,  ~lz[5:0]}),
     .b(er[12:0]),

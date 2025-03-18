@@ -16,6 +16,8 @@ module specfprnd(
     input db,
 
     output [63:0] fp_out,
+    
+    // TODO: remove after the testing is done
     output sp_out,
     output [10:0] ep_out,
     output [51:0] f_out,

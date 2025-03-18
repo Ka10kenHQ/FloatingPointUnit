@@ -1,5 +1,3 @@
-`include "./unpacker.sv"
-
 module unpackermaster(
     input [63:0] FA2,
     input [63:0] FB2,
@@ -28,7 +26,7 @@ wire ZEROa, INFa, SNANa, NANa;
 wire ZEROb, INFb, SNANb, NANb;
 wire [10:0] e1, e2;
 wire [5:0] lz1, lz2;
-wire [51:0] h1, h2;
+wire [52:0] h1, h2;
 wire [52:0] f1, f2;
 
 unpacker a(
@@ -61,7 +59,7 @@ unpacker b(
 
 exceptions e (
     .e_inf(e_inf1),
-    .h_1(h1[0]),
+    .h_1(h1[51]),
     .fz(fz1),
     .ez(e_z1),
     .ZERO(ZEROa),
@@ -72,7 +70,7 @@ exceptions e (
 
 exceptions exc (
     .e_inf(e_inf2),
-    .h_1(h2[0]),
+    .h_1(h2[51]),
     .fz(fz2),
     .ez(e_z2),
     .ZERO(ZEROb),
@@ -95,19 +93,16 @@ assign sa = s1;
 assign ea = e1;
 assign lza = lz1;
 assign fa = f1;
-assign fla[3] = ZEROa;
-assign fla[2] = INFa;
-assign fla[1] = SNANa;
-assign fla[0] = NANa;
-assign nan = {snan, fnan};
+assign fla = {ZEROa, INFa, SNANa, NANa};
+
 assign sb = s2;
 assign eb = e2;
 assign lzb = lz2;
 assign fb = f2;
-assign flb[3] = ZEROb;
-assign flb[2] = INFb;
-assign flb[1] = SNANb;
-assign flb[0] = NANb;
+assign flb = {ZEROb, INFb, SNANb, NANb};
+
+assign nan = {snan, fnan};
+
 
 endmodule
 

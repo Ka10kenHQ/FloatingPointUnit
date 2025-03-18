@@ -12,15 +12,17 @@ module exprnd(
 );
 
 wire inf;
-assign inf = (RM[1] == 1'b1) ? RM[0] : ~(RM[0] ^ s);
+wire [10:0] exp_xmax_inf;
+wire [51:0] fp_xmax_inf;
 
-assign eout = (OVF & ~OVFen) ? 
-              (inf ? {{3{db}}, 8'b11111111} : {{3{db}}, 7'b1111111, 1'b0}) :
-              (e3 & f3[52]);
+assign inf = RM[1] ? ~(RM[0] ^ s) : RM[0];
 
-assign fout = (OVF & ~OVFen) ? 
-              (inf ? 52'b0 : {{23{1'b1}}, {29{db}}}) :
-              f3[51:0];
+assign exp_xmax_inf = inf ? {{3{db}}, 8'b11111111} : {{3{db}}, 7'b1111111, 1'b0};
+assign fp_xmax_inf = inf ? 52'b0 : {{23{1'b1}}, {29{db}}};
+
+
+assign eout = (OVF & ~OVFen) ? exp_xmax_inf : e3[10:0] & f3[52];
+assign fout = (OVF & ~OVFen) ? fp_xmax_inf: f3[51:0];
 
 endmodule
 

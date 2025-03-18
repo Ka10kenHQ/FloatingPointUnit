@@ -106,7 +106,7 @@ end
 always @(negedge fdiv) begin
     fa_in = {fa, 5'b0};
     fb_in = {fb, 5'b0};
-    #1;
+    #2;
     fq = {mul_out[115:60], or_out};
 end
 

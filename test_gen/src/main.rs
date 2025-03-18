@@ -1,3 +1,4 @@
+mod automate_unpacker;
 mod factorize;
 mod lookup;
 

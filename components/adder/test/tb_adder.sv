@@ -23,14 +23,16 @@ module tb_adder;
 
 
     unpackermaster unpack (
+        // inputs
         .FA2(fpa),
         .FB2(fpb),
+        .db(db),
+        .normal(normal),
+        // outputs
         .sa(sa),
         .sb(sb),
         .ea(ea),
         .eb(eb),
-        .db(db),
-        .normal(normal),
         .fa(fa),
         .fb(fb),
         .lza(lza),

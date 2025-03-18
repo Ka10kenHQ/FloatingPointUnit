@@ -1,5 +1,6 @@
 module postnorm(
-    input [10:0] en, eni,
+    input [10:0] en,
+    input [10:0] eni,
     input [53:0] f2,
 
     output sigovf,
@@ -8,8 +9,8 @@ module postnorm(
 );
 
 assign sigovf = f2[53];
-
-assign {e2, f3} = (f2[53:52] == 2'b10 && f2[51:0] == 52'b0) ? {eni, {1'b1, 52'b0}} : {en, f2[52:0]};
+assign e2 = f2[53] ? eni : en;
+assign f3 = {f2[53] | f2[52], f2[51:0]};
 
 endmodule
 

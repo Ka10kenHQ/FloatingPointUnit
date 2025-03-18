@@ -1,5 +1,5 @@
 `include "./../../utils/add.sv"
-// FIXME: some things dont line up with eb_gt_ea in tests
+
 module exp_sub (
     input [10:0] ea,
     input [10:0] eb,
@@ -16,9 +16,9 @@ assign inb = {~eb[10], ~eb[10:0]};
 
 parameter n = 12;
 add #(n) ad(
-    .a(ina),
-    .b(inb),
-    .c_in(1'b1),
+    .a(inb),
+    .b(ina),
+    .c_in(1'b1), // NOTE: carry in
     .sum(sum)
 );
 

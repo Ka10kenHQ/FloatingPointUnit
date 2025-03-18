@@ -3,24 +3,24 @@ module unpacker(
     input              db,
     input              normal,
 
-    output reg         e_inf,
-    output reg         e_z,
-    output reg [10:0]  e,
-    output reg         s,
-    output reg [5:0]   lz,
-    output reg [52:0]  f,
-    output reg         fz,
-    output reg [51:0]  h
+    output             e_inf,
+    output             e_z,
+    output [10:0]      e,
+    output             s,
+    output [5:0]       lz,
+    output [52:0]      f,
+    output             fz,
+    output [52:0]      h
 );
 
+assign s = fp[63];
 
 exponent exponent_inst(
     .fp(fp),
     .db(db),
     .e_inf(e_inf),
     .e_z(e_z),
-    .e(e),
-    .s(s)
+    .e(e)
 );
 
 significant unpacker_inst(

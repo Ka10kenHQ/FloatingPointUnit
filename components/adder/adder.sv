@@ -24,9 +24,10 @@ module adder(
 
 wire [55:0] fb3;
 wire [52:0] fa2;
-wire sb_adj = sb ^ sub;
-
 wire sa2, sx, sb2;
+wire sb_adj;
+
+assign sb_adj = sb ^ sub;
 
 alignment align(
     .ea(ea),

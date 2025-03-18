@@ -26,6 +26,6 @@ add #(n) ad(
     .sum(sum)
 );
 
-assign sh = TINY & ~UNFen ? sum[12:0] : {7'b0, lz[5:0]};
+assign sh = (TINY & ~UNFen) ? sum[12:0] : {7'b0, lz[5:0]};
 
 endmodule

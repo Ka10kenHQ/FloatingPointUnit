@@ -14,7 +14,7 @@ module specselect(
 
 assign spec = (NAN | INF | ZERO);
 assign sp =  spec ? nan[52] : s;
-assign ep = spec ? {10'b0, ~ZERO} : eout;
+assign ep = spec ? {11{~ZERO}} : eout;
 assign fp = spec ? (NAN ? nan[51:0] : 52'b0) : fout;
 
 
