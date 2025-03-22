@@ -4,5 +4,5 @@ module lrs (
     output [54:0] fb3
 );
 
-    assign fb3 = fb2 >> as2;
+assign fb3 = (as2 >= 55) ? 55'b0 : (fb2 >> as2);
 endmodule

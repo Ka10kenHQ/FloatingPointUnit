@@ -2,9 +2,11 @@ module leadingzero #(parameter n = 64, m = 6) (
     input  [n - 1 : 0] x,
     output [m : 0] y
 );
+
 wire [m-1:0] y_H;
 wire [m-1:0] y_L;
 wire high_zero;
+
 generate
 if (m > 1) begin : rec
 
@@ -24,7 +26,7 @@ else if (m == 0) begin: bc_2
     assign   y = ~x[0];
 end
 else begin : bc
-            assign   y = {~x[1] & ~x[0], ~x[1] & x[0]};
+    assign   y = {~x[1] & ~x[0], ~x[1] & x[0]};
 end
 
 endgenerate

@@ -10,7 +10,7 @@ module sticky (
 parameter N = 6;
 wire [63:0] y;
 
-HDecJ #(N) hdec(
+HDecJ #(.N(N)) hdec(
     .x(as2),
     .y(y)
 );

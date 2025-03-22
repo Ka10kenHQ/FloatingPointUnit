@@ -18,7 +18,7 @@ parameter n = 12;
 add #(n) ad(
     .a(inb),
     .b(ina),
-    .c_in(1'b1), // NOTE: carry in
+    .c_in(1'b1),
     .sum(sum)
 );
 

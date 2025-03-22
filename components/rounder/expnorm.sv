@@ -26,7 +26,7 @@ wire [11:0] t, s;
 assign w1 = (OVFen & OVF1) ? 2'b11 : 2'b10;
 assign w2 = (UNFen & TINY) ? 2'b01 : w1;
 
-assign delta = db ? {w2, 3'b0} : {3'b0, w1};
+assign delta = db ? {w2, 3'b0} : {3'b0, w2};
 assign c = {delta, 6'b0};
 assign b = {5'b11111, ~lz[5:0]};
 

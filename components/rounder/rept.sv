@@ -12,13 +12,13 @@ parameter n2 = 29;
 
 wire sta, st_db;
 
-ortree #(n1) or1(
+ortree #(.n(n1)) or1(
     //NOTE: transformed [0:127] into [127:0]
     .x(fn[73:0]),
     .or_out(st_db)
 );
 
-ortree #(n2) or2(
+ortree #(.n(n2)) or2(
     //NOTE: transformed [0:127] into [127:0]
     .x(fn[102:74]),
     .or_out(sta)

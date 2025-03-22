@@ -7,9 +7,9 @@ module mask(
     output [63:0] w
 );
 
-wire [11:0] t;
-
 wire w1;
+
+wire [11:0] t;
 wire [5:0] shp;
 wire [63:0] h;
 wire [63:0] u;
@@ -25,22 +25,24 @@ ortree #(n) or_tree(
 
 assign shp = w1 ? 6'b111111 : t[5:0];
 
-HDecJ #(n) hdec(
+HDecJ #(.N(n)) hdec(
     .x(shp),
     .y(h)
 );
 
-assign u = sh[12] ? flip_bits({h[62:0], 1'b1}) : h;
+assign u = sh[12] ? flip_bits({h[62:0], 1'b1}) : h[63:0];
 
 assign v = ~u;
-assign w = u & sh[12];
+assign w = u & {64{sh[12]}};
 
 
 function automatic [63:0] flip_bits(input [63:0] in);
     integer i;
+    reg [63:0] temp;
 begin
     for (i = 0; i < 64; i = i + 1)
-        flip_bits[i] = in[63 - i];
+        temp[i] = in[63 - i];
+    flip_bits = temp;
 end
 endfunction
 

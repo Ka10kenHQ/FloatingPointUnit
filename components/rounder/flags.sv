@@ -34,7 +34,7 @@ add #(n) ad(
 assign lz = lz_out[5:0];
 assign TINY = sum[12];
 
-assign OVF1 = (fr[56] & (er > emax - 1)) | 
+assign OVF1 = (fr[56] & (er >= emax)) | 
               (fr[55] & (er > emax)) | 
               (fr[54] & (er > emax + 1));
 

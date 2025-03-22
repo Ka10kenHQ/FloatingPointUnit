@@ -14,7 +14,7 @@ parameter n = 64;
 
 cls #(n) cl(
     .m(sh[5:0]),
-    .x({fr, 7'b0}),
+    .x({fr[56:0], 7'b0}),
     .y(fs)
 );
 

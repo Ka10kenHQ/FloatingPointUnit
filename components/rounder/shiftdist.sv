@@ -21,7 +21,7 @@ wire [13:0] sum;
 
 add #(n) ad(
     .a(er[12:0]),
-    .b(emax),
+    .b(emax[12:0]),
     .c_in(1'b0),
     .sum(sum)
 );

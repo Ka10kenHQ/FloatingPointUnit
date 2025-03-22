@@ -19,7 +19,7 @@ module alignment(
 wire [10:0] as;
 wire eb_gt_ea;
 
-exp_sub uut(
+exp_sub exps(
     .ea(ea),
     .eb(eb),
     .as(as),
@@ -28,14 +28,14 @@ exp_sub uut(
 
 wire [5:0] as2;
 
-limit uut1(
+limit lim(
     .as(as),
     .eb_gt_ea(eb_gt_ea),
     .as2(as2)
 );
 
 wire [54:0] fb2;
-swap uut2(
+swap swp(
     .fa(fa),
     .fb(fb),
     .sa(sa),
@@ -49,14 +49,14 @@ swap uut2(
 
 wire [54:0] fp3_h;
 
-lrs uut3(
+lrs log_r_s(
 .as2(as2),
 .fb2(fb2),
 .fb3(fp3_h)
 );
 
 wire sticky;
-sticky uut4(
+sticky stky(
 .as2(as2),
 .fb2(fb2),
 .sticky(sticky)
