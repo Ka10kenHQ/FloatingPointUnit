@@ -21,10 +21,10 @@ wire [13:0] t, s;
 assign sq = sa ^ sb;
 
 assign a = {ea[10], ea[10], ea[10:0]};
-assign b = {7'b1111111, ~lza};
-
+assign b = {7'b1111111, ~lza[5:0]};
+// TODO: figure this out
 assign c = fdiv ? {~eb[10], ~eb[10], ~eb[10:0]} : {eb[10], eb[10], eb[10:0]};
-assign d = fdiv ? {7'b0, lzb} : {7'b1111111, lzb};
+assign d = fdiv ? {7'b0000000, lzb[5:0]} : {7'b1111111, ~lzb[5:0]};
 
 ftadd add(
     .a(a),

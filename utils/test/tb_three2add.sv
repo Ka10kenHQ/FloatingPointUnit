@@ -10,6 +10,7 @@ module tb_three2add;
         .a(a),
         .b(b),
         .c(c),
+        .c_in(1'b0),
         .t(t),
         .s(s)
     );

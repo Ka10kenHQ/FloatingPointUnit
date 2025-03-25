@@ -1,6 +1,4 @@
-mod automate_unpacker;
-mod factorize;
-mod lookup;
+use test_gen::{factorize, lookup};
 
 fn main() {
     let factors_res = factorize::factorize();

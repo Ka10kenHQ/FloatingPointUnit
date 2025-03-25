@@ -2,11 +2,12 @@ module three2add #(parameter n = 11) (
     input [n-1:0] a,
     input [n-1:0] b,
     input [n-1:0] c,
-    output [n:0] t,
-    output [n:0] s
+    input         c_in,
+    output [n:0]  t,
+    output [n:0]  s
 );
 genvar i;
-assign t[0] = 0;
+assign t[0] = c_in;
 
 generate
 for (i = 0; i < n; i = i + 1) begin : add_bits

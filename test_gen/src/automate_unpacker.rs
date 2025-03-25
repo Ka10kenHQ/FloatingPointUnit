@@ -63,17 +63,3 @@ fn compile_unpacker() {
 
     println!("cargo:rerun-if-changed={}", sv_dir);
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_unpacker() {
-        compile_unpacker();
-        let result = run_verilog_simulation(0x3FF0000000000000, 0x4000000000000000, true, true);
-        println!("Simulation Result: {}", result);
-
-        // assert!(result.contains("expected_output"));
-    }
-}

@@ -9,7 +9,7 @@ module postnorm(
 );
 
 assign sigovf = f2[53];
-assign e2 = f2[53] ? eni : en;
+assign e2 = (f2[53:52] == 2'b10 && f2[51:0] == 52'b0) ? eni : en;
 assign f3 = {f2[53] | f2[52], f2[51:0]};
 
 endmodule

@@ -15,6 +15,7 @@ module expnorm(
 
 wire [1:0] w1;
 wire [1:0] w2;
+
 wire [4:0] delta;
 wire [10:0] c;
 wire [10:0] b;
@@ -27,13 +28,14 @@ assign w1 = (OVFen & OVF1) ? 2'b11 : 2'b10;
 assign w2 = (UNFen & TINY) ? 2'b01 : w1;
 
 assign delta = db ? {w2, 3'b0} : {3'b0, w2};
-assign c = {delta, 6'b0};
 assign b = {5'b11111, ~lz[5:0]};
+assign c = {delta, 6'b0};
 
 three2add add (
-    .a(er),
+    .a(er[10:0]),
     .b(b),
     .c(c),
+    .c_in(1'b0),
     .t(t),
     .s(s)
 );
