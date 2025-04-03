@@ -48,7 +48,7 @@ initial begin
     // fd_out = $fopen("/home/achir/FloatingPointUnit/test/add_sub_output_results.txt", "w");
 
     fd_in = $fopen("/home/achir/FloatingPointUnit/test_gen/decomposed_f64.txt", "r");
-    fd_out = $fopen("/home/achir/FloatingPointUnit/test/add_sub_output_results_sub.txt", "w");
+    fd_out = $fopen("/home/achir/FloatingPointUnit/test/add_sub_output_results.txt", "w");
 
 
     if (fd_in == 0 || fd_out == 0) begin
@@ -65,7 +65,7 @@ initial begin
 
         db = 1;
         normal = 1;
-        sub = 1;
+        sub = 0;
         fdiv = 0;
         RM = 2'b01;
         #1;
