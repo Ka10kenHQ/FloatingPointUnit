@@ -59,7 +59,7 @@ rndexceptions rndexep(
 assign sp_out = sp;
 assign ep_out = ep;
 assign f_out = fp;
-assign fp_out = db ? {sp, ep, fp[51:0]} : {sp, ep[7:0], fp[51:28], sp, ep[7:0], fp[51:28]};
+assign fp_out = db ? {sp, ep, fp[51:0]} : {sp, ep[7:0], fp[51:29], sp, ep[7:0], fp[51:29]};
 
 
 endmodule

@@ -47,8 +47,8 @@ initial begin
     // fd_in = $fopen("/home/achir/FloatingPointUnit/test_gen/decomposed_f64.txt", "r");
     // fd_out = $fopen("/home/achir/FloatingPointUnit/test/add_sub_output_results.txt", "w");
 
-    fd_in = $fopen("/home/achir/FloatingPointUnit/test_gen/decomposed_f32.txt", "r");
-    fd_out = $fopen("/home/achir/FloatingPointUnit/test/add_sub_output_results_32.txt", "w");
+    fd_in = $fopen("/home/achir/FloatingPointUnit/test_gen/decomposed_f64.txt", "r");
+    fd_out = $fopen("/home/achir/FloatingPointUnit/test/add_sub_output_results_sub.txt", "w");
 
 
     if (fd_in == 0 || fd_out == 0) begin
@@ -63,19 +63,15 @@ initial begin
         $display("Line read: %s", line);
         $sscanf(line, "%b;%b", fpa, fpb);
 
-        db = 0;
+        db = 1;
         normal = 1;
-        sub = 0;
+        sub = 1;
         fdiv = 0;
         RM = 2'b01;
         #1;
 
-        // $fdisplay(fd_out, "------------------------------------------------------------------------------------------");
-        // $fdisplay(fd_out, "Input fpa = %b, fpb = %b", fpa, fpb);
-        // $fdisplay(fd_out, "Muldiv Result: fp_mul_out = %b", fp_mul_out);
-        // $fdisplay(fd_out, "Muldiv Details: sp_out = %b, ep_out = %b, f_out = %b", sp_mul_out, ep_mul_out, f_mul_out);
-        $fdisplay(fd_out, "%b%b%b", sp_add_out, ep_add_out, f_add_out);
-        // $fdisplay(fd_out, "%b", fp_add_out);
+        // $fdisplay(fd_out, "%b%b%b", sp_add_out, ep_add_out, f_add_out);
+        $fdisplay(fd_out, "%b", fp_add_out);
     end
 
     // NOTE: Double precision numbers
