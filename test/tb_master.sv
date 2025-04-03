@@ -38,33 +38,45 @@ master uut (
     .f_add_out(f_add_out)
 );
 
-// integer fd;
-// reg [1050:0] line;
+integer fd_in,fd_out;
+reg [1050:0] line;
 
 initial begin
 
     
-    // fd = $fopen("/home/achir/FloatingPointUnit/test_gen/decomposed_f64.txt", "r");  
-    // if (fd == 0) begin
-    //     $display("Error opening file.");
-    //     $finish;
-    // end
-    //
-    // $monitor("Adder Details: sp_out = %b, ep_out = %b, f_out = %b", sp_add_out, ep_add_out, f_add_out);
-    //
-    // while (!$feof(fd)) begin
-    //     $fgets(line, fd); 
-    //     $display("Line read: %s", line);
-    //     $sscanf(line, "%b;%b", fpa, fpb);
-    //     db = 1;
-    //     normal=1;
-    //     sub = 0;
-    //     fdiv = 0;
-    //     RM = 0;
-    //     #1;
-    // end
-    // $fclose(fd); 
+    // fd_in = $fopen("/home/achir/FloatingPointUnit/test_gen/decomposed_f64.txt", "r");
+    // fd_out = $fopen("/home/achir/FloatingPointUnit/test/add_sub_output_results.txt", "w");
 
+    fd_in = $fopen("/home/achir/FloatingPointUnit/test_gen/decomposed_f32.txt", "r");
+    fd_out = $fopen("/home/achir/FloatingPointUnit/test/add_sub_output_results_32.txt", "w");
+
+
+    if (fd_in == 0 || fd_out == 0) begin
+        $display("Error opening file.");
+        $finish;
+    end
+
+    $monitor("Adder Details: sp_out = %b, ep_out = %b, f_out = %b", sp_add_out, ep_add_out, f_add_out);
+
+    while (!$feof(fd_in)) begin
+        $fgets(line, fd_in); 
+        $display("Line read: %s", line);
+        $sscanf(line, "%b;%b", fpa, fpb);
+
+        db = 0;
+        normal = 1;
+        sub = 0;
+        fdiv = 0;
+        RM = 2'b01;
+        #1;
+
+        // $fdisplay(fd_out, "------------------------------------------------------------------------------------------");
+        // $fdisplay(fd_out, "Input fpa = %b, fpb = %b", fpa, fpb);
+        // $fdisplay(fd_out, "Muldiv Result: fp_mul_out = %b", fp_mul_out);
+        // $fdisplay(fd_out, "Muldiv Details: sp_out = %b, ep_out = %b, f_out = %b", sp_mul_out, ep_mul_out, f_mul_out);
+        $fdisplay(fd_out, "%b%b%b", sp_add_out, ep_add_out, f_add_out);
+        // $fdisplay(fd_out, "%b", fp_add_out);
+    end
 
     // NOTE: Double precision numbers
 
@@ -85,23 +97,41 @@ initial begin
     // $display("Adder Result: fp_add_out = %b", fp_add_out);
     // $display("Adder Details: sp_out = %b, ep_out = %b, f_out = %b", sp_add_out, ep_add_out, f_add_out);
 
+    // Test Case 1: -2.0 * -2.0 and -2.0 + -2.0
+    // fpa = {1'b1, 11'b10000000000, 52'b0000000000000000000000000000000000000000000000000000};
+    // fpb = {1'b1, 11'b10000000000, 52'b0000000000000000000000000000000000000000000000000000};
+    // db = 1;
+    // normal = 1;
+    // sub = 0;
+    // fdiv = 0;
+    // RM = 2'b00;
+    // #20;
+    // $display("------------------------------------------------------------------------------------------");
+    // $display("Muldiv Result: fp_mul_out = %b", fp_mul_out);
+    // $display("Muldiv Details: sp_out = %b, ep_out = %b, f_out = %b", sp_mul_out, ep_mul_out, f_mul_out);
+    //
+    // $display("------------------------------------------------------------------------------------------");
+    // $display("Adder Result: fp_add_out = %b", fp_add_out);
+    // $display("Adder Details: sp_out = %b, ep_out = %b, f_out = %b", sp_add_out, ep_add_out, f_add_out);
+
+
 
     // Test Case 1: 4.0 / 3.0 and 4.0 - 3.0
-    fpa = {1'b0, 11'b10000000001, 52'b0000000000000000000000000000000000000000000000000000};
-    fpb = {1'b0, 11'b10000000000, 52'b1000000000000000000000000000000000000000000000000000};
-    db = 1;
-    normal = 1;
-    sub = 1;
-    fdiv = 1;
-    RM = 2'b01;
-    #20;
-    $display("------------------------------------------------------------------------------------------");
-    $display("Muldiv Result: fp_mul_out = %b", fp_mul_out);
-    $display("Muldiv Details: sp_out = %b, ep_out = %b, f_out = %b", sp_mul_out, ep_mul_out, f_mul_out);
-
-    $display("------------------------------------------------------------------------------------------");
-    $display("Adder Result: fp_add_out = %b", fp_add_out);
-    $display("Adder Details: sp_out = %b, ep_out = %b, f_out = %b", sp_add_out, ep_add_out, f_add_out);
+    // fpa = {1'b0, 11'b10000000001, 52'b0000000000000000000000000000000000000000000000000000};
+    // fpb = {1'b0, 11'b10000000000, 52'b1000000000000000000000000000000000000000000000000000};
+    // db = 1;
+    // normal = 1;
+    // sub = 1;
+    // fdiv = 1;
+    // RM = 2'b01;
+    // #20;
+    // $display("------------------------------------------------------------------------------------------");
+    // $display("Muldiv Result: fp_mul_out = %b", fp_mul_out);
+    // $display("Muldiv Details: sp_out = %b, ep_out = %b, f_out = %b", sp_mul_out, ep_mul_out, f_mul_out);
+    //
+    // $display("------------------------------------------------------------------------------------------");
+    // $display("Adder Result: fp_add_out = %b", fp_add_out);
+    // $display("Adder Details: sp_out = %b, ep_out = %b, f_out = %b", sp_add_out, ep_add_out, f_add_out);
 
 
      // Test Case 2: 4.0 * 4.0 and 4.0 + 4.0
