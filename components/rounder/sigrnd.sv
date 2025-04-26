@@ -33,7 +33,7 @@ assign temp = db ? (f1[54:2] + 1) : ({f1[54:31], {29{1'b1}}} + 1);
 
 // f2 assignment based on the value of inc
 // this part was missing in book it was from slides
-assign w1 = db ? {1'b0, f1[54:2]} : {1'b0, f1[54:32], 30'b0};
+assign w1 = db ? {1'b0, f1[54:2]} : {1'b0, f1[54:33], 31'b0};
 assign f2 = inc ? temp : w1;
 
 endmodule

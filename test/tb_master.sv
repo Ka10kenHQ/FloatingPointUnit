@@ -44,11 +44,11 @@ reg [1050:0] line;
 initial begin
 
     
-    // fd_in = $fopen("/home/achir/FloatingPointUnit/test_gen/decomposed_f64.txt", "r");
+    // fd_in = $fopen("/home/achir/FloatingPointUnit/test_python/decomposed_f64.txt", "r");
     // fd_out = $fopen("/home/achir/FloatingPointUnit/test/add_sub_output_results.txt", "w");
 
-    fd_in = $fopen("/home/achir/FloatingPointUnit/test_gen/decomposed_f64.txt", "r");
-    fd_out = $fopen("/home/achir/FloatingPointUnit/test/add_sub_output_results.txt", "w");
+    fd_in = $fopen("/home/achir/FloatingPointUnit/test_gen/decomposed_f32.txt", "r");
+    fd_out = $fopen("/home/achir/FloatingPointUnit/test/add_sub_output_results_32.txt", "w");
 
 
     if (fd_in == 0 || fd_out == 0) begin
@@ -63,7 +63,7 @@ initial begin
         $display("Line read: %s", line);
         $sscanf(line, "%b;%b", fpa, fpb);
 
-        db = 1;
+        db = 0;
         normal = 1;
         sub = 0;
         fdiv = 0;
@@ -224,6 +224,23 @@ initial begin
     // 102.1234 - 571.321
     // fpa = {1'b0, 8'b10000101, 23'b10011000011111100101110, 1'b0, 8'b10000101, 23'b10011000011111100101110};
     // fpb = {1'b0, 8'b10001000, 23'b00011101101010010001011, 1'b0, 8'b10001000, 23'b00011101101010010001011};
+    // db = 0;
+    // normal = 1;
+    // sub = 1;
+    // fdiv = 0;
+    // RM = 2'b00;
+    // #20;
+    // $display("------------------------------------------------------------------------------------------");
+    // $display("Muldiv Result: fp_mul_out = %b", fp_mul_out);
+    // $display("Muldiv Details: sp_out = %b, ep_out = %b, f_out = %b", sp_mul_out, ep_mul_out, f_mul_out);
+    //
+    // $display("------------------------------------------------------------------------------------------");
+    // $display("Adder Result: fp_add_out = %b", fp_add_out);
+    // $display("Adder Details: sp_out = %b, ep_out = %b, f_out = %b", sp_add_out, ep_add_out, f_add_out);
+
+    // 69.0 - 3.14
+    // fpa = {1'b0, 8'b10000101, 23'b00010100000000000000000, 1'b0, 8'b10000101, 23'b00010100000000000000000};
+    // fpb = {1'b0, 8'b10000000, 23'b10010001111010111000011, 1'b0, 8'b10000000, 23'b10010001111010111000011};
     // db = 0;
     // normal = 1;
     // sub = 1;

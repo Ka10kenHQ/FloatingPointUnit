@@ -5,6 +5,7 @@ edition = "2024"
 
 [dependencies]
 dirs = "4.0"
+ieee754 = "0.2.6"
 
 
 [build-dependencies]
