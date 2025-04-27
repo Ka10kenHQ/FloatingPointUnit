@@ -27,6 +27,6 @@ ortree #(.n(n2)) or2(
 
 
 assign f1[54:30] = fn[127:103];
-assign f1[29:0] = db?  {fn[102:74], st_db} : {sta | st_db, 29'b0};
+assign f1[29:0] = db ? {fn[102:74], st_db} : {sta | st_db, 29'b0};
 
 endmodule
