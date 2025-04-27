@@ -123,7 +123,7 @@ def factorize():
                 s32b, e32b, f32b = decompose_f32(fp32b)
                 s64b, e64b, f64b = decompose_f64(fp64b)
 
-                file_f32.write(f"{s32a}{e32a}{f32a};{s32b}{e32b}{f32b}\n")
+                file_f32.write(f"{s32a}{e32a}{f32a}{s32a}{e32a}{f32a};{s32b}{e32b}{f32b}{s32b}{e32b}{f32b}\n")
                 file_f64.write(f"{s64a}{e64a}{f64a};{s64b}{e64b}{f64b}\n")
 
     print("Decompositions written to 'decomposed_f32.txt' and 'decomposed_f64.txt'")

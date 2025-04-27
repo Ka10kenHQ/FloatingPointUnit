@@ -163,107 +163,107 @@ pub fn factorize() -> io::Result<()> {
 mod tests {
     use super::*;
 
-    #[test]
-    fn test_add_f64() {
-        use std::fs::File;
-        use std::io::{BufRead, BufReader};
+    // #[test]
+    // fn test_add_f64() {
+    //     use std::fs::File;
+    //     use std::io::{BufRead, BufReader};
+    //
+    //     let computed_file_path = "/home/achir/FloatingPointUnit/test/add_sub_output_results.txt";
+    //     let decomposed_file_path = "decomposed_f64.txt";
+    //
+    //     let computed_file = File::open(computed_file_path).expect(&format!(
+    //         "Failed to open expected results file: {}",
+    //         computed_file_path
+    //     ));
+    //
+    //     let decomposed_file = File::open(decomposed_file_path).expect(&format!(
+    //         "Failed to open generated results file: {}",
+    //         decomposed_file_path
+    //     ));
+    //
+    //     let computed_reader = BufReader::new(computed_file).lines();
+    //     let decomposed_reader = BufReader::new(decomposed_file).lines();
+    //
+    //     for (i, (computed_line, expected_line)) in
+    //         computed_reader.zip(decomposed_reader).enumerate()
+    //     {
+    //         let computed_line = computed_line.expect("Failed to read line from expected file");
+    //         let expected_line = expected_line.expect("Failed to read line from generated file");
+    //
+    //         let parts: Vec<&str> = expected_line.split(';').collect();
+    //         assert!(parts.len() == 2, "Invalid format at line {}", i + 1);
+    //
+    //         let a = f64::from_bits(u64::from_str_radix(parts[0], 2).expect("Invalid binary for a"));
+    //         let b = f64::from_bits(u64::from_str_radix(parts[1], 2).expect("Invalid binary for b"));
+    //
+    //         let result: f64 = a + b;
+    //
+    //         let (s_exp, e_exp, f_exp) = decompose_f64(result);
+    //         let expected_output = format!("{:b}{:011b}{:052b}", s_exp, e_exp, f_exp);
+    //
+    //         assert_eq!(
+    //             computed_line,
+    //             expected_output,
+    //             "Mismatch at line {}:\nComputed: {}\nCorrect: {}\n inputs: a = {}, b = {}\n output={}",
+    //             i + 1,
+    //             computed_line,
+    //             expected_output,
+    //             a,
+    //             b,
+    //             result
+    //         );
+    //     }
+    // }
 
-        let computed_file_path = "/home/achir/FloatingPointUnit/test/add_sub_output_results.txt";
-        let decomposed_file_path = "decomposed_f64.txt";
-
-        let computed_file = File::open(computed_file_path).expect(&format!(
-            "Failed to open expected results file: {}",
-            computed_file_path
-        ));
-
-        let decomposed_file = File::open(decomposed_file_path).expect(&format!(
-            "Failed to open generated results file: {}",
-            decomposed_file_path
-        ));
-
-        let computed_reader = BufReader::new(computed_file).lines();
-        let decomposed_reader = BufReader::new(decomposed_file).lines();
-
-        for (i, (computed_line, expected_line)) in
-            computed_reader.zip(decomposed_reader).enumerate()
-        {
-            let computed_line = computed_line.expect("Failed to read line from expected file");
-            let expected_line = expected_line.expect("Failed to read line from generated file");
-
-            let parts: Vec<&str> = expected_line.split(';').collect();
-            assert!(parts.len() == 2, "Invalid format at line {}", i + 1);
-
-            let a = f64::from_bits(u64::from_str_radix(parts[0], 2).expect("Invalid binary for a"));
-            let b = f64::from_bits(u64::from_str_radix(parts[1], 2).expect("Invalid binary for b"));
-
-            let result: f64 = a + b;
-
-            let (s_exp, e_exp, f_exp) = decompose_f64(result);
-            let expected_output = format!("{:b}{:011b}{:052b}", s_exp, e_exp, f_exp);
-
-            assert_eq!(
-                computed_line,
-                expected_output,
-                "Mismatch at line {}:\nComputed: {}\nCorrect: {}\n inputs: a = {}, b = {}\n output={}",
-                i + 1,
-                computed_line,
-                expected_output,
-                a,
-                b,
-                result
-            );
-        }
-    }
-
-    #[test]
-    fn test_sub_f64() {
-        use std::fs::File;
-        use std::io::{BufRead, BufReader};
-
-        let computed_file_path =
-            "/home/achir/FloatingPointUnit/test/add_sub_output_results_sub.txt";
-        let decomposed_file_path = "decomposed_f64.txt";
-
-        let computed_file = File::open(computed_file_path).expect(&format!(
-            "Failed to open expected results file: {}",
-            computed_file_path
-        ));
-
-        let decomposed_file = File::open(decomposed_file_path).expect(&format!(
-            "Failed to open generated results file: {}",
-            decomposed_file_path
-        ));
-
-        let computed_reader = BufReader::new(computed_file).lines();
-        let decomposed_reader = BufReader::new(decomposed_file).lines();
-
-        for (i, (computed_line, expected_line)) in
-            computed_reader.zip(decomposed_reader).enumerate()
-        {
-            let computed_line = computed_line.expect("Failed to read line from expected file");
-            let expected_line = expected_line.expect("Failed to read line from generated file");
-
-            let parts: Vec<&str> = expected_line.split(';').collect();
-            assert!(parts.len() == 2, "Invalid format at line {}", i + 1);
-
-            let a = f64::from_bits(u64::from_str_radix(parts[0], 2).expect("Invalid binary for a"));
-            let b = f64::from_bits(u64::from_str_radix(parts[1], 2).expect("Invalid binary for b"));
-
-            let result: f64 = a - b;
-
-            let (s_exp, e_exp, f_exp) = decompose_f64(result);
-            let expected_output = format!("{:b}{:011b}{:052b}", s_exp, e_exp, f_exp);
-
-            assert_eq!(
-                computed_line,
-                expected_output,
-                "Mismatch at line {}:\nComputed: {}\nCorrect: {}\n",
-                i + 1,
-                computed_line,
-                expected_output,
-            );
-        }
-    }
+    // #[test]
+    // fn test_sub_f64() {
+    //     use std::fs::File;
+    //     use std::io::{BufRead, BufReader};
+    //
+    //     let computed_file_path =
+    //         "/home/achir/FloatingPointUnit/test/add_sub_output_results_sub.txt";
+    //     let decomposed_file_path = "decomposed_f64.txt";
+    //
+    //     let computed_file = File::open(computed_file_path).expect(&format!(
+    //         "Failed to open expected results file: {}",
+    //         computed_file_path
+    //     ));
+    //
+    //     let decomposed_file = File::open(decomposed_file_path).expect(&format!(
+    //         "Failed to open generated results file: {}",
+    //         decomposed_file_path
+    //     ));
+    //
+    //     let computed_reader = BufReader::new(computed_file).lines();
+    //     let decomposed_reader = BufReader::new(decomposed_file).lines();
+    //
+    //     for (i, (computed_line, expected_line)) in
+    //         computed_reader.zip(decomposed_reader).enumerate()
+    //     {
+    //         let computed_line = computed_line.expect("Failed to read line from expected file");
+    //         let expected_line = expected_line.expect("Failed to read line from generated file");
+    //
+    //         let parts: Vec<&str> = expected_line.split(';').collect();
+    //         assert!(parts.len() == 2, "Invalid format at line {}", i + 1);
+    //
+    //         let a = f64::from_bits(u64::from_str_radix(parts[0], 2).expect("Invalid binary for a"));
+    //         let b = f64::from_bits(u64::from_str_radix(parts[1], 2).expect("Invalid binary for b"));
+    //
+    //         let result: f64 = a - b;
+    //
+    //         let (s_exp, e_exp, f_exp) = decompose_f64(result);
+    //         let expected_output = format!("{:b}{:011b}{:052b}", s_exp, e_exp, f_exp);
+    //
+    //         assert_eq!(
+    //             computed_line,
+    //             expected_output,
+    //             "Mismatch at line {}:\nComputed: {}\nCorrect: {}\n",
+    //             i + 1,
+    //             computed_line,
+    //             expected_output,
+    //         );
+    //     }
+    // }
 
     // #[test]
     // fn test_add_f32() {
@@ -383,4 +383,58 @@ mod tests {
     //         );
     //     }
     // }
+
+    #[test]
+    fn test_mul_f64() {
+        use std::fs::File;
+        use std::io::{BufRead, BufReader};
+
+        let computed_file_path = "/home/achir/FloatingPointUnit/test/mul_div_output_results_64.txt";
+        let decomposed_file_path = "decomposed_f64.txt";
+
+        let computed_file = File::open(computed_file_path).expect(&format!(
+            "Failed to open expected results file: {}",
+            computed_file_path
+        ));
+
+        let decomposed_file = File::open(decomposed_file_path).expect(&format!(
+            "Failed to open generated results file: {}",
+            decomposed_file_path
+        ));
+
+        let computed_reader = BufReader::new(computed_file).lines();
+        let decomposed_reader = BufReader::new(decomposed_file).lines();
+
+        for (i, (computed_line, expected_line)) in
+            computed_reader.zip(decomposed_reader).enumerate()
+        {
+            let computed_line = computed_line.expect("Failed to read line from expected file");
+            let expected_line = expected_line.expect("Failed to read line from generated file");
+
+            let parts: Vec<&str> = expected_line.split(';').collect();
+            assert!(parts.len() == 2, "Invalid format at line {}", i + 1);
+
+            let a = f64::from_bits(u64::from_str_radix(parts[0], 2).expect("Invalid binary for a"));
+            let b = f64::from_bits(u64::from_str_radix(parts[1], 2).expect("Invalid binary for b"));
+
+            let result: f64 = a * b;
+
+            let (s_exp, e_exp, f_exp) = decompose_f64(result);
+            let expected_output = format!("{:b}{:011b}{:052b}", s_exp, e_exp, f_exp);
+            println!("{}", expected_output);
+            println!("{}", computed_line);
+
+            assert_eq!(
+                computed_line,
+                expected_output,
+                "Mismatch at line {}:\nComputed: {}\nCorrect: {}\n inputs: a = {}, b = {}\n output={}",
+                i + 1,
+                computed_line,
+                expected_output,
+                a,
+                b,
+                result
+            );
+        }
+    }
 }

@@ -22,7 +22,7 @@ s, e, f = decompose_f32(69.)
 sa, ea, fa = decompose_f32(3.14)
 sb, eb, fb = decompose_f32(69. + 3.14)
 
-print(f"{s} {e} {f}")
-print(f"{sa} {ea} {fa}")
-print(f"{sb} {eb} {fb}")
+print(f"s={s} e={e} f={f}")
+print(f"f={sa} e={ea} s={fa}")
+print(f"s={sb} e={eb} f={fb}")
 
