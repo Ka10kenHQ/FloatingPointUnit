@@ -25,7 +25,7 @@ wire [13:0] sum;
 
 parameter n = 13;
 add #(n) ad(
-    .a({3'b0, {3{db}}, 1'b1,  ~lz[5:0]}),
+    .a({3'b0, {3{db}}, 1'b1,  ~lz_out[5:0]}),
     .b(er[12:0]),
     .c_in(1'b0),
     .sum(sum)

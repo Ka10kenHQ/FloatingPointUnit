@@ -17,8 +17,8 @@ wire [51:0] fp_xmax_inf;
 
 assign inf = RM[1] ? ~(RM[0] ^ s) : RM[0];
 
-assign exp_xmax_inf = inf ? {{3{db}}, 8'b11111111} : {{3{db}}, 7'b1111111, 1'b0};
-assign fp_xmax_inf = inf ? 52'b0 : {{23{1'b1}}, {29{db}}};
+assign exp_xmax_inf = inf ? {11'b11111111111} : {10'b1111111111, 1'b0};
+assign fp_xmax_inf = inf ? 52'b0 : {{23{1'b1}}, {29{1'b1}}};
 
 
 assign eout = (OVF & ~OVFen) ? exp_xmax_inf : e3[10:0] & {11{f3[52]}};

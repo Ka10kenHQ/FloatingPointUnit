@@ -10,6 +10,7 @@ def decompose_f32(fp):
     f = fact.mantissa
     return s, e, f
 
+
 def decompose_f64(fp):
     fact = double(fp)
     s = fact.sign
@@ -86,29 +87,37 @@ def normal_numbers():
         (8.9, 8.9),
     ]
 
+
 def zero():
     return [(0.0, 0.0)]
 
+
 def infinity():
     return [
-        (float('inf'), float('inf')),
-        (-float('inf'), -float('inf')),
+        (float("inf"), float("inf")),
+        (-float("inf"), -float("inf")),
     ]
+
 
 def denormal_numbers():
     return [
-        (struct.unpack('!f', struct.pack('!I', 0x00000001))[0],
-         struct.unpack('!d', struct.pack('!Q', 0x0000000000000001))[0]),
-        (struct.unpack('!f', struct.pack('!I', 0x80000001))[0],
-         struct.unpack('!d', struct.pack('!Q', 0x8000000000000001))[0]),
-        (-0.0, -0.0)
+        (
+            struct.unpack("!f", struct.pack("!I", 0x00000001))[0],
+            struct.unpack("!d", struct.pack("!Q", 0x0000000000000001))[0],
+        ),
+        (
+            struct.unpack("!f", struct.pack("!I", 0x80000001))[0],
+            struct.unpack("!d", struct.pack("!Q", 0x8000000000000001))[0],
+        ),
+        (-0.0, -0.0),
     ]
+
 
 def min_max_values():
     return [
-        (float('inf'), float('inf')),
-        (-float('inf'), -float('inf')),
-        (float('-inf'), float('-inf')),
+        (float("inf"), float("inf")),
+        (-float("inf"), -float("inf")),
+        (float("-inf"), float("-inf")),
     ]
 
 
@@ -116,7 +125,9 @@ def compute_add_64_32():
     test_cases = normal_numbers()
     test_cases.extend(zero())
 
-    with open("correct_add_f32.txt", "w") as file_f32, open("correct_add_f64.txt", "w") as file_f64:
+    with open("correct_add_f32.txt", "w") as file_f32, open(
+        "correct_add_f64.txt", "w"
+    ) as file_f64:
         for fp32a, fp64a in test_cases:
             for fp32b, fp64b in test_cases:
                 s32a, e32a, f32a = decompose_f32(fp32a + fp32b)
@@ -127,11 +138,14 @@ def compute_add_64_32():
 
     print("Correct written to 'correct_add_64.txt' and 'correct_add_f32'")
 
+
 def compute_sub_64_32():
     test_cases = normal_numbers()
     test_cases.extend(zero())
 
-    with open("correct_sub_f32.txt", "w") as file_f32, open("correct_sub_f64.txt", "w") as file_f64:
+    with open("correct_sub_f32.txt", "w") as file_f32, open(
+        "correct_sub_f64.txt", "w"
+    ) as file_f64:
         for fp32a, fp64a in test_cases:
             for fp32b, fp64b in test_cases:
                 s32a, e32a, f32a = decompose_f32(fp32a - fp32b)
@@ -146,4 +160,3 @@ def compute_sub_64_32():
 if __name__ == "__main__":
     compute_add_64_32()
     compute_sub_64_32()
-

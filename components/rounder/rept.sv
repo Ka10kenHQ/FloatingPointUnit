@@ -19,7 +19,6 @@ ortree #(.n(n1)) or1(
 );
 
 ortree #(.n(n2)) or2(
-    //NOTE: transformed [0:127] into [127:0]
     .x(fn[102:74]),
     .or_out(sta)
 );

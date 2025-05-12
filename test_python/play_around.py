@@ -9,6 +9,7 @@ def decompose_f32(fp):
     f = fact.mantissa
     return s, e, f
 
+
 def decompose_f64(fp):
     fact = double(fp)
     s = fact.sign
@@ -17,12 +18,9 @@ def decompose_f64(fp):
     return s, e, f
 
 
-
-s, e, f = decompose_f32(69.)
+s, e, f = decompose_f32(69.0)
 sa, ea, fa = decompose_f32(3.14)
-sb, eb, fb = decompose_f32(69. + 3.14)
+sb, eb, fb = decompose_f32(69.0 + 3.14)
 
-print(f"s={s} e={e} f={f}")
-print(f"f={sa} e={ea} s={fa}")
+print(f"69.0 + 3.14")
 print(f"s={sb} e={eb} f={fb}")
-

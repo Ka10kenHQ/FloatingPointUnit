@@ -12,7 +12,6 @@ module shiftdist(
     output [12:0] sh
 );
 
-// 1 - emin = emax
 wire [12:0] emax;
 assign emax = {3'b0, {3{db}}, {7{1'b1}}};
 

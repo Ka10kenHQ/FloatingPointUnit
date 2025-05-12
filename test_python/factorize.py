@@ -10,12 +10,14 @@ def decompose_f32(fp):
     f = fact.mantissa
     return s, e, f
 
+
 def decompose_f64(fp):
     fact = double(fp)
     s = fact.sign
     e = fact.exponent
     f = fact.mantissa
     return s, e, f
+
 
 def normal_numbers():
     return [
@@ -85,36 +87,47 @@ def normal_numbers():
         (8.9, 8.9),
     ]
 
+
 def zero():
     return [(0.0, 0.0)]
 
+
 def infinity():
     return [
-        (float('inf'), float('inf')),
-        (-float('inf'), -float('inf')),
+        (float("inf"), float("inf")),
+        (-float("inf"), -float("inf")),
     ]
+
 
 def denormal_numbers():
     return [
-        (struct.unpack('!f', struct.pack('!I', 0x00000001))[0],
-         struct.unpack('!d', struct.pack('!Q', 0x0000000000000001))[0]),
-        (struct.unpack('!f', struct.pack('!I', 0x80000001))[0],
-         struct.unpack('!d', struct.pack('!Q', 0x8000000000000001))[0]),
-        (-0.0, -0.0)
+        (
+            struct.unpack("!f", struct.pack("!I", 0x00000001))[0],
+            struct.unpack("!d", struct.pack("!Q", 0x0000000000000001))[0],
+        ),
+        (
+            struct.unpack("!f", struct.pack("!I", 0x80000001))[0],
+            struct.unpack("!d", struct.pack("!Q", 0x8000000000000001))[0],
+        ),
+        (-0.0, -0.0),
     ]
+
 
 def min_max_values():
     return [
-        (float('inf'), float('inf')),
-        (-float('inf'), -float('inf')),
-        (float('-inf'), float('-inf')),
+        (float("inf"), float("inf")),
+        (-float("inf"), -float("inf")),
+        (float("-inf"), float("-inf")),
     ]
+
 
 def factorize():
     test_cases = normal_numbers()
     test_cases.extend(zero())
 
-    with open("decomposed_f32.txt", "w") as file_f32, open("decomposed_f64.txt", "w") as file_f64:
+    with open("decomposed_f32.txt", "w") as file_f32, open(
+        "decomposed_f64.txt", "w"
+    ) as file_f64:
         for fp32a, fp64a in test_cases:
             for fp32b, fp64b in test_cases:
                 s32a, e32a, f32a = decompose_f32(fp32a)
@@ -123,13 +136,13 @@ def factorize():
                 s32b, e32b, f32b = decompose_f32(fp32b)
                 s64b, e64b, f64b = decompose_f64(fp64b)
 
-                file_f32.write(f"{s32a}{e32a}{f32a}{s32a}{e32a}{f32a};{s32b}{e32b}{f32b}{s32b}{e32b}{f32b}\n")
+                file_f32.write(
+                    f"{s32a}{e32a}{f32a}{s32a}{e32a}{f32a};{s32b}{e32b}{f32b}{s32b}{e32b}{f32b}\n"
+                )
                 file_f64.write(f"{s64a}{e64a}{f64a};{s64b}{e64b}{f64b}\n")
 
     print("Decompositions written to 'decomposed_f32.txt' and 'decomposed_f64.txt'")
 
 
-
 if __name__ == "__main__":
     factorize()
-

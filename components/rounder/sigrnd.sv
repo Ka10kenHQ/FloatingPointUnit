@@ -29,11 +29,10 @@ roundingdecision rdc(
     .inc(inc)
 );
 
-assign temp = db ? (f1[54:2] + 1) : ({f1[54:31], {29{1'b1}}} + 1);
+assign temp = db ? (f1[54:2] + 1) : ({f1[54:31], {29{1'b1}}} + 1'b1);
 
-// f2 assignment based on the value of inc
-// this part was missing in book it was from slides
-assign w1 = db ? {1'b0, f1[54:2]} : {1'b0, f1[54:33], 31'b0};
+// does not chop for single precision added mux
+assign w1 = db ? {1'b0, f1[54:2]} : {1'b0, f1[54:30] ,  28'b0};
 assign f2 = inc ? temp : w1;
 
 endmodule

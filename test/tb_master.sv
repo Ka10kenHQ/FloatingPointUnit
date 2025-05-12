@@ -44,21 +44,24 @@ reg [1050:0] line;
 initial begin
 
     //NOTE: add_sub 64-32 bits
-    // fd_in = $fopen("/home/achir/FloatingPointUnit/test_gen/decomposed_f64.txt", "r");
-    // fd_out = $fopen("/home/achir/FloatingPointUnit/test/add_sub_output_results_sub.txt", "w");
 
-    // fd_in = $fopen("/home/achir/FloatingPointUnit/test_python/decomposed_f32.txt", "r");
-    // fd_out = $fopen("/home/achir/FloatingPointUnit/test/add_sub_output_results_32.txt", "w");
+    //ADD 64:
+    // fd_in = $fopen("/home/achir/FloatingPointUnit/test_gen/decomposed_f64.txt", "r");
+    // fd_out = $fopen("/home/achir/FloatingPointUnit/test/add_sub_output_results.txt", "w");
+
+    //ADD 32:
+    fd_in = $fopen("/home/achir/FloatingPointUnit/test_gen/decomposed_f32.txt", "r");
+    fd_out = $fopen("/home/achir/FloatingPointUnit/test/add_sub_output_results_32.txt", "w");
+
 
     // NOTE: mul-div 64-32 bits
     // fd_in = $fopen("/home/achir/FloatingPointUnit/test_gen/decomposed_f64.txt", "r");
     // fd_out = $fopen("/home/achir/FloatingPointUnit/test/mul_div_output_results_64.txt", "w");
 
 
-    fd_in = $fopen("/home/achir/FloatingPointUnit/test_gen/decomposed_f32.txt", "r");
-    fd_out = $fopen("/home/achir/FloatingPointUnit/test/mul_div_output_results_32.txt", "w");
-
-
+    // fd_in = $fopen("/home/achir/FloatingPointUnit/test_gen/decomposed_f32.txt", "r");
+    // fd_out = $fopen("/home/achir/FloatingPointUnit/test/mul_div_output_results_32.txt", "w");
+ 
     if (fd_in == 0 || fd_out == 0) begin
         $display("Error opening file.");
         $finish;
@@ -72,15 +75,15 @@ initial begin
         $sscanf(line, "%b;%b", fpa, fpb);
 
         db = 0;
-        normal = 1;
+        normal = 0;
         sub = 0;
         fdiv = 0;
         RM = 2'b01;
         #1;
 
         // $fdisplay(fd_out, "%b%b%b", sp_add_out, ep_add_out, f_add_out);
-         // $fdisplay(fd_out, "%b", fp_add_out);
-         $fdisplay(fd_out, "%b", fp_mul_out);
+         $fdisplay(fd_out, "%b", fp_add_out);
+         // $fdisplay(fd_out, "%b", fp_mul_out);
     end
 
     // NOTE: Double precision numbers
@@ -195,14 +198,14 @@ initial begin
 
     // NOTE: Single Precision Number
 
-    // 23.14 + 0.19
-    // fpa = {1'b0,8'b10000011,23'b01110010011001100110011,1'b0,8'b10000011,23'b01110010011001100110011};
-    // fpb = {1'b0,8'b01111100,23'b10000101000111101011100,1'b0,8'b01111100,23'b10000101000111101011100};
+    // 69.0 + 3.14
+    // fpa = {1'b0,8'b10000101,23'b00010100000000000000000,1'b0,8'b10000101,23'b00010100000000000000000};
+    // fpb = {1'b0,8'b10000000,23'b10010001111010111000011,1'b0,8'b10000000,23'b10010001111010111000011};
     // db = 0;
     // normal = 1;
     // sub = 0;
     // fdiv = 0;
-    // RM = 2'b00;
+    // RM = 2'b01;
     // #20;
     // $display("------------------------------------------------------------------------------------------");
     // $display("Muldiv Result: fp_mul_out = %b", fp_mul_out);

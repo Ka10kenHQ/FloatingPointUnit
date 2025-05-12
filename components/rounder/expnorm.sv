@@ -29,7 +29,7 @@ assign w2 = (UNFen & TINY) ? 2'b01 : w1;
 
 assign delta = db ? {w2, 3'b0} : {3'b0, w2};
 assign b = {5'b11111, ~lz[5:0]};
-assign c = {delta, 6'b0};
+assign c = {delta[4:0], 6'b0};
 
 three2add add (
     .a(er[10:0]),
