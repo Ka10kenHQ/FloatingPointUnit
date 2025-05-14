@@ -14,9 +14,9 @@ wire l, r, st;
 
 wire inc;
 
-assign l = db ? f1[2] : f1[34];
-assign r = db ? f1[1] : f1[33];
-assign st = db ? f1[0] : f1[32];
+assign l = db ? f1[2] : f1[31];
+assign r = db ? f1[1] : f1[30];
+assign st = db ? f1[0] : f1[29];
 
 assign siginx = r | st;
 

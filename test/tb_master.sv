@@ -50,8 +50,8 @@ initial begin
     // fd_out = $fopen("/home/achir/FloatingPointUnit/test/add_sub_output_results.txt", "w");
 
     //ADD 32:
-    fd_in = $fopen("/home/achir/FloatingPointUnit/test_gen/decomposed_f32.txt", "r");
-    fd_out = $fopen("/home/achir/FloatingPointUnit/test/add_sub_output_results_32.txt", "w");
+    // fd_in = $fopen("/home/achir/FloatingPointUnit/test_gen/decomposed_f32.txt", "r");
+    // fd_out = $fopen("/home/achir/FloatingPointUnit/test/add_sub_output_results_32.txt", "w");
 
 
     // NOTE: mul-div 64-32 bits
@@ -59,8 +59,8 @@ initial begin
     // fd_out = $fopen("/home/achir/FloatingPointUnit/test/mul_div_output_results_64.txt", "w");
 
 
-    // fd_in = $fopen("/home/achir/FloatingPointUnit/test_gen/decomposed_f32.txt", "r");
-    // fd_out = $fopen("/home/achir/FloatingPointUnit/test/mul_div_output_results_32.txt", "w");
+    fd_in = $fopen("/home/achir/FloatingPointUnit/test_gen/decomposed_f32.txt", "r");
+    fd_out = $fopen("/home/achir/FloatingPointUnit/test/mul_div_output_results_32.txt", "w");
  
     if (fd_in == 0 || fd_out == 0) begin
         $display("Error opening file.");
@@ -75,15 +75,14 @@ initial begin
         $sscanf(line, "%b;%b", fpa, fpb);
 
         db = 0;
-        normal = 0;
+        normal = 1;
         sub = 0;
         fdiv = 0;
         RM = 2'b01;
         #1;
 
-        // $fdisplay(fd_out, "%b%b%b", sp_add_out, ep_add_out, f_add_out);
-         $fdisplay(fd_out, "%b", fp_add_out);
-         // $fdisplay(fd_out, "%b", fp_mul_out);
+         // $fdisplay(fd_out, "%b", fp_add_out);
+         $fdisplay(fd_out, "%b", fp_mul_out);
     end
 
     // NOTE: Double precision numbers
