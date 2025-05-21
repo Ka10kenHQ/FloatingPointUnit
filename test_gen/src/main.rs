@@ -1,16 +1,17 @@
-use test_gen::{factorize, lookup};
+use std::io;
 
-fn main() {
-    let factors_res = factorize::factorize();
-    let lookup_res = lookup::lookup_table();
+use test_gen::file_utils::{factorize_denormal, factorize_normal};
 
-    match lookup_res {
-        Ok(()) => println!("lookup generate completed"),
-        Err(_) => println!("Error generating lookup"),
-    }
+fn main() -> io::Result<()> {
+    println!("Generating test files for floating point operations...");
 
-    match factors_res {
-        Ok(()) => println!("factorized numbers generate completed"),
-        Err(_) => println!("Error generating factorization"),
-    }
+    // Generate test files for normal floating point operations
+    factorize_normal()?;
+
+    // Generate test files for denormal floating point operations
+    factorize_denormal()?;
+
+    println!("All test files generated successfully!");
+
+    Ok(())
 }
