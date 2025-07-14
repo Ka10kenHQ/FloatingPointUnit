@@ -151,7 +151,7 @@ always @(posedge clk) begin
         $display("Time %t: Division state=%d, Dcnt=%d, fdiv=%b, rst_n=%b", $time, state, Dcnt, fdiv, rst_n);
     end
     if (state == RESULT) begin
-        $display("Division completed at time %t: fa=%b, fb=%b, result=%b", $time, fa, fb, fd_out);
+        $display("Division completed at time %t: fa=%b, fb=%b, fd_out=%b", $time, fa, fb, fd_out);
     end
 end
 

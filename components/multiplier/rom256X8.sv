@@ -3,13 +3,13 @@ module rom256X8(
     output wire [7:0] data
 );
 
-reg [15:0] rom [255:0];
+reg [63:0] rom [255:0];
 
 initial begin
     $readmemb("/home/achir/FloatingPointUnit/components/multiplier/lookup_table.txt", rom);
 end
 
-assign data = rom[addr][14:7];
+assign data = rom[addr][63:56];
 
 endmodule
 

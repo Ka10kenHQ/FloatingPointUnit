@@ -5,8 +5,9 @@ pub fn lookup_table() -> Result<()> {
     let mut file = File::create("lookup_table.txt")?;
 
     for fb in 0..=255 {
-        let approx = calc_x0(fb) * 65536.0;
-        writeln!(file, "{:016b}", approx as u16)?;
+        let approx = calc_x0(fb);
+        println!("{}", approx);
+        writeln!(file, "{:08b}", approx.to_bits())?;
     }
 
     Ok(())
