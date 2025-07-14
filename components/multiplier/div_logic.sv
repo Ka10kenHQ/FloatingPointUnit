@@ -8,17 +8,19 @@ module div_logic(
     output [56:0]      fq
 );
 
+reg [57:0] opa, opb;
+
+
 wire [7:0] look_up;
 rom256X8 rm (
-    .addr(fb[51:44]),
+    .addr(opb[56:49]),
     .data(look_up)
 );
 
-reg [57:0] fa_in, fb_in;
 wire [115:0] mul_out;
 multree mlt (
-    .a(fa_in),
-    .b(fb_in),
+    .a(opa),
+    .b(opb),
     .out(mul_out)
 );
 
@@ -72,8 +74,8 @@ always @(posedge clk or negedge rst_n) begin
         Db <= 58'b0;
         E <= 55'b0;
         Eb <= 116'b0;
-        fa_in <= 58'b0;
-        fb_in <= 58'b0;
+        opa <= 58'b0;
+        opb <= 58'b0;
     end else begin
         case (state)
             IDLE:    state <= (fdiv) ? NEWTON1 : IDLE;
@@ -95,31 +97,33 @@ always @(posedge clk or negedge rst_n) begin
         end 
         else if (state == NEWTON1) begin
             Dcnt <= Dcnt - 1;
-            fa_in <= x;
-            fb_in <= {fb, 5'b0};
+            opa <= x;
+            opb <= {fb, 5'b0};
         end
         else if (state == NEWTON2) begin
             A <= ~mul_out[115:58];
         end
         else if (state == NEWTON3) begin
-            fa_in <= A;
-            fb_in <= x;
+            opa <= A;
+            opb <= x;
         end
         else if (state == NEWTON4) begin
             x <= mul_out[115:58];
         end
         else if (state == QUOT1) begin
-            fa_in <= {fa, 5'b0};
-            fb_in <= x;
+            opa <= {fa, 5'b0};
+            opb <= x;
         end 
         else if (state == QUOT2) begin
+            opa <= {fa, 5'b0};
+            opb <= {fb, 5'b0};
             Da <= {fa, 5'b0};
             Db <= {fb, 5'b0};
         end
         else if (state == QUOT3) begin
             E <= {mul_out[115:90], mul_out[89:61] & {29{db}}};
-            fa_in <= {mul_out[115:90], mul_out[89:61] & {29{db}}, 3'b0};
-            fb_in <= {fb, 5'b0};
+            opa <= {mul_out[115:90], mul_out[89:61] & {29{db}}, 3'b0};
+            opb <= {fb, 5'b0};
         end 
         else if (state == QUOT4) begin
             Eb <= mul_out;
