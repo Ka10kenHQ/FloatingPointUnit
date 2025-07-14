@@ -7,7 +7,7 @@ pub fn lookup_table() -> Result<()> {
     for fb in 0..=255 {
         let approx = calc_x0(fb);
         println!("{}", approx);
-        writeln!(file, "{:08b}", approx.to_bits())?;
+        writeln!(file, "{:016b}", approx.to_bits())?;
     }
 
     Ok(())

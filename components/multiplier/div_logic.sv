@@ -89,58 +89,45 @@ always @(posedge clk or negedge rst_n) begin
             default: state <= IDLE;
         endcase
         
-        if (state == RESULT) begin
-            fq_reg <= fd_out;
-        end
-        
         if (state == IDLE && fdiv) begin
             Dcnt <= db ? 2'b11 : 2'b10;
-        end else if (state == NEWTON1) begin
-            Dcnt <= Dcnt - 1;
-        end
-        
-        if (state == IDLE && fdiv) begin
             x <= {2'b01, look_up, 48'b0};
-        end else if (state == NEWTON4) begin
-            x <= mul_out[115:58];
+        end 
+        else if (state == NEWTON1) begin
+            Dcnt <= Dcnt - 1;
+            fa_in <= x;
+            fb_in <= {fb, 5'b0};
         end
-        
-        if (state == NEWTON2) begin
+        else if (state == NEWTON2) begin
             A <= ~mul_out[115:58];
         end
-        
-        if (state == QUOT2) begin
+        else if (state == NEWTON3) begin
+            fa_in <= A;
+            fb_in <= x;
+        end
+        else if (state == NEWTON4) begin
+            x <= mul_out[115:58];
+        end
+        else if (state == QUOT1) begin
+            fa_in <= {fa, 5'b0};
+            fb_in <= x;
+        end 
+        else if (state == QUOT2) begin
             Da <= {fa, 5'b0};
             Db <= {fb, 5'b0};
         end
-        
-        if (state == QUOT3) begin
+        else if (state == QUOT3) begin
             E <= {mul_out[115:90], mul_out[89:61] & {29{db}}};
-        end
-        
-        if (state == QUOT4) begin
+            fa_in <= {mul_out[115:90], mul_out[89:61] & {29{db}}, 3'b0};
+            fb_in <= {fb, 5'b0};
+        end 
+        else if (state == QUOT4) begin
             Eb <= mul_out;
         end
-        
-        if (state == NEWTON1) begin
-            fa_in <= x;
-        end else if (state == NEWTON3) begin
-            fa_in <= A;
-        end else if (state == QUOT1) begin
-            fa_in <= {fa, 5'b0};
-        end else if (state == QUOT3) begin
-            fa_in <= {mul_out[115:90], mul_out[89:61] & {29{db}}, 3'b0};
+        else if (state == RESULT) begin
+            fq_reg <= fd_out;
         end
         
-        if (state == NEWTON1) begin
-            fb_in <= {fb, 5'b0};
-        end else if (state == NEWTON3) begin
-            fb_in <= x;
-        end else if (state == QUOT1) begin
-            fb_in <= x;
-        end else if (state == QUOT3) begin
-            fb_in <= {fb, 5'b0};
-        end
     end
 end
 
