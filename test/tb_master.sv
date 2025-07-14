@@ -4,6 +4,8 @@ module tb_master;
 reg [63:0] fpa, fpb;
 reg db, normal, sub, fdiv;
 reg [1:0] RM;
+reg clk = 0;
+reg rst_n = 0;
 
 wire [63:0] fp_mul_out;
 wire [4:0] IEEp_mul;
@@ -11,13 +13,15 @@ wire [4:0] IEEp_mul;
 // wire [10:0] ep_mul_out;
 // wire [51:0] f_mul_out;
 
- wire [63:0] fp_add_out;
- wire [4:0] IEEp_add;
+wire [63:0] fp_add_out;
+wire [4:0] IEEp_add;
 // wire sp_add_out;
 // wire [10:0] ep_add_out;
 // wire [51:0] f_add_out;
 
 master uut (
+    .clk(clk),
+    .rst_n(rst_n),
     .fpa(fpa),
     .fpb(fpb),
     .db(db),
@@ -39,6 +43,8 @@ master uut (
 
 // integer fd_in,fd_out;
 //reg [1050:0] line;
+
+always #5 clk = ~clk;
 
 initial begin
 
@@ -110,20 +116,20 @@ initial begin
     // NOTE: Double precision numbers
 
     // Test Case 1: 3.0 * 3.0 and 3.0 + 3.0
-    fpa = {1'b0, 11'b10000000000, 52'b1000000000000000000000000000000000000000000000000000};
-    fpb = {1'b0, 11'b10000000000, 52'b1000000000000000000000000000000000000000000000000000};
-    db = 1;
-    normal = 1;
-    sub = 0;
-    fdiv = 0;
-    RM = 2'b00;
-    #20;
-    $display("------------------------------------------------------------------------------------------");
-    $display("Muldiv Result: fp_mul_out = %b", fp_mul_out);
+    // fpa = {1'b0, 11'b10000000000, 52'b1000000000000000000000000000000000000000000000000000};
+    // fpb = {1'b0, 11'b10000000000, 52'b1000000000000000000000000000000000000000000000000000};
+    // db = 1;
+    // normal = 1;
+    // sub = 0;
+    // fdiv = 0;
+    // RM = 2'b00;
+    // #20;
+    // $display("------------------------------------------------------------------------------------------");
+    // $display("Muldiv Result: fp_mul_out = %b", fp_mul_out);
     // $display("Muldiv Details: sp_out = %b, ep_out = %b, f_out = %b", sp_mul_out, ep_mul_out, f_mul_out);
 
-    $display("------------------------------------------------------------------------------------------");
-    $display("Adder Result: fp_add_out = %b", fp_add_out);
+    // $display("------------------------------------------------------------------------------------------");
+    // $display("Adder Result: fp_add_out = %b", fp_add_out);
     // $display("Adder Details: sp_out = %b, ep_out = %b, f_out = %b", sp_add_out, ep_add_out, f_add_out);
 
     // Test Case 1: -2.0 * -2.0 and -2.0 + -2.0
@@ -145,21 +151,27 @@ initial begin
 
 
 
+    // Reset sequence
+    rst_n = 0;
+    #20;
+    rst_n = 1;
+    #20;
+
     // Test Case 1: 4.0 / 3.0 and 4.0 - 3.0
-    // fpa = {1'b0, 11'b10000000001, 52'b0000000000000000000000000000000000000000000000000000};
-    // fpb = {1'b0, 11'b10000000000, 52'b1000000000000000000000000000000000000000000000000000};
-    // db = 1;
-    // normal = 1;
-    // sub = 1;
-    // fdiv = 1;
-    // RM = 2'b01;
-    // #20;
-    // $display("------------------------------------------------------------------------------------------");
-    // $display("Muldiv Result: fp_mul_out = %b", fp_mul_out);
+    fpa = {1'b0, 11'b10000000001, 52'b0000000000000000000000000000000000000000000000000000};
+    fpb = {1'b0, 11'b10000000000, 52'b1000000000000000000000000000000000000000000000000000};
+    db = 1;
+    normal = 1;
+    sub = 1;
+    fdiv = 1;
+    RM = 2'b01;
+    #200;  // Wait longer for division to complete
+    $display("------------------------------------------------------------------------------------------");
+    $display("Muldiv Result: fp_mul_out = %b", fp_mul_out);
     // $display("Muldiv Details: sp_out = %b, ep_out = %b, f_out = %b", sp_mul_out, ep_mul_out, f_mul_out);
-    //
-    // $display("------------------------------------------------------------------------------------------");
-    // $display("Adder Result: fp_add_out = %b", fp_add_out);
+
+    $display("------------------------------------------------------------------------------------------");
+    $display("Adder Result: fp_add_out = %b", fp_add_out);
     // $display("Adder Details: sp_out = %b, ep_out = %b, f_out = %b", sp_add_out, ep_add_out, f_add_out);
 
 
@@ -288,6 +300,7 @@ initial begin
     // $display("Adder Result: fp_add_out = %b", fp_add_out);
     // $display("Adder Details: sp_out = %b, ep_out = %b, f_out = %b", sp_add_out, ep_add_out, f_add_out);
 
+    $finish;
 
 end
 

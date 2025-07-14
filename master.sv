@@ -4,9 +4,8 @@
 // `include "./components/multiplier/muldiv.sv"
 
 module master  (
-    input clk,              // Add clock input
-    input rst_n,            // Add reset input
-    input start_div,        // Add start signal for division
+    input clk,              
+    input rst_n,            
     input [63:0] fpa,
     input [63:0] fpb,
     input db,
@@ -22,8 +21,7 @@ module master  (
     // output [51:0] f_mul_out,
 
     output [63:0] fp_add_out,/* synthesis keep */ 
-    output [4:0] IEEp_add,/* synthesis keep */ 
-    output div_ready        // Add ready signal for division
+    output [4:0] IEEp_add/* synthesis keep */ 
     // output sp_add_out,
     // output [10:0] ep_add_out,
     // output [51:0] f_add_out
@@ -81,12 +79,10 @@ wire [56:0] fq;
 wire [12:0] eq;
 wire sq;
 wire [57:0] flq;
-wire div_ready_sig;
 
 muldiv uut_mul(
     .clk(clk),
     .rst_n(rst_n),
-    .start_div(start_div),
     .fdiv(fdiv),
     .sa(sa),
     .sb(sb),
@@ -103,8 +99,7 @@ muldiv uut_mul(
     .fq(fq),
     .eq(eq),
     .sq(sq),
-    .flq(flq),
-    .div_ready(div_ready_sig)
+    .flq(flq)
 );
 
 wire OVFen = 1'b0;
@@ -143,7 +138,6 @@ rounder rnd_mul(
     // .f_out(f_mul_out)
 );
 
-assign div_ready = div_ready_sig;
 
 endmodule
 
