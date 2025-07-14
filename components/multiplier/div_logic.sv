@@ -1,11 +1,11 @@
-// TODO: this needs correction
-// problem is always block is not entered initially
+// Division logic using Newton-Raphson iteration for floating point division
 module div_logic(
     input  [52:0]      fa,        
     input  [52:0]      fb,  
     input              db,
     input              fdiv,
-    output  [56:0]  fq
+    output reg [56:0]  fq,
+    output reg         div_ready  // Add ready signal
 );
 
 wire [7:0] look_up;
@@ -42,8 +42,6 @@ localparam RESULT  = 4'd9;
 
 reg [3:0] state, next_state;
 
-
-reg init = 1;
 reg [1:0] Dcnt;             
 reg [57:0] x;               
 reg [57:0] A;
@@ -61,70 +59,88 @@ select_fd fd_inst (
     .fd(fd_out)
 );
 
-assign fq = 0;
+// State machine - sequential logic
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        state <= IDLE;
+        div_ready <= 1'b0;
+        fq <= 57'b0;
+    end else begin
+        state <= next_state;
+        
+        case(state)
+            IDLE: begin 
+                div_ready <= 1'b0;
+                if (start_div && fdiv) begin
+                    Dcnt <= db ? 2'b11 : 2'b10;
+                    x <= {2'b01, look_up, 48'b0};
+                end
+            end
+            NEWTON1: begin
+                fa_in <= x;
+                fb_in <= {fb, 5'b0};
+                Dcnt <= Dcnt - 1;
+            end
+            NEWTON2: begin
+                A <= ~mul_out[115:58];
+            end
+            NEWTON3: begin
+                fa_in <= A;
+                fb_in <= x;
+            end
+            NEWTON4: begin
+                x <= mul_out[115:58];
+            end
+            QUOT1: begin
+                fa_in <= {fa, 5'b0};
+                fb_in <= x;
+            end
+            QUOT2: begin
+                Da <= {fa, 5'b0};
+                Db <= {fb, 5'b0};
+            end
+            QUOT3: begin
+                E <= {mul_out[115:90], mul_out[89:61] & {29{db}}};
+                fa_in <= {mul_out[115:90], mul_out[89:61] & {29{db}}, 3'b0};
+                fb_in <= {fb, 5'b0};
+            end
+            QUOT4: begin
+                Eb <= mul_out;
+            end
+            RESULT: begin
+                fq <= fd_out;
+                div_ready <= 1'b1;
+            end
+        endcase
+    end
+end
 
-
-// always @(init) begin
-//     $display("here");
-//     case(state)
-//         IDLE: begin 
-//             next_state <= NEWTON1;
-//             Dcnt <= db ? 2'b11 : 2'b10;
-//             x <= {2'b01, look_up, 48'b0};
-//         end
-//         NEWTON1: begin
-//             next_state <= NEWTON2;
-//             fa_in <= x;
-//             fb_in <= {fb, 5'b0};
-//             Dcnt <= Dcnt - 1;
-//         end
-//         NEWTON2: begin
-//             next_state <= NEWTON3;
-//             A <= ~mul_out[115:58];
-//         end
-//         NEWTON3: begin
-//             next_state <= NEWTON4;
-//             fa_in <= A;
-//             fb_in <= x;
-//         end
-//         NEWTON4: begin
-//             next_state <= (Dcnt > 0) ? IDLE : QUOT1;
-//             x <= mul_out[115:58];
-//         end
-//         QUOT1: begin
-//             next_state <= QUOT2;
-//             fa_in <= {fa, 5'b0};
-//             fb_in <= x;
-//         end
-//         QUOT2: begin
-//             next_state <= QUOT3;
-//             Da <= {fa, 5'b0};
-//             Db <= {fb, 5'b0};
-//         end
-//         QUOT3: begin
-//             next_state <= QUOT4;
-//             E <= {mul_out[115:90], mul_out[89:61] & {29{db}}};
-//             fa_in <= {mul_out[115:90], mul_out[89:61] & {29{db}}, 3'b0};
-//             fb_in <= {fb, 5'b0};
-//         end
-//         QUOT4: begin
-//             next_state <= RESULT;
-//             Eb <= mul_out;
-//         end
-//         RESULT: begin
-//             next_state <= RESULT;
-//             fq <= fd_out;
-//         end
-//         default: begin
-//             next_state <= IDLE;
-//         end
-//     endcase
-//     init = 0;
-// end
-//
-// always @(state) begin
-//     state <= next_state;
-// end
+// State machine - combinational logic
+always @(*) begin
+    case(state)
+        IDLE: begin 
+            if (start_div && fdiv)
+                next_state = NEWTON1;
+            else
+                next_state = IDLE;
+        end
+        NEWTON1: next_state = NEWTON2;
+        NEWTON2: next_state = NEWTON3;
+        NEWTON3: next_state = NEWTON4;
+        NEWTON4: begin
+            if (Dcnt > 0)
+                next_state = NEWTON1;  // Continue Newton iterations
+            else
+                next_state = QUOT1;    // Start quotient calculation
+        end
+        QUOT1: next_state = QUOT2;
+        QUOT2: next_state = QUOT3;
+        QUOT3: next_state = QUOT4;
+        QUOT4: next_state = RESULT;
+        RESULT: next_state = IDLE;  // Return to idle after result
+        default: next_state = IDLE;
+    endcase
+end
 
 endmodule
 
