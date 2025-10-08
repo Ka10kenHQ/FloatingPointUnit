@@ -53,17 +53,17 @@ end
 integer fd_in,fd_out;
 reg [1050:0] line;
 
-always @(uut.mul.sig.div_inst.state) begin
-    $display("Time=%0t | State changed: %b", $time, uut.mul.sig.div_inst.state);
-end
-
-always @(uut.mul.sig.div_inst.fd_out) begin
-    $display("Time=%0t | fd_out changed: %b", $time, uut.mul.sig.div_inst.fd_out);
-end
-
-always @(uut.mul.sig.div_inst.fd_out) begin
-    $display("Time=%0t | fd_out changed: %b", $time, uut.mul.sig.div_inst.fq);
-end
+// always @(uut.mul.sig.div_inst.state) begin
+//     $display("Time=%0t | State changed: %b", $time, uut.mul.sig.div_inst.state);
+// end
+//
+// always @(uut.mul.sig.div_inst.fd_out) begin
+//     $display("Time=%0t | fd_out changed: %b", $time, uut.mul.sig.div_inst.fd_out);
+// end
+//
+// always @(uut.mul.sig.div_inst.fd_out) begin
+//     $display("Time=%0t | fd_out changed: %b", $time, uut.mul.sig.div_inst.fq);
+// end
 
 initial begin
 
@@ -169,15 +169,15 @@ initial begin
     // $display("Adder Details: sp_out = %b, ep_out = %b, f_out = %b", sp_add_out, ep_add_out, f_add_out);
 
 
-    // Test Case 1: 4.0 / 3.0 and 4.0 - 3.0
+    // Test Case 1: 4.0 / 2.0 and 4.0 - 2.0
     fpa = {1'b0, 11'b10000000001, 52'b0000000000000000000000000000000000000000000000000000};
-    fpb = {1'b0, 11'b10000000000, 52'b1000000000000000000000000000000000000000000000000000};
+    fpb = {1'b0, 11'b10000000000, 52'b0000000000000000000000000000000000000000000000000000};
     db = 1;
     normal = 1;
     sub = 0;
     fdiv = 1;
     RM = 2'b01;
-    #40;
+    #20;
     $display("------------------------------------------------------------------------------------------");
     $display("Muldiv Result: fp_mul_out = %b", fp_mul_out);
     $display("Muldiv Details: sp_out = %b, ep_out = %b, f_out = %b", sp_mul_out, ep_mul_out, f_mul_out);

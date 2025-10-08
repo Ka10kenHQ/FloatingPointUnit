@@ -29,7 +29,7 @@ select_fd_reg fd_inst_reg (
     .clk(clk),
     .Da(Da),
     .Db(Db),
-    .Eb(Eb),
+    .Eb(Eb[114:0]),
     .E(E),
     .db(db),
     .fd(fd_out)
