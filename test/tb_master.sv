@@ -61,6 +61,10 @@ always @(uut.mul.sig.div_inst.fd_out) begin
     $display("Time=%0t | fd_out changed: %b", $time, uut.mul.sig.div_inst.fd_out);
 end
 
+always @(uut.mul.sig.div_inst.fd_out) begin
+    $display("Time=%0t | fd_out changed: %b", $time, uut.mul.sig.div_inst.fq);
+end
+
 initial begin
 
     //NOTE: add_sub 64-32 bits

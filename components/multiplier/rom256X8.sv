@@ -9,7 +9,7 @@ initial begin
     $readmemb("/home/achir/dev/FloatingPointUnit/test_gen/lookup_table.txt", rom);
 end
 
-assign data = rom[addr][15:8];
+assign data = rom[addr][14:7];
 
 endmodule
 

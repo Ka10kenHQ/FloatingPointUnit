@@ -116,6 +116,7 @@ always @(posedge clk or negedge rst_n) begin
             RESULT: begin
                 fq <= fd_out;
                 state <= RESULT;
+                $finish;
             end
         endcase
     end
