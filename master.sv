@@ -4,6 +4,8 @@
 `include "./components/multiplier/muldiv.sv"
 
 module master  (
+    input        clk,
+    input        rst_n,
     input [63:0] fpa,
     input [63:0] fpb,
     input db,
@@ -79,6 +81,8 @@ wire sq;
 wire [57:0] flq;
 
 muldiv mul(
+    .clk(clk),
+    .rst_n(rst_n),
     .fdiv(fdiv),
     .sa(sa),
     .sb(sb),

@@ -1,18 +1,21 @@
 `include "./../../utils/ortree.sv"
 
 module sigfmd (
-    input [52:0]      fa,        
-    input [52:0]      fb,  
-    input             fdiv, 
-    input             db,      
-    output [56:0] fq         
+    input           clk,
+    input           rst_n,
+    input   [52:0]  fa,        
+    input   [52:0]  fb,  
+    input           fdiv, 
+    input           db,      
+    output  [56:0]  fq         
 );
 
-
-wire [56:0] fq_mul;
-wire [56:0] fq_div;
+reg [56:0] fq_mul;
+reg [56:0] fq_div;
 
 div_logic div_inst (
+    .clk(clk),
+    .rst_n(rst_n),
     .fa(fa),
     .fb(fb),
     .db(db),
@@ -26,6 +29,6 @@ mul_logic mul_inst (
     .fq(fq_mul)
 );
 
-assign fq = (fdiv) ? fq_div : fq_mul;
- 
+assign fq = fdiv ? fq_div : fq_mul;
+
 endmodule

@@ -1,8 +1,10 @@
 module muldiv (
-    input fdiv,
-    input sa,
-    input sb,
-    input db,
+    input        clk,
+    input        rst_n,
+    input        fdiv,
+    input        sa,
+    input        sb,
+    input        db,
     input  [52:0] fa,
     input  [52:0] fb,
     input  [10:0] ea,
@@ -20,6 +22,8 @@ module muldiv (
 );
 
 sigfmd sig(
+    .clk(clk),
+    .rst_n(rst_n),
     .fa(fa),
     .fb(fb),
     .fdiv(fdiv),
@@ -46,6 +50,5 @@ specmd spec(
     .fdiv(fdiv),
     .flq(flq)
 );
-
 
 endmodule

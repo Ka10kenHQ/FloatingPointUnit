@@ -1,6 +1,9 @@
 use std::io;
 
-use test_gen::file_utils::{factorize_denormal, factorize_normal};
+use test_gen::{
+    file_utils::{factorize_denormal, factorize_normal},
+    lookup::lookup_table,
+};
 
 fn main() -> io::Result<()> {
     println!("Generating test files for floating point operations...");
@@ -12,6 +15,8 @@ fn main() -> io::Result<()> {
     factorize_denormal()?;
 
     println!("All test files generated successfully!");
+
+    let _ = lookup_table();
 
     Ok(())
 }

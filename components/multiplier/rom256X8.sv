@@ -6,10 +6,10 @@ module rom256X8(
 reg [15:0] rom [255:0];
 
 initial begin
-    $readmemb("$HOME/FloatingPointUnit/components/multiplier/lookup_table.txt", rom);
+    $readmemb("/home/achir/dev/FloatingPointUnit/test_gen/lookup_table.txt", rom);
 end
 
-assign data = rom[addr][14:7];
+assign data = rom[addr][15:8];
 
 endmodule
 

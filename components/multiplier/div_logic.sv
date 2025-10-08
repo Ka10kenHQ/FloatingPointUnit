@@ -1,116 +1,127 @@
-// TODO: this needs correction
-// problem is always block is not entered initially
 module div_logic(
-    input  [52:0]      fa,        
-    input  [52:0]      fb,  
-    input              db,
-    input              fdiv,
-    output reg [56:0]  fq
+    input           clk,
+    input           rst_n,
+    input  [52:0]   fa,
+    input  [52:0]   fb,
+    input           db,
+    input           fdiv,
+    output logic [56:0] fq
 );
 
-wire [7:0] look_up;
-rom256X8 rm (
-    .addr(fb[51:44]),
-    .data(look_up)
-);
-
-reg [57:0] fa_in, fb_in;     
-wire [115:0] mul_out;        
-multree mlt (
-    .a(fa_in),
-    .b(fb_in),
-    .out(mul_out)
-);
-
+logic  [57:0] fa_in, fb_in;
+logic [115:0] mul_out;
+wire [56:0] fd_out;           // changed to wire
+logic or_out;
+logic [7:0] rom_data;
 parameter n = 60;
-wire or_out;
-ortree #(n) or_inst (
-    .x(mul_out[59:0]),
-    .or_out(or_out)
-);
 
-enum int unsigned { IDLE = 4'd0, NEWTON1 = 4'd1, NEWTON2 = 4'd2, NEWTON3 = 4'd3, NEWTON4 = 4'd4,
-                   QUOT1 = 4'd5, QUOT2 = 4'd6, QUOT3 = 4'd7, QUOT4 = 4'd8, RESULT = 4'd9 } state, next_state;
-reg init = 1;
-reg [1:0] Dcnt;             
-reg [57:0] x;               
-reg [57:0] A;
-reg [57:0] Da, Db;
-reg [54:0] E;
-reg [115:0] Eb;
+logic [3:0] state;
+logic [1:0] Dcnt;
+logic [57:0] x, A, Da, Db;
+logic [54:0] E;
+logic [115:0] Eb;
+logic [8:0] look_up;
 
-wire [56:0] fd_out;
-select_fd fd_inst (
-    .Da(Da),
-    .Db(Db),
-    .Eb(Eb[114:0]),
-    .E(E),
-    .db(db),
-    .fd(fd_out)
-);
+// Module instances
+rom256X8 rom_inst (.addr(fb[51:44]), .data(rom_data));
+multree mlt (.a(fa_in), .b(fb_in), .out(mul_out));
+ortree #(n) or_inst (.x(mul_out[59:0]), .or_out(or_out));
+select_fd fd_inst (.Da(Da), .Db(Db), .Eb(Eb[114:0]), .E(E), .db(db), .fd(fd_out));
 
+// State encoding
+localparam IDLE    = 4'd0;
+localparam NEWTON1 = 4'd1;
+localparam NEWTON2 = 4'd2;
+localparam NEWTON3 = 4'd3;
+localparam NEWTON4 = 4'd4;
+localparam QUOT1   = 4'd5;
+localparam QUOT2   = 4'd6;
+localparam QUOT3   = 4'd7;
+localparam QUOT4   = 4'd8;
+localparam RESULT  = 4'd9;
 
-always @(state or posedge init) begin
-    $display("here");
-    case(state)
-        IDLE: begin 
-            next_state <= NEWTON1;
-            Dcnt <= db ? 2'b11 : 2'b10;
-            x <= {2'b01, look_up, 48'b0};
-        end
-        NEWTON1: begin
-            next_state <= NEWTON2;
-            fa_in <= x;
-            fb_in <= {fb, 5'b0};
-            Dcnt <= Dcnt - 1;
-        end
-        NEWTON2: begin
-            next_state <= NEWTON3;
-            A <= ~mul_out[115:58];
-        end
-        NEWTON3: begin
-            next_state <= NEWTON4;
-            fa_in <= A;
-            fb_in <= x;
-        end
-        NEWTON4: begin
-            next_state <= (Dcnt > 0) ? IDLE : QUOT1;
-            x <= mul_out[115:58];
-        end
-        QUOT1: begin
-            next_state <= QUOT2;
-            fa_in <= {fa, 5'b0};
-            fb_in <= x;
-        end
-        QUOT2: begin
-            next_state <= QUOT3;
-            Da <= {fa, 5'b0};
-            Db <= {fb, 5'b0};
-        end
-        QUOT3: begin
-            next_state <= QUOT4;
-            E <= {mul_out[115:90], mul_out[89:61] & {29{db}}};
-            fa_in <= {mul_out[115:90], mul_out[89:61] & {29{db}}, 3'b0};
-            fb_in <= {fb, 5'b0};
-        end
-        QUOT4: begin
-            next_state <= RESULT;
-            Eb <= mul_out;
-        end
-        RESULT: begin
-            next_state <= RESULT;
-            fq <= fd_out;
-        end
-        default: begin
-            next_state <= IDLE;
-        end
-    endcase
-    init = 0;
-end
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        state <= IDLE;
+        Dcnt  <= 0;
+        x     <= 0;
+        A     <= 0;
+        Da    <= 0;
+        Db    <= 0;
+        E     <= 0;
+        Eb    <= 0;
+        fa_in <= 0;
+        fb_in <= 0;
+        fq    <= 0;
+        look_up <= 0;
+    end else begin
+        case (state)
+            IDLE: begin
+                // latch lookup from ROM
+                look_up <= rom_data;
+                x       <= {2'b01, rom_data, 48'b0};
+                Dcnt    <= db ? 2'b11 : 2'b10;
+                state   <= NEWTON1;
+            end
 
-always_ff @(state) begin
-    state <= next_state;
+            NEWTON1: begin
+                fa_in <= x;
+                fb_in <= {fb, 5'b0};
+                Dcnt  <= Dcnt - 1;
+                state <= NEWTON2;
+            end
+
+            NEWTON2: begin
+                A     <= ~mul_out[115:58];
+                state <= NEWTON3;
+            end
+
+            NEWTON3: begin
+                fa_in <= A;
+                fb_in <= x;
+                state <= NEWTON4;
+            end
+
+            NEWTON4: begin
+                x <= mul_out[115:58];
+                if (Dcnt == 2'b00)
+                    state <= QUOT1;
+                else
+                    state <= IDLE; // continue Newton iteration
+            end
+
+            QUOT1: begin
+                fa_in <= {fa, 5'b0};
+                fb_in <= x;
+                state <= QUOT2;
+            end
+
+            QUOT2: begin
+                Da    <= {fa, 5'b0};
+                Db    <= {fb, 5'b0};
+                state <= QUOT3;
+            end
+
+            QUOT3: begin
+                E      <= {mul_out[115:90], mul_out[89:61] & {29{db}}};
+                fa_in  <= {mul_out[115:90], mul_out[89:61] & {29{db}}, 3'b0};
+                fb_in  <= {fb, 5'b0};
+                state  <= QUOT4;
+            end
+
+            QUOT4: begin
+                Eb    <= mul_out;
+                state <= RESULT;
+            end
+
+            RESULT: begin
+                fq    <= fd_out; // latch fd_out from select_fd
+                state <= RESULT; // hold RESULT
+            end
+
+            default: state <= IDLE;
+        endcase
+    end
 end
 
 endmodule
-
