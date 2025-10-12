@@ -71,7 +71,7 @@ always @(posedge clk or negedge rst_n) begin
 
             NEWTON1: begin
                 fa_in <= x;
-                fb_in <= {fb[51:0], 6'b0};
+                fb_in <= {fb, 5'b0};
                 Dcnt  <= Dcnt - 1;
                 state <= NEWTON2;
             end
@@ -96,7 +96,7 @@ always @(posedge clk or negedge rst_n) begin
             end
 
             QUOT1: begin
-                fa_in <= {fa[51:0], 6'b0};
+                fa_in <= {fa, 5'b0};
                 fb_in <= x;
                 state <= QUOT2;
             end
