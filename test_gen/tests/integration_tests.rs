@@ -4,7 +4,7 @@ use test_gen::fp_decompose::{decompose_f32, decompose_f64};
 
 #[test]
 fn test_add_f64() {
-    let computed_file_path = "/home/achir/FloatingPointUnit/test/add_sub_output_results.txt";
+    let computed_file_path = "/home/achir/dev/FloatingPointUnit/test/add_sub_output_results.txt";
     let decomposed_file_path = "decomposed_f64.txt";
 
     let computed_file = File::open(computed_file_path).expect(&format!(
@@ -52,7 +52,7 @@ fn test_add_f64() {
 #[test]
 fn test_add_f64_denormal() {
     let computed_file_path =
-        "/home/achir/FloatingPointUnit/test/add_sub_output_results_denormal.txt";
+        "/home/achir/dev/FloatingPointUnit/test/add_sub_output_results_denormal.txt";
     let decomposed_file_path = "decomposed_f64_denormal.txt";
 
     let computed_file = File::open(computed_file_path).expect(&format!(
@@ -98,7 +98,8 @@ fn test_add_f64_denormal() {
 
 #[test]
 fn test_sub_f64() {
-    let computed_file_path = "/home/achir/FloatingPointUnit/test/add_sub_output_results_sub.txt";
+    let computed_file_path =
+        "/home/achir/dev/FloatingPointUnit/test/add_sub_output_results_sub.txt";
     let decomposed_file_path = "decomposed_f64.txt";
 
     let computed_file = File::open(computed_file_path).expect(&format!(
@@ -143,7 +144,7 @@ fn test_sub_f64() {
 #[test]
 fn test_sub_f64_denormal() {
     let computed_file_path =
-        "/home/achir/FloatingPointUnit/test/add_sub_output_results_sub_denormal.txt";
+        "/home/achir/dev/FloatingPointUnit/test/add_sub_output_results_sub_denormal.txt";
     let decomposed_file_path = "decomposed_f64_denormal.txt";
 
     let computed_file = File::open(computed_file_path).expect(&format!(
@@ -189,7 +190,7 @@ fn test_sub_f64_denormal() {
 
 #[test]
 fn test_add_f32() {
-    let computed_file_path = "/home/achir/FloatingPointUnit/test/add_sub_output_results_32.txt";
+    let computed_file_path = "/home/achir/dev/FloatingPointUnit/test/add_sub_output_results_32.txt";
     let decomposed_file_path = "decomposed_f32.txt";
 
     let computed_file = File::open(computed_file_path).expect(&format!(
@@ -243,7 +244,7 @@ fn test_add_f32() {
 #[test]
 fn test_add_f32_denormal() {
     let computed_file_path =
-        "/home/achir/FloatingPointUnit/test/add_sub_output_results_32_denormal.txt";
+        "/home/achir/dev/FloatingPointUnit/test/add_sub_output_results_32_denormal.txt";
     let decomposed_file_path = "decomposed_f32_denormal.txt";
 
     let computed_file = File::open(computed_file_path).expect(&format!(
@@ -298,7 +299,8 @@ fn test_add_f32_denormal() {
 
 #[test]
 fn test_sub_f32() {
-    let computed_file_path = "/home/achir/FloatingPointUnit/test/add_sub_output_results_32_sub.txt";
+    let computed_file_path =
+        "/home/achir/dev/FloatingPointUnit/test/add_sub_output_results_32_sub.txt";
     let decomposed_file_path = "decomposed_f32.txt";
 
     let computed_file = File::open(computed_file_path).expect(&format!(
@@ -352,7 +354,7 @@ fn test_sub_f32() {
 #[test]
 fn test_sub_f32_denormal() {
     let computed_file_path =
-        "/home/achir/FloatingPointUnit/test/add_sub_output_results_sub_32_denormal.txt";
+        "/home/achir/dev/FloatingPointUnit/test/add_sub_output_results_sub_32_denormal.txt";
     let decomposed_file_path = "decomposed_f32_denormal.txt";
 
     let computed_file = File::open(computed_file_path).expect(&format!(
@@ -407,7 +409,7 @@ fn test_sub_f32_denormal() {
 
 #[test]
 fn test_mul_f64() {
-    let computed_file_path = "/home/achir/FloatingPointUnit/test/mul_div_output_results_64.txt";
+    let computed_file_path = "/home/achir/dev/FloatingPointUnit/test/mul_div_output_results_64.txt";
     let decomposed_file_path = "decomposed_f64.txt";
 
     let computed_file = File::open(computed_file_path).expect(&format!(
@@ -454,7 +456,7 @@ fn test_mul_f64() {
 
 #[test]
 fn test_mul_f32() {
-    let computed_file_path = "/home/achir/FloatingPointUnit/test/mul_div_output_results_32.txt";
+    let computed_file_path = "/home/achir/dev/FloatingPointUnit/test/mul_div_output_results_32.txt";
     let decomposed_file_path = "decomposed_f32.txt";
 
     let computed_file = File::open(computed_file_path).expect(&format!(

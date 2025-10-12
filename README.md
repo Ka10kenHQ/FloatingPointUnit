@@ -1,3 +1,4 @@
-# FloatingPointUnit
+# IEEE754 complient FloatingPoint Unit
 
-![denorma_works](./images/testing_output.png)
+
+![working tests](./images/10-tests.png)

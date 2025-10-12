@@ -111,6 +111,10 @@ always @(uut.mul.sig.div_inst.fb_in) begin
     $display("Time=%0t | fb_in changed: %b", $time, uut.mul.sig.div_inst.fb_in);
 end
 
+always @(fp_mul_out) begin
+    $display("Time=%0t | final result changed: %b", $time, fp_mul_out);
+end
+
 initial begin
 
     //NOTE: add_sub 64-32 bits
@@ -216,7 +220,7 @@ initial begin
 
 
     // Test Case 1: 4.0 / 2.0 and 4.0 - 2.0
-    fpa = {1'b0, 11'b10000000001, 52'b0000000000000000000000000000000000000000000000000000};
+    fpa = {1'b0, 11'b10000000001, 52'b1100000000000000000000000000000000000000000000000000};
     fpb = {1'b0, 11'b10000000000, 52'b0000000000000000000000000000000000000000000000000000};
     db = 1;
     normal = 1;
