@@ -77,7 +77,7 @@ always @(posedge clk or negedge rst_n) begin
             end
 
             NEWTON2: begin
-                A     <= ~mul_out[115:58];
+                A     <= mul_out[115:58];
                 state <= NEWTON3;
             end
 

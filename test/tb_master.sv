@@ -53,17 +53,63 @@ end
 integer fd_in,fd_out;
 reg [1050:0] line;
 
-// always @(uut.mul.sig.div_inst.state) begin
-//     $display("Time=%0t | State changed: %b", $time, uut.mul.sig.div_inst.state);
-// end
-//
-// always @(uut.mul.sig.div_inst.fd_out) begin
-//     $display("Time=%0t | fd_out changed: %b", $time, uut.mul.sig.div_inst.fd_out);
-// end
-//
-// always @(uut.mul.sig.div_inst.fd_out) begin
-//     $display("Time=%0t | fd_out changed: %b", $time, uut.mul.sig.div_inst.fq);
-// end
+function string state_name(input [3:0] state);
+    case (state)
+        4'd0:  return "IDLE";
+        4'd1:  return "NEWTON1";
+        4'd2:  return "NEWTON2";
+        4'd3:  return "NEWTON3";
+        4'd4:  return "NEWTON4";
+        4'd5:  return "QUOT1";
+        4'd6:  return "QUOT2";
+        4'd7:  return "QUOT3";
+        4'd8:  return "QUOT4";
+        4'd9:  return "RESULT";
+        default: return "UNKNOWN";
+    endcase
+endfunction
+
+always @(uut.mul.sig.div_inst.state) begin
+    $display("Time=%0t | State changed: %04b (%s)", 
+             $time, uut.mul.sig.div_inst.state, 
+             state_name(uut.mul.sig.div_inst.state));
+end
+
+always @(uut.mul.sig.div_inst.fd_out) begin
+    $display("Time=%0t | fd_out changed: %b", $time, uut.mul.sig.div_inst.fd_out);
+end
+
+always @(uut.mul.sig.div_inst.fq) begin
+    $display("Time=%0t | fq changed: %b", $time, uut.mul.sig.div_inst.fq);
+end
+
+always @(uut.mul.sig.div_inst.mul_out) begin
+    $display("Time=%0t | mul_out changed: %b", $time, uut.mul.sig.div_inst.mul_out);
+end
+
+always @(uut.mul.sig.div_inst.x) begin
+    $display("Time=%0t | x changed: %b", $time, uut.mul.sig.div_inst.x);
+end
+
+always @(uut.mul.sig.div_inst.A) begin
+    $display("Time=%0t | A changed: %b", $time, uut.mul.sig.div_inst.A);
+end
+
+always @(uut.mul.sig.div_inst.fa) begin
+    $display("Time=%0t | fa changed: %b", $time, uut.mul.sig.div_inst.fa);
+end
+
+always @(uut.mul.sig.div_inst.fb) begin
+    $display("Time=%0t | fb changed: %b", $time, uut.mul.sig.div_inst.fb);
+end
+
+always @(uut.mul.sig.div_inst.fa_in) begin
+    $display("Time=%0t | fa_in changed: %b", $time, uut.mul.sig.div_inst.fa_in);
+end
+
+always @(uut.mul.sig.div_inst.fb_in) begin
+    $display("Time=%0t | fb_in changed: %b", $time, uut.mul.sig.div_inst.fb_in);
+end
 
 initial begin
 
@@ -178,13 +224,13 @@ initial begin
     fdiv = 1;
     RM = 2'b01;
     #20;
-    $display("------------------------------------------------------------------------------------------");
-    $display("Muldiv Result: fp_mul_out = %b", fp_mul_out);
-    $display("Muldiv Details: sp_out = %b, ep_out = %b, f_out = %b", sp_mul_out, ep_mul_out, f_mul_out);
-
-    $display("------------------------------------------------------------------------------------------");
-    $display("Adder Result: fp_add_out = %b", fp_add_out);
-    $display("Adder Details: sp_out = %b, ep_out = %b, f_out = %b", sp_add_out, ep_add_out, f_add_out);
+    // $display("------------------------------------------------------------------------------------------");
+    // $display("Muldiv Result: fp_mul_out = %b", fp_mul_out);
+    // $display("Muldiv Details: sp_out = %b, ep_out = %b, f_out = %b", sp_mul_out, ep_mul_out, f_mul_out);
+    //
+    // $display("------------------------------------------------------------------------------------------");
+    // $display("Adder Result: fp_add_out = %b", fp_add_out);
+    // $display("Adder Details: sp_out = %b, ep_out = %b, f_out = %b", sp_add_out, ep_add_out, f_add_out);
 
 
      // Test Case 2: 4.0 * 4.0 and 4.0 + 4.0
