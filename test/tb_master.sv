@@ -55,24 +55,31 @@ reg [1050:0] line;
 
 function string state_name(input [3:0] state);
     case (state)
-        4'd0:  return "IDLE";
-        4'd1:  return "NEWTON1";
-        4'd2:  return "NEWTON2";
-        4'd3:  return "NEWTON3";
-        4'd4:  return "NEWTON4";
-        4'd5:  return "QUOT1";
-        4'd6:  return "QUOT2";
-        4'd7:  return "QUOT3";
-        4'd8:  return "QUOT4";
-        4'd9:  return "RESULT";
+        4'd0:  return "UNPACK";
+        4'd1:  return "LOOKUP";
+        
+        4'd2:  return "NEWTON1";
+        4'd3:  return "NEWTON2";
+        4'd4:  return "NEWTON3";
+        4'd5:  return "NEWTON4";
+        
+        4'd6:  return "QUOT1";
+        4'd7:  return "QUOT2";
+        4'd8:  return "QUOT3";
+        4'd9:  return "QUOT4";
+        
+        4'd10: return "SELECT_FD"; 
+        4'd11: return "ROUND1";
+        4'd12: return "ROUND2";
+        
         default: return "UNKNOWN";
     endcase
 endfunction
 
-always @(uut.mul.sig.div_inst.state) begin
-    $display("Time=%0t | State changed: %04b (%s)", 
-             $time, uut.mul.sig.div_inst.state, 
-             state_name(uut.mul.sig.div_inst.state));
+always @(uut.mul.sig.div_inst.curr_state) begin
+    $display("Time=%0t | curr_state changed: %04b (%s)", 
+             $time, uut.mul.sig.div_inst.curr_state, 
+             state_name(uut.mul.sig.div_inst.curr_state));
 end
 
 always @(uut.mul.sig.div_inst.fd_out) begin
@@ -219,8 +226,8 @@ initial begin
     // $display("Adder Details: sp_out = %b, ep_out = %b, f_out = %b", sp_add_out, ep_add_out, f_add_out);
 
 
-    // Test Case 1: 4.0 / 2.0 and 4.0 - 2.0
-    fpa = {1'b0, 11'b10000000001, 52'b1100000000000000000000000000000000000000000000000000};
+    // Test Case 1: 4.0 / 2.0 and 4.0 - 3.0
+    fpa = {1'b0, 11'b10000000001, 52'b0000000000000000000000000000000000000000000000000000};
     fpb = {1'b0, 11'b10000000000, 52'b0000000000000000000000000000000000000000000000000000};
     db = 1;
     normal = 1;
