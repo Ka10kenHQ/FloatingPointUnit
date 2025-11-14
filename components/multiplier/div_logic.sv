@@ -80,41 +80,37 @@ always @(posedge clk or negedge rst_n) begin
 end
 
 always_comb begin
-    next_state = curr_state;
     xce = 0; tlu = 0; Ace = 0; Dce = 0; Ece = 0; Ebce = 0; cce = 0; sce = 0;
     faadoe = 0; fbbdoe = 0; Eadoe = 0; Aadoe = 0; xadoe = 0; xbdoe = 0;
 
     case (curr_state)
 
         UNPACK: begin
-            xce = 1; tlu = 1; fbbdoe = 1;
             next_state = LOOKUP;
         end
 
         LOOKUP: begin
-            xadoe = 1; fbbdoe = 1;
+            xce = 1; tlu = 1; fbbdoe = 1;
             next_state = NEWTON1;
-        end
 
         NEWTON1: begin
-            Ace = 1;
+            xadoe = 1; fbbdoe = 1;
             next_state = NEWTON2;
         end
 
         NEWTON2: begin 
-            cce = 1; sce = 1;
-            Aadoe = 1; xbdoe = 1;
+            Ace = 1;
             next_state = NEWTON3;
         end
 
         NEWTON3: begin
-            xce = 1;
+            cce = 1; sce = 1;
+            Aadoe = 1; xbdoe = 1;
             next_state = NEWTON4;
         end
 
         NEWTON4: begin
-            faadoe = 1; fbbdoe = 1;
-            cce = 1; sce = 1;
+            xce = 1;
             if (Dcnt == 3'd0)
                 next_state = QUOT1;
             else
@@ -123,22 +119,24 @@ always_comb begin
 
         QUOT1: begin
             faadoe = 1; fbbdoe = 1;
-            Dce = 1; Ece = 1;
+            cce = 1; sce = 1;
             next_state = QUOT2;
         end
 
         QUOT2: begin
-            fbbdoe = 1;
-            sce = 1; cce = 1;
+            faadoe = 1; fbbdoe = 1;
+            Dce = 1; Ece = 1;
             next_state = QUOT3;
         end
 
         QUOT3: begin
-            Ebce = 1;
+            fbbdoe = 1;
+            sce = 1; cce = 1;
             next_state = QUOT4;
         end
 
         QUOT4: begin
+            Ebce = 1;
             next_state = SELECT_FD;
         end
 
@@ -182,19 +180,19 @@ always @(posedge clk or negedge rst_n) begin
             if (tlu)
                 x <= {2'b01, look_up, 48'b0};
             else 
-                x <= mul_out[115:58]; 
+                x <= mul_out[116:59]; 
         end
         
-        if (Ace) A <= ~mul_out[115:58];
+        if (Ace) A <= ~mul_out[116:59];
         
         if (Dce) begin
             Da <= {fa, 5'b0};
             Db <= {fb, 5'b0};
         end
         
-        if (Ece) E <= {mul_out[115:90], (mul_out[89:61] & {29{db}}) , 3'b0};
+        if (Ece) E <= {mul_out[116:91], (mul_out[90:62] & {29{db}}) , 3'b0};
             
-        if (Ebce) Eb <= mul_out[115:0];
+        if (Ebce) Eb <= mul_out[116:1];
             
         if (curr_state == ROUND2) fq <= fd_out;
     end
