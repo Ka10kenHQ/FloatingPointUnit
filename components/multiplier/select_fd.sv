@@ -19,8 +19,8 @@ wire neg, zero;
 
 assign a = {1'b0, Da, 56'b0, 1'b1};
 assign b = {1'b1, ~Eb};
-assign c = db ? {{26{1'b1}}, ~({29'b0, Db}), 3'b111} :
-                  {{26{1'b1}}, ~({Db, 29'b0}), 3'b111};
+assign c = db ? {{26{1'b1}}, ~({29'b0, Db}), 3'b111}
+              : {{26{1'b1}}, ~({Db, 29'b0}), 3'b111};
 
 parameter n = 116;
 three2add #(n) add(
@@ -55,4 +55,3 @@ assign fd[28:1] = r[27:0];
 assign fd[0] = ~zero & db;
 
 endmodule
-
