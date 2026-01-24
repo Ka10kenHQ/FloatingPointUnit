@@ -92,6 +92,7 @@ always_comb begin
         LOOKUP: begin
             xce = 1; tlu = 1; fbbdoe = 1;
             next_state = NEWTON1;
+        end
 
         NEWTON1: begin
             xadoe = 1; fbbdoe = 1;
@@ -140,13 +141,17 @@ always_comb begin
             next_state = SELECT_FD;
         end
 
-        SELECT_FD: next_state = ROUND1;
+        SELECT_FD: begin
+            next_state = ROUND1;
+        end
 
-        ROUND1:    next_state = ROUND2;
+        ROUND1: begin 
+            next_state = ROUND2;
+        end
     endcase
 end
 
-always @(posedge clk or negedge rst_n) begin
+always @(negedge clk or negedge rst_n) begin
     if (!rst_n) begin
         Dcnt <= 3'd0;
         x <= '0; A <= '0; Da <= '0; Db <= '0; E <= '0; Eb <= '0;
