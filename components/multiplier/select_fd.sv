@@ -5,7 +5,7 @@ module select_fd(
     input  [57:0]  Da,
     input  [57:0]  Db,
     input  [114:0] Eb,
-    input  [54:0]  E,
+    input  [57:0]  E,
     input          db,
 
     output [56:0]  fd
@@ -46,10 +46,10 @@ assign neg = sum[117];
 assign zero = (beta == 117'b0);
 
 assign r = neg ?
-        {1'b0, E}
+        {1'b0, E[57:3]}
         : db ?
-            (E + 1)
-            : {E[54:30], {29{1'b1}}} + 1;
+            (E[57:3] + 1)
+            : {E[57:33], {29{1'b1}}} + 1;
 
 assign fd[56:30] = r[55:29];
 assign fd[29] = (db == 1) ? r[28] : ~zero;

@@ -86,8 +86,52 @@ always @(uut.mul.sig.div_inst.fd_out) begin
     $display("Time=%0t | fd_out changed: %b", $time, uut.mul.sig.div_inst.fd_out);
 end
 
+// always @(uut.mul.sig.div_inst.cce) begin
+//     $display("Time=%0t | cce changed: %b", $time, uut.mul.sig.div_inst.cce);
+// end
+//
+// always @(uut.mul.sig.div_inst.sce) begin
+//     $display("Time=%0t | sce changed: %b", $time, uut.mul.sig.div_inst.sce);
+// end
+//
+// always @(uut.mul.sig.div_inst.c) begin
+//     $display("Time=%0t | c changed: %b", $time, uut.mul.sig.div_inst.c);
+// end
+//
+// always @(uut.mul.sig.div_inst.s) begin
+//     $display("Time=%0t | s changed: %b", $time, uut.mul.sig.div_inst.s);
+// end
+
 always @(uut.mul.sig.div_inst.fq) begin
     $display("Time=%0t | fq changed: %b", $time, uut.mul.sig.div_inst.fq);
+end
+
+always @(uut.mul.sig.div_inst.E) begin
+    $display("Time=%0t | E changed: %b", $time, uut.mul.sig.div_inst.E);
+end
+
+always @(uut.mul.sig.div_inst.Eb) begin
+    $display("Time=%0t | Eb changed: %b", $time, uut.mul.sig.div_inst.Eb);
+end
+
+always @(uut.mul.sig.div_inst.fd_out) begin
+    $display("Time=%0t | fd_out changed: %b", $time, uut.mul.sig.div_inst.fd_out);
+end
+
+always @(uut.mul.sig.div_inst.select_f.neg) begin
+    $display("Time=%0t | neg changed: %b", $time, uut.mul.sig.div_inst.select_f.neg);
+end
+
+always @(uut.mul.sig.div_inst.select_f.beta) begin
+    $display("Time=%0t | beta changed: %b", $time, uut.mul.sig.div_inst.select_f.beta);
+end
+
+always @(uut.mul.sig.div_inst.Da) begin
+    $display("Time=%0t | Da changed: %b", $time, uut.mul.sig.div_inst.Da);
+end
+
+always @(uut.mul.sig.div_inst.Db) begin
+    $display("Time=%0t | Db changed: %b", $time, uut.mul.sig.div_inst.Db);
 end
 
 always @(uut.mul.sig.div_inst.mul_out) begin
@@ -108,6 +152,14 @@ end
 
 always @(uut.mul.sig.div_inst.fb) begin
     $display("Time=%0t | fb changed: %b", $time, uut.mul.sig.div_inst.fb);
+end
+
+always @(uut.mul.sig.div_inst.look_up) begin
+    $display("Time=%0t | look_up changed: %b", $time, uut.mul.sig.div_inst.look_up);
+end
+
+always @(uut.mul.sig.div_inst.tlu) begin
+    $display("Time=%0t | tlu changed: %b", $time, uut.mul.sig.div_inst.tlu);
 end
 
 always @(uut.mul.sig.div_inst.fa_in) begin
