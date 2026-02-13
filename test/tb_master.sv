@@ -138,6 +138,10 @@ always @(uut.mul.sig.div_inst.mul_out) begin
     $display("Time=%0t | mul_out changed: %b", $time, uut.mul.sig.div_inst.mul_out);
 end
 
+// always @(uut.mul.sig.div_inst.mul_out_rev) begin
+//     $display("Time=%0t | mul_out_rev changed: %b", $time, uut.mul.sig.div_inst.mul_out_rev);
+// end
+
 always @(uut.mul.sig.div_inst.x) begin
     $display("Time=%0t | x changed: %b", $time, uut.mul.sig.div_inst.x);
 end
@@ -168,6 +172,14 @@ end
 
 always @(uut.mul.sig.div_inst.fb_in) begin
     $display("Time=%0t | fb_in changed: %b", $time, uut.mul.sig.div_inst.fb_in);
+end
+
+always @(uut.mul.sig.div_inst.fa_in_rev) begin
+    $display("Time=%0t | fa_in_rev changed: %b", $time, uut.mul.sig.div_inst.fa_in_rev);
+end
+
+always @(uut.mul.sig.div_inst.fb_in_rev) begin
+    $display("Time=%0t | fb_in_rev changed: %b", $time, uut.mul.sig.div_inst.fb_in_rev);
 end
 
 always @(fp_mul_out) begin
@@ -283,8 +295,8 @@ initial begin
 
 
     // Test Case 1: 4.0 / 2.0 and 4.0 - 2.0
-    fpa = {1'b0, 11'b10000000001, 52'b0000000000000000000000000000000000000000000000000000};
-    fpb = {1'b0, 11'b10000000000, 52'b0000000000000000000000000000000000000000000000000000};
+    fpa = {1'b0, 11'b10000000001, 52'b1000000000000000000000000000000000000000000000000000};
+    fpb = {1'b0, 11'b10000000000, 52'b1000000000000000000000000000000000000000000000000000};
     db = 1;
     normal = 1;
     sub = 0;

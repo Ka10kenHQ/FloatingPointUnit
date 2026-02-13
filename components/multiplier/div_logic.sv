@@ -9,7 +9,11 @@ module div_logic(
 );
 
 logic  [57:0] fa_in, fb_in;
+logic  [57:0] fa_in_rev, fb_in_rev;
+
 logic [115:0] mul_out;
+logic [115:0] mul_out_rev;
+
 logic [56:0] fd_out;
 
 logic or_out;
@@ -39,7 +43,7 @@ rom256X8 rom_inst (.addr(fb[51:44]), .data(rom_data));
 
 // multree_div mlt (.a(fa_in), .b(fb_in), .t(t), .s(s1));
 
-multree mlt (.a(fa_in), .b(fb_in), .out(mul_out));
+multree mlt (.a(fa_in_rev), .b(fb_in_rev), .out(mul_out_rev));
 
 // parameter m = 116;
 // add #(m) ad(
@@ -155,6 +159,8 @@ always_comb begin
     endcase
 end
 
+
+integer i;
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         Dcnt = 3'd0;
@@ -162,6 +168,12 @@ always @(posedge clk or negedge rst_n) begin
         fa_in = '0; fb_in = '0; look_up = '0;
         // c = '0; s = '0;
     end else begin
+
+        for (i = 0; i < 116; i = i + 1) begin
+            mul_out[i] = mul_out_rev[115- i];
+        end
+
+        mul_out = mul_out << 1;
 
         if (curr_state == LOOKUP) begin
             Dcnt = db ? 3'd3 : 3'd2;
@@ -196,7 +208,7 @@ always @(posedge clk or negedge rst_n) begin
         
         if (Ace) begin
             $display("Time=%0t | inside Ace: mul_out %b", $time, mul_out);
-            A = ~mul_out[115:58];
+            A = ~mul_out[115:58]; // [0:57]
         end
         
         if (Dce) begin
@@ -217,6 +229,11 @@ always @(posedge clk or negedge rst_n) begin
         if (curr_state == ROUND1) fq = fd_out;
             
         if (curr_state == ROUND2) fq = fd_out;
+
+        for (i = 57; i >= 0; i = i - 1) begin
+            fa_in_rev[57 - i] = fa_in[i];
+            fb_in_rev[57 - i] = fb_in[i];
+        end
     end
 end
 

@@ -46,7 +46,7 @@ assign neg = sum[117];
 assign zero = (beta == 117'b0);
 
 assign r = neg ?
-        {1'b0, E[57:3]}
+        {E[57:3], 1'b0}
         : db ?
             (E[57:3] + 1)
             : {E[57:33], {29{1'b1}}} + 1;
