@@ -9,10 +9,8 @@ module div_logic(
 );
 
 logic  [57:0] fa_in, fb_in;
-logic  [57:0] fa_in_rev, fb_in_rev;
 
 logic [115:0] mul_out;
-logic [115:0] mul_out_rev;
 
 logic [56:0] fd_out;
 
@@ -22,7 +20,6 @@ logic [7:0] rom_data;
 parameter n = 60;
 
 logic [115:0] t,s1;
-// logic [115:0] c,s;
 logic [3:0] curr_state, next_state;
 logic [3:0] Dcnt;
 logic [57:0] x, A, Da, Db;
@@ -34,24 +31,13 @@ logic faadoe, fbbdoe;
 logic Eadoe, Aadoe;
 logic xadoe, xbdoe;
 
-// logic cce, sce;
 logic Dce, Ebce, Ece;
 logic xce, Ace;
 logic tlu;
 
 rom256X8 rom_inst (.addr(fb[51:44]), .data(rom_data));
 
-// multree_div mlt (.a(fa_in), .b(fb_in), .t(t), .s(s1));
-
-multree mlt (.a(fa_in_rev), .b(fb_in_rev), .out(mul_out_rev));
-
-// parameter m = 116;
-// add #(m) ad(
-//   .a(c),
-//   .b(s),
-//   .c_in(1'b0),
-//   .sum(mul_out)
-// );
+multree mlt (.a(fa_in), .b(fb_in), .out(mul_out));
 
 ortree #(n) or_inst (.x(mul_out[59:0]), .or_out(or_out));
 
@@ -107,12 +93,10 @@ always_comb begin
 
         NEWTON2: begin 
             Ace = 1;
-            // sce = 1; cce = 1;
             next_state = NEWTON3;
         end
 
         NEWTON3: begin
-            // cce = 1; sce = 1;
             Aadoe = 1; xbdoe = 1;
             next_state = NEWTON4;
         end
@@ -127,7 +111,6 @@ always_comb begin
 
         QUOT1: begin
             faadoe = 1; xbdoe = 1;
-            // cce = 1; sce = 1;
             next_state = QUOT2;
         end
 
@@ -139,7 +122,6 @@ always_comb begin
 
         QUOT3: begin
             fbbdoe = 1; Eadoe = 1;
-            // sce = 1; cce = 1;
             next_state = QUOT4;
         end
 
@@ -166,14 +148,7 @@ always @(posedge clk or negedge rst_n) begin
         Dcnt = 3'd0;
         x = '0; A = '0; Da = '0; Db = '0; E = '0; Eb = '0;
         fa_in = '0; fb_in = '0; look_up = '0;
-        // c = '0; s = '0;
     end else begin
-
-        for (i = 0; i < 116; i = i + 1) begin
-            mul_out[i] = mul_out_rev[115- i];
-        end
-
-        mul_out = mul_out << 1;
 
         if (curr_state == LOOKUP) begin
             Dcnt = db ? 3'd3 : 3'd2;
@@ -182,11 +157,6 @@ always @(posedge clk or negedge rst_n) begin
         else if (curr_state == NEWTON1) begin
             Dcnt = Dcnt - 1;
         end
-
-        // if (sce && cce) begin
-        //     c = t;
-        //     s = s1;
-        // end
 
         if (faadoe) fa_in = {fa, 5'b0};
         if (fbbdoe) fb_in = {fb, 5'b0};
@@ -203,12 +173,12 @@ always @(posedge clk or negedge rst_n) begin
                 x = {2'b01, look_up, 48'b0};
             end
             else 
-                x = mul_out[115:58]; 
+                x = mul_out[114:57]; 
         end
         
         if (Ace) begin
             $display("Time=%0t | inside Ace: mul_out %b", $time, mul_out);
-            A = ~mul_out[115:58]; // [0:57]
+            A = ~mul_out[114:57]; // [0:57]
         end
         
         if (Dce) begin
@@ -216,7 +186,7 @@ always @(posedge clk or negedge rst_n) begin
             Db = {fb, 5'b0};
         end
         
-        if (Ece) E = {mul_out[115:90], (mul_out[89:61] & {29{db}}) , 3'b0};
+        if (Ece) E = {mul_out[114:89], (mul_out[88:60] & {29{db}})};
             
         if (Ebce) begin
             Eb = mul_out[115:0];
@@ -229,11 +199,6 @@ always @(posedge clk or negedge rst_n) begin
         if (curr_state == ROUND1) fq = fd_out;
             
         if (curr_state == ROUND2) fq = fd_out;
-
-        for (i = 57; i >= 0; i = i - 1) begin
-            fa_in_rev[57 - i] = fa_in[i];
-            fb_in_rev[57 - i] = fb_in[i];
-        end
     end
 end
 
