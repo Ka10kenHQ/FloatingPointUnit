@@ -142,7 +142,6 @@ always_comb begin
 end
 
 
-integer i;
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         Dcnt = 3'd0;
