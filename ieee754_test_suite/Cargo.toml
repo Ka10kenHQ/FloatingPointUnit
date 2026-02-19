@@ -1,5 +1,5 @@
 [package]
-name = "test_gen"
+name = "ieee754_test_suite"
 version = "0.1.0"
 edition = "2024"
 

@@ -1,6 +1,6 @@
 use std::io;
 
-use test_gen::{
+use ieee754_test_suite::{
     // file_utils::{factorize_denormal, factorize_normal},
     lookup::lookup_table,
 };

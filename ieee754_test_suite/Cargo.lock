@@ -52,6 +52,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9007da9cacbd3e6343da136e98b0d2df013f553d35bdec8b518f07bea768e19c"
 
 [[package]]
+name = "ieee754_test_suite"
+version = "0.1.0"
+dependencies = [
+ "dirs",
+ "ieee754",
+]
+
+[[package]]
 name = "libc"
 version = "0.2.171"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -105,14 +113,6 @@ dependencies = [
  "proc-macro2",
  "quote",
  "unicode-ident",
-]
-
-[[package]]
-name = "test_gen"
-version = "0.1.0"
-dependencies = [
- "dirs",
- "ieee754",
 ]
 
 [[package]]
