@@ -1,6 +1,6 @@
 `include "./../master.sv"
 
-module tb_mul_64;
+module tb_div_64;
 
 reg clk, rst_n;
 reg [63:0] fpa, fpb;
@@ -56,11 +56,11 @@ reg [1050:0] line;
 
 initial begin
 
-    // fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f64.txt", "r");
-    // fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/mul_div_output_results_64.txt", "w");
-    
-    fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f32.txt", "r");
-    fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/mul_div_output_results_32.txt", "w");
+    fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f64.txt", "r");
+    fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/mul_div_output_results_64_div.txt", "w");
+
+    // fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f64_denormal.txt", "r");
+    // fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/add_sub_output_results_denormal.txt", "w");
 
 
     if (fd_in == 0 || fd_out == 0) begin
@@ -70,17 +70,19 @@ initial begin
 
     $monitor("Adder Details: sp_out = %b, ep_out = %b, f_out = %b", sp_add_out, ep_add_out, f_add_out);
 
+    #5;
+
     while (!$feof(fd_in)) begin
         $fgets(line, fd_in); 
         $display("Line read: %s", line);
         $sscanf(line, "%b;%b", fpa, fpb);
 
-        db = 0;
+        db = 1;
         normal = 1;
         sub = 0;
-        fdiv = 0;
+        fdiv = 1;
         RM = 2'b01;
-        #1;
+        #10;
 
          $fdisplay(fd_out, "%b", fp_mul_out);
     end
