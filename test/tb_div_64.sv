@@ -68,7 +68,7 @@ initial begin
         $finish;
     end
 
-    $monitor("Adder Details: sp_out = %b, ep_out = %b, f_out = %b", sp_add_out, ep_add_out, f_add_out);
+    $monitor("Adder Details: sp_out = %b, ep_out = %b, f_out = %b", sp_mul_out, ep_mul_out, f_mul_out);
 
     #5;
 
@@ -82,9 +82,12 @@ initial begin
         sub = 0;
         fdiv = 1;
         RM = 2'b01;
-        #10;
+        #5;
 
-         $fdisplay(fd_out, "%b", fp_mul_out);
+        wait (uut.mul.sig.div_inst.curr_state == 4'd12);
+
+        $fdisplay(fd_out, "%b", fp_mul_out);
+
     end
 end
 
