@@ -60,7 +60,7 @@ initial begin
     fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/mul_div_output_results_64_div.txt", "w");
 
     // fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f64_denormal.txt", "r");
-    // fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/add_sub_output_results_denormal.txt", "w");
+    // fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/mul_div_output_results_64_div_denormal.txt", "w");
 
 
     if (fd_in == 0 || fd_out == 0) begin
@@ -68,13 +68,13 @@ initial begin
         $finish;
     end
 
-    $monitor("Adder Details: sp_out = %b, ep_out = %b, f_out = %b", sp_mul_out, ep_mul_out, f_mul_out);
+    $monitor("Time=%0t | Adder Details: sp_out = %b, ep_out = %b, f_out = %b", $time, sp_mul_out, ep_mul_out, f_mul_out);
 
     #5;
 
     while (!$feof(fd_in)) begin
         $fgets(line, fd_in); 
-        $display("Line read: %s", line);
+        $display("Time = %0t | Line read: %s", $time, line);
         $sscanf(line, "%b;%b", fpa, fpb);
 
         db = 1;
@@ -82,12 +82,17 @@ initial begin
         sub = 0;
         fdiv = 1;
         RM = 2'b01;
-        #5;
+        #211;
 
-        wait (uut.mul.sig.div_inst.curr_state == 4'd12);
+        $display("Time=%0t | STATE: %b", $time, uut.mul.sig.div_inst.curr_state);
+
+        $display("Time=%0t | final result: %b", $time, fp_mul_out);
 
         $fdisplay(fd_out, "%b", fp_mul_out);
 
+        rst_n = 0;
+        #20;
+        rst_n = 1;
     end
 end
 
