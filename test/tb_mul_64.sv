@@ -56,11 +56,11 @@ reg [1050:0] line;
 
 initial begin
 
-    // fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f64.txt", "r");
-    // fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/mul_div_output_results_64.txt", "w");
+    fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f64.txt", "r");
+    fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/mul_div_output_results_64.txt", "w");
     
-    fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f32.txt", "r");
-    fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/mul_div_output_results_32.txt", "w");
+    // fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f64_denormal.txt", "r");
+    // fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/mul_div_output_results_64_denormal.txt", "w");
 
 
     if (fd_in == 0 || fd_out == 0) begin
@@ -75,11 +75,11 @@ initial begin
         $display("Line read: %s", line);
         $sscanf(line, "%b;%b", fpa, fpb);
 
-        db = 0;
+        db = 1;
         normal = 1;
         sub = 0;
         fdiv = 0;
-        RM = 2'b10;
+        RM = 2'b01;
         #1;
 
          $fdisplay(fd_out, "%b", fp_mul_out);

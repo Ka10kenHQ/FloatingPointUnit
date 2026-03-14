@@ -10,3 +10,13 @@ fn test_mul_f32() {
         decompose_f32,
     );
 }
+
+#[test]
+fn test_mul_f32_denormal() {
+    common::run_f32_test(
+        "mul_div_output_results_32_denormal.txt",
+        "decomposed_f32_denormal.txt",
+        |a, b| a * b,
+        decompose_f32,
+    );
+}
