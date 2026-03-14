@@ -18,7 +18,7 @@ wire [55:0] r;
 wire neg, zero;
 
 assign a = {1'b0, Da, 56'b0, 1'b1};
-assign b = {1'b1, ~Eb};
+assign b = {1'b1, ~Eb[114:0]};
 assign c = db ? {{26{1'b1}}, ~({29'b0, Db}), 3'b111}
               : {{26{1'b1}}, ~({Db, 29'b0}), 3'b111};
 
@@ -42,7 +42,7 @@ add #(m) ad(
 );
 
 assign beta = sum[116:0];
-assign neg = sum[117];
+assign neg = sum[116];
 assign zero = (beta == 117'b0);
 
 assign r = neg ?
@@ -52,7 +52,7 @@ assign r = neg ?
             : {E[57:32], {29{1'b1}}} + 1;
 
 assign fd[56:30] = r[55:29];
-assign fd[29] = (db == 1) ? r[28] : ~zero;
+assign fd[29] = db ? r[28] : ~zero;
 assign fd[28:1] = r[27:0];
 assign fd[0] = ~zero & db;
 

@@ -57,10 +57,10 @@ reg [1050:0] line;
 initial begin
 
     // fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f32.txt", "r");
-    // fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/mul_div_output_results_32_div_down.txt", "w");
+    // fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/mul_div_output_results_32_div.txt", "w");
 
     fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f32_denormal.txt", "r");
-    fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/mul_div_output_results_32_div_denormal_down.txt", "w");
+    fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/mul_div_output_results_32_div_denormal.txt", "w");
 
 
     if (fd_in == 0 || fd_out == 0) begin
@@ -81,7 +81,7 @@ initial begin
         normal = 1;
         sub = 0;
         fdiv = 1;
-        RM = 2'b11;
+        RM = 2'b01;
         #211;
 
         $display("Time=%0t | STATE: %b", $time, uut.mul.sig.div_inst.curr_state);

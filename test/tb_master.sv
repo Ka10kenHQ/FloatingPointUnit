@@ -109,6 +109,10 @@ always @(uut.mul.sig.div_inst.E) begin
     $display("Time=%0t | E changed: %b", $time, uut.mul.sig.div_inst.E);
 end
 
+always @(uut.mul.sig.div_inst.select_f.E) begin
+    $display("Time=%0t | SELECT_FD E changed: %b", $time, uut.mul.sig.div_inst.select_f.E);
+end
+
 always @(uut.mul.sig.div_inst.Eb) begin
     $display("Time=%0t | Eb changed: %b", $time, uut.mul.sig.div_inst.Eb);
 end
@@ -179,13 +183,13 @@ end
 
 initial begin
 
-    fpa = 64'b0100000001010001010000000000000000000000000000000000000000000000;
-    fpb = 64'b0100000011001000000111001101011011100110001100011111100010100001;
+    fpa = 64'b0011111111110000000000000000000000000000000000000000000000000000;
+    fpb = 64'b0100000000001000000000000000000000000000000000000000000000000000;
     db = 1;
     normal = 1;
     sub = 0;
     fdiv = 1;
-    RM = 2'b10;
+    RM = 2'b01;
     #210;
 
 
