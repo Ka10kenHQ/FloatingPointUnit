@@ -34,7 +34,7 @@ assign h[52] = ~e_z;
 assign h[51:0] = db ? fp[51:0] : {fp[54:32], 29'b0};
 assign temp = {~e_z, h[51:0], {11{1'b1}}};
 assign te = {~e_z, h[51:0]};
-assign fz = (52'b0 == h);
+assign fz = (52'b0 == h[51:0]);
 assign f =  normal ? temp1 : te; 
 assign lz = lz_out[5:0];
 

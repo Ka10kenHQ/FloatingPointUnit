@@ -1,3 +1,4 @@
+use core::f64;
 use std::io;
 
 use ieee754_test_suite::{
@@ -25,10 +26,10 @@ fn main() -> io::Result<()> {
 }
 
 fn something() {
-    let a: f64 = 69.0_f64;
-    let b: f64 = 12345.6789_f64;
+    let a: f64 = f64::INFINITY;
+    let b: f64 = f64::NAN;
 
-    let (s, e, f) = decompose_f64(a / b);
+    let (s, e, f) = decompose_f64(b);
 
     println!("{:0b}, {:11b}, {:052b}", s, e, f)
 }
