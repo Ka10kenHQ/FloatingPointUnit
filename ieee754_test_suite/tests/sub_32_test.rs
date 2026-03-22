@@ -8,6 +8,7 @@ fn test_sub_f32() {
         "decomposed_f32.txt",
         |a, b| a - b,
         decompose_f32,
+        false,
     );
 }
 
@@ -18,5 +19,6 @@ fn test_sub_f32_denormal() {
         "decomposed_f32_denormal.txt",
         |a, b| a - b,
         decompose_f32,
+        false,
     );
 }

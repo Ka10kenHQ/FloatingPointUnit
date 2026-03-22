@@ -68,19 +68,6 @@ pub fn normal_numbers() -> Vec<(f32, f64)> {
     ]
 }
 
-/// Returns a zero value as a floating point pair (f32, f64)
-pub fn zero() -> Vec<(f32, f64)> {
-    vec![(0.0_f32, 0.0_f64)]
-}
-
-/// Returns infinity values as floating point pairs (f32, f64)
-pub fn infinity() -> Vec<(f32, f64)> {
-    vec![
-        (f32::INFINITY, f64::INFINITY),
-        (-f32::INFINITY, -f64::INFINITY),
-    ]
-}
-
 /// Returns denormal floating point number pairs (f32, f64)
 pub fn denormal_numbers() -> Vec<(f32, f64)> {
     vec![
@@ -127,4 +114,21 @@ pub fn min_max_values() -> Vec<(f32, f64)> {
         (f32::MIN, f64::MIN),
         (-f32::MIN, -f64::MIN),
     ]
+}
+
+/// Returns a zero value as a floating point pair (f32, f64)
+pub fn zero() -> Vec<(f32, f64)> {
+    vec![(0.0_f32, 0.0_f64)]
+}
+
+/// Returns infinity values as floating point pairs (f32, f64)
+pub fn infinity() -> Vec<(f32, f64)> {
+    vec![
+        (f32::INFINITY, f64::INFINITY),
+        (-f32::INFINITY, -f64::INFINITY),
+    ]
+}
+
+pub fn nan_values() -> Vec<(f32, f64)> {
+    vec![(f32::NAN, f64::NAN)]
 }
