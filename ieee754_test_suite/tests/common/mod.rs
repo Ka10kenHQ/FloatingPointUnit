@@ -65,13 +65,14 @@ pub fn run_f32_test(
         assert_eq!(
             parsed_computed,
             expected_output,
-            "Mismatch at line {}:\nComputed: {}\nExpected: {}\n inputs: a = {}, b = {}, result = {}",
+            "Mismatch at line {}:\nComputed: {}\nExpected: {}\n inputs: a = {}, b = {}, result = {} \n is_edge={}",
             i + 1,
             parsed_computed,
             expected_output,
             a,
             b,
-            result
+            result,
+            is_edge
         );
     }
 }
@@ -123,13 +124,14 @@ pub fn run_f64_test(
         assert_eq!(
             parsed_computed,
             expected_output,
-            "Mismatch at line {}:\nComputed: {}\nExpected: {}\n inputs: a = {}, b = {}, result = {}",
+            "Mismatch at line {}:\nComputed: {}\nExpected: {}\n inputs: a = {}, b = {}, result = {}\n is_edge={}",
             i + 1,
             parsed_computed,
             expected_output,
             a,
             b,
-            result
+            result,
+            is_edge
         );
     }
 }
