@@ -1,6 +1,6 @@
 `include "./../master.sv"
 
-module tb_div_64_edge;
+module tb_mul_32_edge;
 
 reg clk, rst_n;
 reg [63:0] fpa, fpb;
@@ -55,9 +55,9 @@ reg [1050:0] line;
 
 
 initial begin
-    fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f64_edge.txt", "r");
-    fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/mul_div_output_results_64_div_edge.txt", "w");
 
+    fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f32_edge.txt", "r");
+    fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/mul_div_output_results_32_edge.txt", "w");
 
     if (fd_in == 0 || fd_out == 0) begin
         $display("Error opening file.");
@@ -73,10 +73,10 @@ initial begin
         $display("Time = %0t | Line read: %s", $time, line);
         $sscanf(line, "%b;%b", fpa, fpb);
 
-        db = 1;
+        db = 0;
         normal = 1;
         sub = 0;
-        fdiv = 1;
+        fdiv = 0;
         RM = 2'b01;
         #211;
 

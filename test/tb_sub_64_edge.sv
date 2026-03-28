@@ -1,6 +1,6 @@
 `include "./../master.sv"
 
-module tb_div_64_edge;
+module tb_sub_64_edge;
 
 reg clk, rst_n;
 reg [63:0] fpa, fpb;
@@ -55,9 +55,9 @@ reg [1050:0] line;
 
 
 initial begin
-    fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f64_edge.txt", "r");
-    fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/mul_div_output_results_64_div_edge.txt", "w");
 
+    fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f64_edge.txt", "r");
+    fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/add_sub_output_results_64_sub_edge.txt", "w");
 
     if (fd_in == 0 || fd_out == 0) begin
         $display("Error opening file.");
@@ -75,7 +75,7 @@ initial begin
 
         db = 1;
         normal = 1;
-        sub = 0;
+        sub = 1;
         fdiv = 1;
         RM = 2'b01;
         #211;
@@ -84,7 +84,7 @@ initial begin
 
         $display("Time=%0t | final result: %b", $time, fp_mul_out);
 
-        $fdisplay(fd_out, "%b", fp_mul_out);
+        $fdisplay(fd_out, "%b", fp_add_out);
 
         rst_n = 0;
         #20;
@@ -94,4 +94,5 @@ end
 
 
 endmodule
+
 

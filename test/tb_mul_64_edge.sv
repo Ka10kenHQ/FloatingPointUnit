@@ -1,6 +1,6 @@
 `include "./../master.sv"
 
-module tb_div_64_edge;
+module tb_mul_64_edge;
 
 reg clk, rst_n;
 reg [63:0] fpa, fpb;
@@ -56,7 +56,7 @@ reg [1050:0] line;
 
 initial begin
     fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f64_edge.txt", "r");
-    fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/mul_div_output_results_64_div_edge.txt", "w");
+    fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/mul_div_output_results_64_edge.txt", "w");
 
 
     if (fd_in == 0 || fd_out == 0) begin
@@ -76,7 +76,7 @@ initial begin
         db = 1;
         normal = 1;
         sub = 0;
-        fdiv = 1;
+        fdiv = 0;
         RM = 2'b01;
         #211;
 
