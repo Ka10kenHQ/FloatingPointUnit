@@ -14,6 +14,7 @@ pub fn run_f32_test(
     decomposed_file: &str,
     operation: impl Fn(f32, f32) -> f32,
     decomposer: impl Fn(f32) -> (u8, u8, u32),
+    is_edge: bool,
 ) {
     let computed_path = test_data_path(computed_file);
     let decomposed_path = PathBuf::from(decomposed_file);
@@ -48,23 +49,30 @@ pub fn run_f32_test(
 
         let (s_exp, e_exp, f_exp) = decomposer(result);
 
-        let expected_output = format!(
-            "{:0b}{:08b}{:023b}{:0b}{:08b}{:023b}",
-            s_exp, e_exp, f_exp, s_exp, e_exp, f_exp
-        );
+        let expected_output = match is_edge {
+            false => format!(
+                "{:0b}{:08b}{:023b}{:0b}{:08b}{:023b}",
+                s_exp, e_exp, f_exp, s_exp, e_exp, f_exp
+            ),
+            true => format!("{:08b}{:023b}{:08b}{:023b}", e_exp, f_exp, e_exp, f_exp),
+        };
 
-        let parsed_computed = format!("{}{}", &computed_line[0..32], &computed_line[32..64]);
+        let parsed_computed = match is_edge {
+            false => format!("{}{}", &computed_line[0..32], &computed_line[32..64]),
+            true => format!("{}{}", &computed_line[1..32], &computed_line[33..64]),
+        };
 
         assert_eq!(
             parsed_computed,
             expected_output,
-            "Mismatch at line {}:\nComputed: {}\nExpected: {}\n inputs: a = {}, b = {}, result = {}",
+            "Mismatch at line {}:\nComputed: {}\nExpected: {}\n inputs: a = {}, b = {}, result = {} \n is_edge={}",
             i + 1,
             parsed_computed,
             expected_output,
             a,
             b,
-            result
+            result,
+            is_edge
         );
     }
 }
@@ -75,6 +83,7 @@ pub fn run_f64_test(
     decomposed_file: &str,
     operation: impl Fn(f64, f64) -> f64,
     decomposer: impl Fn(f64) -> (u8, u16, u64),
+    is_edge: bool,
 ) {
     let computed_path = test_data_path(computed_file);
     let decomposed_path = PathBuf::from(decomposed_file);
@@ -102,18 +111,27 @@ pub fn run_f64_test(
 
         let result = operation(a, b);
         let (s_exp, e_exp, f_exp) = decomposer(result);
-        let expected_output = format!("{:b}{:011b}{:052b}", s_exp, e_exp, f_exp);
+        let expected_output = match is_edge {
+            false => format!("{:b}{:011b}{:052b}", s_exp, e_exp, f_exp),
+            true => format!("{:011b}{:052b}", e_exp, f_exp),
+        };
+
+        let parsed_computed = match is_edge {
+            false => format!("{}", &computed_line),
+            true => format!("{}", &computed_line[1..64]),
+        };
 
         assert_eq!(
-            computed_line,
+            parsed_computed,
             expected_output,
-            "Mismatch at line {}:\nComputed: {}\nExpected: {}\n inputs: a = {}, b = {}, result = {}",
+            "Mismatch at line {}:\nComputed: {}\nExpected: {}\n inputs: a = {}, b = {}, result = {}\n is_edge={}",
             i + 1,
-            computed_line,
+            parsed_computed,
             expected_output,
             a,
             b,
-            result
+            result,
+            is_edge
         );
     }
 }

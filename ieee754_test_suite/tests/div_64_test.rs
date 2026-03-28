@@ -8,6 +8,7 @@ fn test_div_f64() {
         "decomposed_f64.txt",
         |a, b| a / b,
         decompose_f64,
+        false,
     );
 }
 
@@ -18,5 +19,6 @@ fn test_div_denormal_f64() {
         "decomposed_f64_denormal.txt",
         |a, b| a / b,
         decompose_f64,
+        false,
     );
 }

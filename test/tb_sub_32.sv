@@ -56,11 +56,11 @@ reg [1050:0] line;
 
 initial begin
 
-    fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f32.txt", "r");
-    fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/add_sub_output_results_sub_32.txt", "w");
+    // fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f32.txt", "r");
+    // fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/add_sub_output_results_sub_32.txt", "w");
     
-    // fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f32_denormal.txt", "r");
-    // fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/add_sub_output_results_sub_32_denormal.txt", "w");
+    fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f32_denormal.txt", "r");
+    fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/add_sub_output_results_sub_32_denormal.txt", "w");
 
 
     if (fd_in == 0 || fd_out == 0) begin
@@ -76,7 +76,7 @@ initial begin
         $sscanf(line, "%b;%b", fpa, fpb);
 
         db = 0;
-        normal = 1;
+        normal = 0;
         sub = 1;
         fdiv = 0;
         RM = 2'b01;
