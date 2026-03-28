@@ -1,0 +1,13 @@
+use ieee754_test_suite::fp_decompose::decompose_f64;
+mod common;
+
+#[test]
+fn test_add_edge_f64() {
+    common::run_f64_test(
+        "add_sub_output_results_64_sub_edge.txt",
+        "decomposed_f64_edge.txt",
+        |a, b| a - b,
+        decompose_f64,
+        true,
+    );
+}
