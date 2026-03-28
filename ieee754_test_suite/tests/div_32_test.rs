@@ -12,13 +12,13 @@ fn test_div_f32() {
     );
 }
 
-// #[test]
-// fn test_div_denormal_f32() {
-//     common::run_f32_test(
-//         "mul_div_output_results_32_div_denormal.txt",
-//         "decomposed_f32_denormal.txt",
-//         |a, b| a / b,
-//         decompose_f32,
-//         false,
-//     );
-// }
+#[test]
+fn test_div_denormal_f32() {
+    common::run_f32_test(
+        "mul_div_output_results_32_div_denormal.txt",
+        "decomposed_f32_denormal.txt",
+        |a, b| a / b,
+        decompose_f32,
+        false,
+    );
+}
