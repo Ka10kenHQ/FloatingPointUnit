@@ -1,7 +1,7 @@
 module specmd(
     input [52:0] nan,
-    input [3:0] fla,
-    input [3:0] flb,
+    input [3:0] fla, // [Zeroa, INFa, SNANa, NANa]
+    input [3:0] flb, // [Zerob, INFb, SNbNb, NbNb]
     input fdiv,
 
     output [57:0] flq
@@ -15,8 +15,8 @@ wire DBZ;
 
 assign DBZ = fdiv & flb[3] & ~(fla[3] | fla[2] | fla[1] | fla[0]);
 
-assign INV = fdiv ? ((fla[3] & flb[3]) | (fla[2] & flb[2]) | (fla[1] & flb[1])) :
-                    ((fla[2] & flb[3]) | (fla[3] & flb[2]) | (fla[1] | flb[1]));
+assign INV = fdiv ? ((fla[3] & flb[3]) | (fla[2] & flb[2]) | (fla[1] | flb[1]))
+                  : ((fla[2] & flb[3]) | (fla[3] & flb[2]) | (fla[1] | flb[1]));
 
 assign NANq = INV | (fla[0] | flb[0]);
 

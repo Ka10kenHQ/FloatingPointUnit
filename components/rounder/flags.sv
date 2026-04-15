@@ -34,9 +34,8 @@ add #(n) ad(
 assign lz = lz_out[5:0];
 assign TINY = sum[12];
 
-assign OVF1 = (fr[56] & (er >= emax)) | 
-              (fr[55] & (er > emax)) | 
-              (fr[54] & (er > emax + 1));
+assign OVF1 = (fr[56] & (er == emax))
+              | (~er[12] & ((er[11] | er[10]) | (~db & (er[9] | er[8] | er[7]))));
 
 endmodule
 

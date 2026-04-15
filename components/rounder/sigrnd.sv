@@ -32,7 +32,7 @@ roundingdecision rdc(
 assign temp = db ? (f1[54:2] + 1) : ({f1[54:31], {29{1'b1}}} + 1'b1);
 
 // does not chop for single precision added mux
-assign w1 = db ? {1'b0, f1[54:2]} : {1'b0, f1[54:30] ,  28'b0};
+assign w1 = db ? {1'b0, f1[54:2]} : {1'b0, f1[54:30], 28'b0};
 assign f2 = inc ? temp : w1;
 
 endmodule

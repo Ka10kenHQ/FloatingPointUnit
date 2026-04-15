@@ -9,7 +9,7 @@ module nanselect(
 );
 
 assign snan = nana == 1 ? sa : sb;
-assign fnan = nana == 1 ? ha : hb;
+assign fnan = nana == 1 ? {1'b1, ha[50:0]} : {1'b1, hb[50:0]};
 
 endmodule
 

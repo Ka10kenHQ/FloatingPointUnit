@@ -138,16 +138,17 @@ always_comb begin
         ROUND1: begin 
             next_state = ROUND2;
         end
+        ROUND2: begin
+        end
     endcase
 end
 
 
-integer i;
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         Dcnt = 3'd0;
         x = '0; A = '0; Da = '0; Db = '0; E = '0; Eb = '0;
-        fa_in = '0; fb_in = '0; look_up = '0;
+        fa_in = '0; fb_in = '0; look_up = '0; fd_out = '0;
     end else begin
 
         if (curr_state == LOOKUP) begin
@@ -198,7 +199,10 @@ always @(posedge clk or negedge rst_n) begin
 
         if (curr_state == ROUND1) fq = fd_out;
             
-        if (curr_state == ROUND2) fq = fd_out;
+        if (curr_state == ROUND2) begin
+            fq = fd_out;
+            $display("Time=%0t | inside ROUND2", $time);
+        end
     end
 end
 
