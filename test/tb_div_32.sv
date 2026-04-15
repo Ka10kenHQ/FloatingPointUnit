@@ -59,8 +59,8 @@ initial begin
     // fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f32.txt", "r");
     // fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/mul_div_output_results_32_div.txt", "w");
 
-    fd_in = $fopen("/home/Zura/FloatingPointUnit/ieee754_test_suite/decomposed_f32_denormal.txt", "r");
-    fd_out = $fopen("/home/Zura/FloatingPointUnit/test/mul_div_output_results_32_div_denormal.txt", "w");
+    fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f32_denormal.txt", "r");
+    fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/mul_div_output_results_32_div_denormal.txt", "w");
 
 
     if (fd_in == 0 || fd_out == 0) begin

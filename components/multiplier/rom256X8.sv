@@ -6,7 +6,7 @@ module rom256X8(
 reg [15:0] rom [255:0];
 
 initial begin
-    $readmemb("/home/Zura/FloatingPointUnit/ieee754_test_suite/lookup_table.txt", rom);
+    $readmemb("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/lookup_table.txt", rom);
 end
 
 assign data = rom[addr][14:7];

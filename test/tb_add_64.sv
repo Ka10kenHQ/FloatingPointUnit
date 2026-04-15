@@ -56,8 +56,8 @@ reg [1050:0] line;
 
 initial begin
 
-    fd_in = $fopen("/home/Zura/FloatingPointUnit/ieee754_test_suite/decomposed_f64.txt", "r");
-    fd_out = $fopen("/home/Zura/FloatingPointUnit/test/add_sub_output_results.txt", "w");
+    fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f64.txt", "r");
+    fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/add_sub_output_results.txt", "w");
 
     //fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f64_denormal.txt", "r");
     //fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/add_sub_output_results_denormal.txt", "w");
