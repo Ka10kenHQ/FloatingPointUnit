@@ -78,7 +78,7 @@ initial begin
         $sscanf(line, "%b;%b", fpa, fpb);
 
         db = 0;
-        normal = 0;
+        normal = 1;
         sub = 0;
         fdiv = 1;
         RM = 2'b01;
