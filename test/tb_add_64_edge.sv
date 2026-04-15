@@ -56,8 +56,8 @@ reg [1050:0] line;
 
 initial begin
 
-    fd_in = $fopen("/home/achir/dev/thesis/FloatingPointUnit/ieee754_test_suite/decomposed_f64_edge.txt", "r");
-    fd_out = $fopen("/home/achir/dev/thesis/FloatingPointUnit/test/add_sub_output_results_64_edge.txt", "w");
+    fd_in = $fopen("/home/Zura/FloatingPointUnit/ieee754_test_suite/decomposed_f64_edge.txt", "r");
+    fd_out = $fopen("/home/Zura/FloatingPointUnit/test/add_sub_output_results_64_edge.txt", "w");
 
     if (fd_in == 0 || fd_out == 0) begin
         $display("Error opening file.");
@@ -74,7 +74,7 @@ initial begin
         $sscanf(line, "%b;%b", fpa, fpb);
 
         db = 1;
-        normal = 1;
+        normal = 0;
         sub = 0;
         fdiv = 1;
         RM = 2'b01;
