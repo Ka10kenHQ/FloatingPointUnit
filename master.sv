@@ -107,7 +107,7 @@ assign er = md ? eq : {es[10], es[10], es[10:0]};
 assign fr = md ? fq : fs;
 assign flr = md ? flq : fls;
 
-rounder rnd_add(
+rounder rnd(
     .db(db),
     .s(s),
     .er(er),
