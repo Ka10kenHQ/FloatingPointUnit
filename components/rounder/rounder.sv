@@ -9,11 +9,7 @@ module rounder(
     input [1:0] RM,
 
     output [4:0] IEEEp,
-    output [63:0] fp,
-    // TODO: remove below outputs after testing is done
-    output sp_out,
-    output [10:0] ep_out,
-    output [51:0] f_out
+    output [63:0] fp
 );
 
 wire [127:0] fn;
@@ -114,9 +110,6 @@ specfprnd specpnd(
     .INV(flr[1]),
     .DBZ(flr[0]),
     .fp_out(fp),
-    .sp_out(sp_out),
-    .ep_out(ep_out),
-    .f_out(f_out),
     .IEEEp(IEEEp)
 );
 

@@ -16,11 +16,6 @@ module specfprnd(
     input db,
 
     output [63:0] fp_out,
-    
-    // TODO: remove after the testing is done
-    output sp_out,
-    output [10:0] ep_out,
-    output [51:0] f_out,
     output [4:0] IEEEp
 );
 
@@ -55,10 +50,6 @@ rndexceptions rndexep(
     .IEEEp(IEEEp)
 );
 
-
-assign sp_out = sp;
-assign ep_out = ep;
-assign f_out = fp;
 assign fp_out = db ? {sp, ep, fp[51:0]} : {sp, ep[7:0], fp[51:29], sp, ep[7:0], fp[51:29]};
 
 

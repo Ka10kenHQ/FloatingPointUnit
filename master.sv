@@ -9,22 +9,14 @@ module master  (
     input [63:0] fpa,
     input [63:0] fpb,
     input db,
+    input md,
     input normal,
     input sub,
     input fdiv,
     input [1:0] RM,
 
-    output [63:0] fp_mul_out,
-    output [4:0] IEEp_mul,
-    output sp_mul_out,
-    output [10:0] ep_mul_out,
-    output [51:0] f_mul_out,
-
-    output [63:0] fp_add_out,
-    output [4:0] IEEp_add,
-    output sp_add_out,
-    output [10:0] ep_add_out,
-    output [51:0] f_add_out
+    output [63:0] fp,
+    output [4:0] IEEEp
 );
 
 wire [5:0]  lza, lzb;
@@ -105,37 +97,27 @@ muldiv mul(
 wire OVFen = 1'b0;
 wire UNFen = 1'b0;
 
+wire s;
+wire [12:0] er;
+wire [56:0] fr;
+wire [57:0] flr;
+
+assign s = md ? sq : ss;
+assign er = md ? eq : {es[10], es[10], es[10:0]};
+assign fr = md ? fq : fs;
+assign flr = md ? flq : fls;
+
 rounder rnd_add(
     .db(db),
-    .s(ss),
-    .er({es[10], es[10], es[10:0]}),
-    .fr(fs),
+    .s(s),
+    .er(er),
+    .fr(fr),
     .OVFen(OVFen),
     .UNFen(UNFen),
-    .flr(fls),
+    .flr(flr),
     .RM(RM),
-    .IEEEp(IEEp_add),
-    .fp(fp_add_out),
-    .sp_out(sp_add_out),
-    .ep_out(ep_add_out),
-    .f_out(f_add_out)
-);
-
-
-rounder rnd_mul(
-    .db(db),
-    .s(sq),
-    .er(eq),
-    .fr(fq),
-    .OVFen(OVFen),
-    .UNFen(UNFen),
-    .flr(flq),
-    .RM(RM),
-    .IEEEp(IEEp_mul),
-    .fp(fp_mul_out),
-    .sp_out(sp_mul_out),
-    .ep_out(ep_mul_out),
-    .f_out(f_mul_out)
+    .IEEEp(IEEEp),
+    .fp(fp)
 );
 
 endmodule
