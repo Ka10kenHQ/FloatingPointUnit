@@ -20,6 +20,22 @@ generate
     end
 endgenerate
 
+function automatic [1:0] full_adder;
+    input logic a;
+    input logic b;
+    input logic c;
+
+    logic c_p;
+    logic s_p;
+
+    begin
+        c_p = (a & b) | (a & c) | (b & c);
+        s_p = a ^ b ^ c;
+
+        full_adder = {c_p, s_p};
+    end
+endfunction
+
 genvar i;
 generate 
 if (npof > 4) begin
@@ -39,44 +55,57 @@ if (npof > 4) begin
     assign carry[0] = 0;
 
     for (i = 0; i < 116; i = i + 1) begin
-        wire [1:0] sum5 = sum1[i] + sum2[i] + sum3[i];
+
+        wire [1:0] sum5 = full_adder(sum1[i], sum2[i], sum3[i]);
+
         assign sum[i] = sum5[0];
         assign carry[i+1] = sum5[1];
     end
      
     assign sum[116] = 0;
-
     assign t[0] = 0;
 
     for (i = 0; i < 115; i = i + 1) begin
-        wire [1:0] sum6 = sum[i] + carry[i] + sum4[i];
+
+        wire [1:0] sum6 = full_adder(sum[i], carry[i], sum4[i]);
+
         assign s[i] = sum6[0];
         assign t[i+1] = sum6[1];
     end
-    wire [1:0] sum6 = sum[115] + carry[115] + sum4[115];
-    assign s[115] = sum6[0];
+
+    wire [1:0] sum6_last = full_adder(sum[115], carry[115], sum4[115]);
+
+    assign s[115] = sum6_last[0];
         
 end else begin : Base
 
     assign carry[0] = 0;
 
     for (i = 0; i < 116; i = i + 1) begin
-        wire [1:0] sum5 = partials1[0][i] + partials1[1][i] + partials1[2][i];
+
+        wire [1:0] sum5 = full_adder(
+            partials1[0][i],
+            partials1[1][i],
+            partials1[2][i]
+        );
+
         assign sum[i] = sum5[0];
         assign carry[i+1] = sum5[1];
     end
 
     assign sum[116] = 0;
-
     assign t[0] = 0;
 
     for (i = 0; i < 115; i = i + 1) begin
-        wire [1:0] sum6 = sum[i] + carry[i] + partials1[3][i];
+        wire [1:0] sum6 = full_adder(sum[i], carry[i], partials1[3][i]);
+
         assign s[i] = sum6[0];
         assign t[i+1] = sum6[1];
     end
-    wire [1:0] sum6 = sum[115] + carry[115] + partials1[3][115];
-    assign s[115] = sum6[0];
+
+    wire [1:0] sum6_last = full_adder(sum[115], carry[115], partials1[3][115]);
+
+    assign s[115] = sum6_last[0];
         
 end
 endgenerate
