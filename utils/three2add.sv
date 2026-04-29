@@ -11,7 +11,12 @@ assign t[0] = c_in;
 
 generate
 for (i = 0; i < n; i = i + 1) begin : add_bits
-    wire [1:0] temp_sum = a[i] + b[i] + c[i];
+
+    // full adder computation
+    wire c_p = (a[i] & b[i]) | (a[i] & c[i]) | (b[i] & c[i]);
+    wire s_p = a[i] ^ b[i] ^ c[i];
+    wire [1:0] temp_sum = {c_p, s_p};
+
     assign s[i] = temp_sum[0];
     assign t[i+1] = temp_sum[1];
 end

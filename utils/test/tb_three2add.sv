@@ -1,12 +1,11 @@
 `include "./../three2add.sv"
 module tb_three2add;
-    parameter n = 11;
 
-    reg [n:0] a, b, c;
+    reg [12:0] a, b, c;
 
-    wire [n+1:0] t, s;
+    wire [13:0] t, s;
 
-    three2add #(n) uut (
+    three2add #(13) uut (
         .a(a),
         .b(b),
         .c(c),
