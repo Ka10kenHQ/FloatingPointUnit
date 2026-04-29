@@ -15,10 +15,9 @@ for (i = 0; i < n; i = i + 1) begin : add_bits
     // full adder computation
     wire c_p = (a[i] & b[i]) | (a[i] & c[i]) | (b[i] & c[i]);
     wire s_p = a[i] ^ b[i] ^ c[i];
-    wire [1:0] temp_sum = {c_p, s_p};
 
-    assign s[i] = temp_sum[0];
-    assign t[i+1] = temp_sum[1];
+    assign s[i] = s_p;
+    assign t[i+1] = c_p;
 end
 endgenerate
 
