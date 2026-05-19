@@ -40,19 +40,19 @@ add #(n) ad(
 assign lz = lz_out[5:0];
 assign TINY = sum[12];
 
-structural_gte tester_gte (
+structural_gte gte (
     .a(er),
     .b(emax),
     .out(er_gte_emax)
 );
 
-structural_gt tester_gt_emax (
+structural_gt gt_emax (
     .a(er),
     .b(emax),
     .out(er_gt_emax)
 );
 
-structural_gt tester_gt_emax_plus (
+structural_gt gt_emax_plus (
     .a(er),
     .b(emax_plus_1),
     .out(er_gt_emax_plus_1)
