@@ -71,19 +71,21 @@ module signed_subtractor_13bit (
     output wire [12:0] diff,
     output wire        ovf
 );
-    wire [13:0] c;
-    assign c[0] = 1'b1;
 
-    genvar i;
-    generate
-        for (i = 0; i < 13; i = i + 1) begin
-            assign diff[i] = a[i] ^ (~b[i]) ^ c[i];
-            assign c[i+1]  = (a[i] & ~b[i]) | (c[i] & (a[i] ^ ~b[i]));
-        end
-    endgenerate
+wire [13:0] c;
+assign c[0] = 1'b1;
 
-    assign ovf = (a[12] == 1'b0 && b[12] == 1'b1 && diff[12] == 1'b1) |
-                      (a[12] == 1'b1 && b[12] == 1'b0 && diff[12] == 1'b0);
+genvar i;
+generate
+    for (i = 0; i < 13; i = i + 1) begin
+        assign diff[i] = a[i] ^ (~b[i]) ^ c[i];
+        assign c[i+1]  = (a[i] & ~b[i]) | (c[i] & (a[i] ^ ~b[i]));
+    end
+endgenerate
+
+assign ovf = (a[12] == 1'b0 && b[12] == 1'b1 && diff[12] == 1'b1) |
+                  (a[12] == 1'b1 && b[12] == 1'b0 && diff[12] == 1'b0);
+
 endmodule
 
 module structural_gte (
@@ -91,17 +93,19 @@ module structural_gte (
     input  wire [12:0] b,
     output wire        out
 );
-    wire [12:0] diff;
-    wire        ovf;
 
-    signed_subtractor_13bit sub (
-        .a(a),
-        .b(b),
-        .diff(diff),
-        .ovf(ovf)
-    );
+wire [12:0] diff;
+wire        ovf;
 
-    assign out = ovf ? diff[12] : ~diff[12];
+signed_subtractor_13bit sub (
+    .a(a),
+    .b(b),
+    .diff(diff),
+    .ovf(ovf)
+);
+
+assign out = ovf ? diff[12] : ~diff[12];
+
 endmodule
 
 
@@ -110,17 +114,18 @@ module structural_gt (
     input  wire [12:0] b,
     output wire        out
 );
-    wire gte_signal;
-    wire is_equal;
 
-    structural_gte gte_inst (
-        .a(a),
-        .b(b),
-        .out(gte_signal)
-    );
+wire gte_signal;
+wire is_equal;
 
-    assign is_equal = (a == b); 
+structural_gte gte_inst (
+    .a(a),
+    .b(b),
+    .out(gte_signal)
+);
 
-    assign out = gte_signal & ~is_equal;
+assign is_equal = (a == b); 
+assign out = gte_signal & ~is_equal;
+
 endmodule
 
