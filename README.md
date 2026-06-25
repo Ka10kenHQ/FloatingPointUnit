@@ -7,7 +7,7 @@ This project implements a fully pipelined IEEE 754 compliant floating-point unit
 - Supports normal numbers, denormal (subnormal) numbers, and all IEEE 754 special values (NaN, infinity, zero)
 - Four rounding modes: round-to-nearest/ties-to-even, toward-zero, toward-plus-infinity, toward-minus-infinity
 - Five IEEE exception flags: invalid operation, division by zero, overflow, underflow, inexact
-- Single-cycle addition, subtraction, and multiplication; multi-cycle division (approx 9 cycles)
+- Single-cycle addition, subtraction, and multiplication; multi-cycle division
 - Dual-precision operation: the same datapath handles both f32 and f64, controlled by a precision-select signal
 
 ## Architecture
