@@ -1,3 +1,6 @@
+`ifndef HDECJ_SV
+`define HDECJ_SV
+
 module HDecJ #(
     parameter N = 2,
     parameter npof2 = 2 ** $clog2(N)
@@ -45,5 +48,7 @@ module HDecJ #(
     endgenerate
 
 endmodule
+
+`endif
 
 

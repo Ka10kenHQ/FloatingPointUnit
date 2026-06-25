@@ -4,7 +4,7 @@ use std::path::PathBuf;
 
 pub fn test_data_path(filename: &str) -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("../test")
+        .join("../test/outputs")
         .join(filename)
 }
 

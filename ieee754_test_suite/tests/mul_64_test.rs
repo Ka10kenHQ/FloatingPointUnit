@@ -4,7 +4,7 @@ mod common;
 #[test]
 fn test_mul_f64() {
     common::run_f64_test(
-        "mul_div_output_results_64.txt",
+        "normal/mul_div_output_results_64.txt",
         "decomposed_f64.txt",
         |a, b| a * b,
         decompose_f64,
@@ -15,7 +15,7 @@ fn test_mul_f64() {
 #[test]
 fn test_mul_f64_denormal() {
     common::run_f64_test(
-        "mul_div_output_results_64_denormal.txt",
+        "denormal/mul_div_output_results_64_denormal.txt",
         "decomposed_f64_denormal.txt",
         |a, b| a * b,
         decompose_f64,

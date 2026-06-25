@@ -4,7 +4,7 @@ mod common;
 #[test]
 fn test_sub_f32() {
     common::run_f32_test(
-        "add_sub_output_results_sub_32.txt",
+        "normal/add_sub_output_results_sub_32.txt",
         "decomposed_f32.txt",
         |a, b| a - b,
         decompose_f32,
@@ -15,7 +15,7 @@ fn test_sub_f32() {
 #[test]
 fn test_sub_f32_denormal() {
     common::run_f32_test(
-        "add_sub_output_results_sub_32_denormal.txt",
+        "denormal/add_sub_output_results_sub_32_denormal.txt",
         "decomposed_f32_denormal.txt",
         |a, b| a - b,
         decompose_f32,
