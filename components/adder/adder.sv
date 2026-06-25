@@ -1,20 +1,20 @@
 module adder(
-    input [52:0] fa,
-    input [10:0] ea,
-    input sa,
+    input [52:0]  fa,
+    input [10:0]  ea,
+    input         sa,
 
-    input [52:0] fb,
-    input [10:0] eb,
-    input sb,
+    input [52:0]  fb,
+    input [10:0]  eb,
+    input         sb,
 
-    input sub,
+    input         sub,
 
-    input [3:0] fla,
-    input [3:0] flb,
+    input [3:0]   fla,
+    input [3:0]   flb,
 
-    input [52:0] nan,
+    input [52:0]  nan,
     
-    input [1:0] RM,
+    input [1:0]   RM,
 
     output [10:0] es,
     output [56:0] fs,
@@ -24,8 +24,8 @@ module adder(
 
 wire [55:0] fb3;
 wire [52:0] fa2;
-wire sa2, sx, sb2;
-wire sb_adj;
+wire        sa2, sx, sb2;
+wire        sb_adj;
 
 assign sb_adj = sb ^ sub;
 

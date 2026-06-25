@@ -1,11 +1,11 @@
 module sigrnd(
-    input s,
-    input db,
-    input [54:0] f1,
-    input [1:0] RM,
+    input         s,
+    input         db,
+    input [54:0]  f1,
+    input [1:0]   RM,
 
     output [53:0] f2,
-    output siginx
+    output        siginx
 );
 
 wire [53:0] temp;

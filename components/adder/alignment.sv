@@ -3,10 +3,10 @@ module alignment(
     input [10:0] eb,
 
     input [52:0] fa,
-    input  sa,
+    input        sa,
     
     input [52:0] fb,
-    input  sb,
+    input        sb,
     
     output [10:0] es,
     output [55:0] fb3,
@@ -17,7 +17,7 @@ module alignment(
 );
 
 wire [10:0] as;
-wire eb_gt_ea;
+wire        eb_gt_ea;
 
 exp_sub exps(
     .ea(ea),
@@ -62,8 +62,8 @@ sticky stky(
 .sticky(sticky)
 );
 
-assign sx = sa2 ^ sb2;
-assign es = eb_gt_ea ? eb : ea;
+assign sx  =  sa2 ^ sb2;
+assign es  =  eb_gt_ea ? eb : ea;
 assign fb3 = {fp3_h[54:0], sticky};
 
 endmodule

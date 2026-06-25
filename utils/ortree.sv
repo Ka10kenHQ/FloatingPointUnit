@@ -1,3 +1,6 @@
+`ifndef ORTREE_SV
+`define ORTREE_SV
+
 module ortree #(
     parameter n = 2,
     parameter npof2 = 2 ** $clog2(n)
@@ -31,3 +34,5 @@ module ortree #(
     endgenerate
 
 endmodule
+
+`endif

@@ -4,19 +4,19 @@
 `include "./components/multiplier/muldiv.sv"
 
 module master  (
-    input        clk,
-    input        rst_n,
-    input [63:0] fpa,
-    input [63:0] fpb,
-    input db,
-    input md,
-    input normal,
-    input sub,
-    input fdiv,
-    input [1:0] RM,
+    input         clk,
+    input         rst_n,
+    input [63:0]  fpa,
+    input [63:0]  fpb,
+    input         db,
+    input         md,
+    input         normal,
+    input         sub,
+    input         fdiv,
+    input [1:0]   RM,
 
     output [63:0] fp,
-    output [4:0] IEEEp
+    output [4:0]  IEEEp
 );
 
 wire [5:0]  lza, lzb;
@@ -44,7 +44,7 @@ unpackermaster unpack(
     .nan(nan)
 );
 
-wire ss;
+wire        ss;
 wire [10:0] es;
 wire [56:0] fs;
 wire [57:0] fls;
@@ -67,9 +67,9 @@ adder add(
     .fls(fls)
 );
 
+wire        sq;
 wire [56:0] fq;
 wire [12:0] eq;
-wire sq;
 wire [57:0] flq;
 
 muldiv mul(
@@ -97,7 +97,7 @@ muldiv mul(
 wire OVFen = 1'b0;
 wire UNFen = 1'b0;
 
-wire s;
+wire        s;
 wire [12:0] er;
 wire [56:0] fr;
 wire [57:0] flr;

@@ -14,9 +14,9 @@ module sign_select(
 
 wire ss2, ss3;
 
-assign ss2 = sx ? sa : RM[0] & RM[1];
-assign ss3 = INFa ? sa : sb;
-assign ss = INFs ? ss3 : (fz ? ss2 : ss1);
+assign ss2  = sx ? sa : RM[0] & RM[1];
+assign ss3  = INFa ? sa : sb;
+assign ss   = INFs ? ss3 : (fz ? ss2 : ss1);
 assign ZERO = ~(INFs | NAN) & fz;
 
 endmodule

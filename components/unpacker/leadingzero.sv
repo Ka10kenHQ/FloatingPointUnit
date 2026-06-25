@@ -1,6 +1,9 @@
+`ifndef LEADINGZERO_SV
+`define LEADINGZERO_SV
+
 module leadingzero #(parameter n = 64, m = 6) (
     input  [n - 1 : 0] x,
-    output [m : 0] y
+    output [m : 0]     y
 );
 
 wire [m-1:0] y_H;
@@ -32,4 +35,6 @@ end
 endgenerate
 
 endmodule
+
+`endif
  

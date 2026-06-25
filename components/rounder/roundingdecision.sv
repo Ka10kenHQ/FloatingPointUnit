@@ -1,11 +1,11 @@
 module roundingdecision(
-    input l,
-    input r,
-    input st,
-    input s,
+    input       l,
+    input       r,
+    input       st,
+    input       s,
     input [1:0] RM,
 
-    output inc
+    output      inc
 );
 
 assign l1 = l | st;

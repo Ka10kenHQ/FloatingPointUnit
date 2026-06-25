@@ -9,23 +9,21 @@ module div_logic(
 );
 
 logic  [57:0] fa_in, fb_in;
-
 logic [115:0] mul_out;
+logic [56:0]  fd_out;
 
-logic [56:0] fd_out;
-
-logic or_out;
+logic       or_out;
 logic [7:0] rom_data;
 
 parameter n = 60;
 
-logic [115:0] t,s1;
-logic [3:0] curr_state, next_state;
-logic [3:0] Dcnt;
-logic [57:0] x, A, Da, Db;
-logic [54:0] E;
+logic [115:0] t, s1;
+logic [3:0]   curr_state, next_state;
+logic [3:0]   Dcnt;
+logic [57:0]  x, A, Da, Db;
+logic [54:0]  E;
 logic [115:0] Eb;
-logic [7:0] look_up;
+logic [7:0]   look_up;
 
 logic faadoe, fbbdoe;
 logic Eadoe, Aadoe;
@@ -55,7 +53,7 @@ localparam LOOKUP     = 4'd1;
 localparam NEWTON1_2  = 4'd2;
 localparam NEWTON3_4  = 4'd3;
 localparam QUOT1_2    = 4'd4;
-localparam QUOT_3_4   = 4'd5;
+localparam QUOT3_4    = 4'd5;
 localparam SELECT_FD  = 4'd6;
 localparam ROUND1     = 4'd7;
 localparam ROUND2     = 4'd8;
@@ -110,10 +108,10 @@ always_comb begin
             Ece   = 1;
             Eadoe = 1;
             fbbdoe= 1;
-            next_state = QUOT_3_4;
+            next_state = QUOT3_4;
         end
 
-        QUOT_3_4: begin
+        QUOT3_4: begin
             Ebce = 1;
             next_state = SELECT_FD;
         end

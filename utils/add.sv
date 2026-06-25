@@ -1,3 +1,6 @@
+`ifndef ADD_SV
+`define ADD_SV
+
 module add #(parameter n = 10) (
     input  [n-1:0] a,
     input  [n-1:0] b,
@@ -33,4 +36,6 @@ endgenerate
 assign sum[n] = c[n];
 
 endmodule
+
+`endif
 

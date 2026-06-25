@@ -1,3 +1,6 @@
+`ifndef THREE2ADD_SV
+`define THREE2ADD_SV
+
 module three2add #(parameter n = 11) (
     input [n-1:0] a,
     input [n-1:0] b,
@@ -23,4 +26,6 @@ endgenerate
 
 assign s[n] = 0;
 endmodule
+
+`endif
 

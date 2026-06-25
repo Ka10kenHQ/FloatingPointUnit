@@ -2,13 +2,13 @@
 `include "./../../utils/add.sv"
 
 module expnorm(
-    input [10:0] er,
-    input [5:0] lz,
-    input db,
-    input OVFen,
-    input OVF1,
-    input UNFen,
-    input TINY,
+    input [10:0]  er,
+    input [5:0]   lz,
+    input         db,
+    input         OVFen,
+    input         OVF1,
+    input         UNFen,
+    input         TINY,
     output [10:0] eni,
     output [10:0] en
 );
@@ -16,7 +16,7 @@ module expnorm(
 wire [1:0] w1;
 wire [1:0] w2;
 
-wire [4:0] delta;
+wire [4:0]  delta;
 wire [10:0] c;
 wire [10:0] b;
 wire [10:0] emin;
