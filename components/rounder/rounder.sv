@@ -1,21 +1,21 @@
 module rounder(
-    input db,
-    input s,
-    input [12:0] er,
-    input [56:0] fr,
-    input OVFen,
-    input UNFen,
-    input [57:0] flr,
-    input [1:0] RM,
+    input         db,
+    input         s,
+    input [12:0]  er,
+    input [56:0]  fr,
+    input         OVFen,
+    input         UNFen,
+    input [57:0]  flr,
+    input [1:0]   RM,
 
-    output [4:0] IEEEp,
+    output [4:0]  IEEEp,
     output [63:0] fp
 );
 
 wire [127:0] fn;
 wire [10:0] eni;
 wire [10:0] en;
-wire TINY, OVF1;
+wire        TINY, OVF1;
 
 normshift nshift(
     .er(er),

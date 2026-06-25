@@ -1,17 +1,17 @@
 module exprnd(
-    input s,
-    input [10:0] e3,
-    input [52:0] f3,
-    input [1:0] RM,
-    input OVF,
-    input db,
-    input OVFen,
+    input         s,
+    input [10:0]  e3,
+    input [52:0]  f3,
+    input [1:0]   RM,
+    input         OVF,
+    input         db,
+    input         OVFen,
 
     output [10:0] eout,
     output [51:0] fout
 );
 
-wire inf;
+wire        inf;
 wire [10:0] exp_xmax_inf;
 wire [51:0] fp_xmax_inf;
 

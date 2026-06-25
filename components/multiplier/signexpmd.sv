@@ -1,17 +1,17 @@
 `include "./../../utils/add.sv"
 
 module signexpmd(
-    input sa,
-    input [10:0] ea,
-    input [5:0] lza,
+    input          sa,
+    input [10:0]   ea,
+    input [5:0]    lza,
 
-    input sb,
-    input [10:0] eb,
-    input [5:0] lzb,
+    input          sb,
+    input [10:0]   eb,
+    input [5:0]    lzb,
 
-    input fdiv,
+    input          fdiv,
 
-    output  sq,
+    output         sq,
     output  [12:0] eq
 );
 

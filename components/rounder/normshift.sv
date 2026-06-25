@@ -1,16 +1,16 @@
 module normshift(
-    input [56:0] fr,
-    input [12:0] er,
-    input OVFen,
-    input UNFen,
+    input [56:0]   fr,
+    input [12:0]   er,
+    input          OVFen,
+    input          UNFen,
 
-    input db,
+    input          db,
 
     output [127:0] fn,
-    output [10:0] eni,
-    output [10:0] en,
-    output TINY,
-    output OVF1
+    output [10:0]  eni,
+    output [10:0]  en,
+    output         TINY,
+    output         OVF1
 );
 
 wire tiny, ovf1;

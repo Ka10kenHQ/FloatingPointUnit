@@ -14,8 +14,8 @@ module select_fd(
 wire [115:0] a, b, c;
 wire [116:0] t, s;
 wire [116:0] beta;
-wire [55:0] r;
-wire neg, zero;
+wire [55:0]  r;
+wire         neg, zero;
 
 assign a = {1'b0, Da, 56'b0, 1'b1};
 assign b = {1'b1, ~Eb[114:0]};
@@ -32,7 +32,7 @@ three2add #(n) add(
     .s(s)
 );
 
-parameter m = 117;
+parameter    m = 117;
 wire [117:0] sum;
 add #(m) ad(
     .a(t),
@@ -42,13 +42,13 @@ add #(m) ad(
 );
 
 assign beta = sum[116:0];
-assign neg = sum[116];
+assign neg =  sum[116];
 assign zero = (beta == 117'b0);
 
-assign r = neg ?
-        {1'b0, E[57:3]}
-        : db ?
-            (E[57:3] + 1)
+assign r = neg 
+        ? {1'b0, E[57:3]}
+        : db 
+            ? (E[57:3] + 1)
             : {E[57:32], {29{1'b1}}} + 1;
 
 assign fd[56:30] = r[55:29];

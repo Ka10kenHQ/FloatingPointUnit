@@ -1,14 +1,14 @@
 module rndexceptions(
-    input NAN,
-    input INF,
-    input ZERO,
-    input OVFen,
-    input UNFen,
-    input OVF,
-    input TINY,
-    input INV,
-    input DBZ,
-    input siginx,
+    input            NAN,
+    input            INF,
+    input            ZERO,
+    input            OVFen,
+    input            UNFen,
+    input            OVF,
+    input            TINY,
+    input            INV,
+    input            DBZ,
+    input            siginx,
 
     output reg [4:0] IEEEp
 );

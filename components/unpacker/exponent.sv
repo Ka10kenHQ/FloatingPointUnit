@@ -7,10 +7,10 @@ module exponent (
 );
 
 wire [10:0] temp_e_db;
-wire [7:0] temp_e_sp;
+wire [7:0]  temp_e_sp;
 
 wire [10:0] inc_db;
-wire [7:0] inc_sp;
+wire [7:0]  inc_sp;
 
 assign e_zd = (fp[62:52] == 11'b0);
 assign e_zs = (fp[62:55] == 8'b0);

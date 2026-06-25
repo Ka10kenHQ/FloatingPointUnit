@@ -9,8 +9,8 @@ module exceptions (
     output SNAN
 );
 assign ZERO = fz & ez;
-assign INF = e_inf & fz;
-assign NAN = e_inf & h_1;
+assign INF  = e_inf & fz;
+assign NAN  = e_inf & h_1;
 assign SNAN = e_inf & ~(h_1 | fz);
 
 

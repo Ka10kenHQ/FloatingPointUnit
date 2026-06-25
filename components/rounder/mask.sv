@@ -10,7 +10,7 @@ module mask(
 wire w1;
 
 wire [11:0] t;
-wire [5:0] shp;
+wire [5:0]  shp;
 wire [63:0] h;
 wire [63:0] u;
 

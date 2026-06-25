@@ -1,13 +1,13 @@
 `include "./../../utils/add.sv"
 
 module shiftdist(
-    input [12:0] er,
-    input [5:0] lz,
+    input [12:0]  er,
+    input [5:0]   lz,
 
-    input db,
+    input         db,
 
-    input TINY,
-    input UNFen,
+    input         TINY,
+    input         UNFen,
 
     output [12:0] sh
 );

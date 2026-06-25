@@ -10,9 +10,9 @@ module adjexp(
 );
 
 wire [10:0] in;
-wire [7:0] emax1alpha;
-wire out;
-wire OVF2;
+wire [7:0]  emax1alpha;
+wire        out;
+wire        OVF2;
 
 assign in = db ? e2[10:0] : {3'b111, e2[7:0]};
 assign emax1alpha = {2'b0, {3{db}}, 6'b111111};
@@ -23,7 +23,7 @@ andtree andt(
 );
 
 assign OVF2 = sigovf & out;
-assign OVF = OVF2 | OVF1;
+assign OVF  = OVF2 | OVF1;
 
 assign e3 = (~OVFen & sigovf & out) ? emax1alpha : e2[10:0];
 
